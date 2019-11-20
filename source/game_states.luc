@@ -1,0 +1,95 @@
+module game_states (
+    input clk,  // clock
+    input rst,  // reset
+    output player_position_out [8][8],
+    input button_up,
+    input button_down,
+    input button_left,
+    input button_right
+  ) {
+  
+  
+  // STATES
+  fsm state(.clk(clk), #INIT(START)) = {START, INTER1, LEVEL1, INTER2, LEVEL2, INTER3, LEVEL3, FINISH};
+  
+  dff player_position [8][8](.clk(clk), .rst(rst));
+  dff player_reg_selector [3](.clk(clk), .rst(rst));
+  
+  // MODULES
+  level_one_rom inter_one;
+  move_player move_player(.clk(clk), .rst(rst));
+
+  always {
+    player_position_out = 8x{{8b0}};
+    move_player.button_down = 0;
+    move_player.button_left = 0;
+    move_player.button_right = 0;
+    move_player.button_up = 0;
+    move_player.player_reg_selector = 3bxxx;
+    move_player.player_current_position = 8x{{8hxx}};
+    // Do some variable init here
+    
+    case(state.q){
+      state.START:
+        /* TODO: Set 7 segment LED lights
+                 Blink LED matrix???
+                 On Start button pressed, state.d = state.LEVEL1
+        
+        */
+        player_position_out = 8x{{8b0}};
+        
+        // TODO: if start pressed, move to state 2
+        
+      // GET DEFAULT GAME MAPS FROM OTHER FILES (HARDCODED VALUES)
+      state.INTER1:
+        /*
+           TODO: 
+           GET TOKENS LOCATION
+           GET WALLS LOCATION
+        */
+        player_position.d = inter_one.player_initial_position;
+        player_reg_selector.d = inter_one.player_reg_selector;
+        player_position_out = player_position.q;
+        state.d = state.LEVEL1;
+      
+      state.LEVEL1:
+        if(button_up){
+          move_player.button_up = 1;
+          move_player.player_current_position = player_position.q;
+          move_player.player_reg_selector = player_reg_selector.q;
+          player_reg_selector.d = move_player.new_player_reg_selector;
+          player_position.d = move_player.player_location_out;
+          player_position_out = player_position.q;
+        }
+        if(button_down){
+          move_player.button_down = 1;
+          move_player.player_current_position = player_position.q;
+          move_player.player_reg_selector = player_reg_selector.q;
+          player_reg_selector.d = move_player.new_player_reg_selector;
+          player_position.d = move_player.player_location_out;
+          player_position_out = player_position.q;
+        }
+        if(button_left){
+          move_player.button_left = 1;
+          move_player.player_current_position = player_position.q;
+          move_player.player_reg_selector = player_reg_selector.q;
+          player_reg_selector.d = move_player.new_player_reg_selector;
+          player_position.d = move_player.player_location_out;
+          player_position_out = player_position.q;
+        }
+        if(button_right){
+          move_player.button_right = 1;
+          move_player.player_current_position = player_position.q;
+          move_player.player_reg_selector = player_reg_selector.q;
+          player_reg_selector.d = move_player.new_player_reg_selector;
+          player_position.d = move_player.player_location_out;
+          player_position_out = player_position.q;
+        }
+        
+        
+        if(player_position.q == inter_one.end_position){
+          state.d = state.INTER2;
+        }
+    }
+  }
+}

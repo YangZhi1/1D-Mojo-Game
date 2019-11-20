@@ -1,0 +1,13 @@
+module level_one_rom (
+    output player_initial_position [8][8],
+    output player_reg_selector[3],
+    output end_position [8][8]
+  ) {
+
+  always {
+    player_initial_position[0] = 8b10000000;
+    player_initial_position[7:1] = 7x{{8b0}};
+    player_reg_selector = 3b000;
+    end_position[7] = 8b00000001;
+  }
+}

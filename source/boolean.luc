@@ -1,0 +1,29 @@
+module boolean (  // this module does operations for AND/OR/XOR/"A" (LDR)
+    input a[16],
+    input b[16],
+    input alufn[6],
+    output aluOut[16]
+    
+  ) {
+  
+  always {
+    aluOut = 16x{0};
+    
+    case(alufn[3:0]){
+      b1000: //AND
+        aluOut = a & b;
+      
+      b1110: //OR
+        aluOut = a | b;
+        
+      b0110: //XOR
+        aluOut = a ^ b;
+        
+      b1010: //LDR
+        aluOut = a;
+       
+      default:
+        aluOut = a + b; // Make addition our "default"
+    }
+  }
+}
