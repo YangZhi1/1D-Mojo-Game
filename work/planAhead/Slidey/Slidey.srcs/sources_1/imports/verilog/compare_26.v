@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module compare_21 (
+module compare_26 (
     input [5:0] alufn,
     output reg [15:0] aluOut,
     input z,

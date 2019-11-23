@@ -37,6 +37,8 @@ module mojo_top_0 (
     .out(M_reset_cond_out)
   );
   wire [64-1:0] M_game_player_position_out;
+  wire [64-1:0] M_game_tokens;
+  wire [7-1:0] M_game_current_score;
   reg [1-1:0] M_game_button_up;
   reg [1-1:0] M_game_button_down;
   reg [1-1:0] M_game_button_left;
@@ -48,7 +50,9 @@ module mojo_top_0 (
     .button_down(M_game_button_down),
     .button_left(M_game_button_left),
     .button_right(M_game_button_right),
-    .player_position_out(M_game_player_position_out)
+    .player_position_out(M_game_player_position_out),
+    .tokens(M_game_tokens),
+    .current_score(M_game_current_score)
   );
   
   wire [1-1:0] M_up_out;

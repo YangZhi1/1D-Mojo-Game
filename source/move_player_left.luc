@@ -1,0 +1,101 @@
+module move_player_left (
+    input player_reg_selector[3],
+    input player_current_position [8][8],
+    output player_location_out [8][8],
+    output new_player_reg_selector[3]
+  ) {
+  sig new_player_position [8];
+  alu alu;
+  
+  always {
+    alu.a = 0;
+    new_player_reg_selector = player_reg_selector;
+    player_location_out = 8x{{8h00}};
+    
+
+    // code to move right
+    alu.alufn = 6b100000;
+    alu.b = 16b1;
+    case(player_reg_selector){
+      b000:
+        alu.a = player_current_position[0];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[0] = new_player_position;
+        }
+        
+      b001:
+        alu.a = player_current_position[1];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[1] = new_player_position;
+        }
+       
+      b010:
+        alu.a = player_current_position[2];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[2] = new_player_position;
+        }
+        
+      b011:
+        alu.a = player_current_position[3];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[3] = new_player_position;
+        }
+       
+      b100:
+        alu.a = player_current_position[4];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[4] = new_player_position;
+        }
+      
+      b101:
+        alu.a = player_current_position[5];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[5] = new_player_position;
+        }
+       
+      b110:
+        alu.a = player_current_position[6];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[6] = new_player_position;
+        }
+      
+      b111:
+        alu.a = player_current_position[7];
+        new_player_position = alu.aluOut[7:0];
+        if(new_player_position == 8b0){
+          player_location_out = player_current_position;
+        }
+        else{
+          player_location_out[7] = new_player_position;
+        }
+    }
+  }
+}

@@ -8,6 +8,8 @@ module game_states_2 (
     input clk,
     input rst,
     output reg [63:0] player_position_out,
+    output reg [63:0] tokens,
+    output reg [6:0] current_score,
     input button_up,
     input button_down,
     input button_left,
@@ -17,110 +19,204 @@ module game_states_2 (
   
   
   
-  localparam START_state = 1'd0;
-  localparam MOVE_state = 1'd1;
+  localparam START_state = 3'd0;
+  localparam TUTORIALROM_state = 3'd1;
+  localparam TUTORIAL_state = 3'd2;
+  localparam INTER1_state = 3'd3;
+  localparam LEVEL1_state = 3'd4;
   
-  reg M_state_d, M_state_q = START_state;
+  reg [2:0] M_state_d, M_state_q = START_state;
+  
+  reg [63:0] M_token_map_d, M_token_map_q = 1'h0;
   
   reg [63:0] M_player_position_d, M_player_position_q = 8'h80;
   
   reg [2:0] M_player_reg_selector_d, M_player_reg_selector_q = 1'h0;
   
-  reg [63:0] next_position;
+  reg [6:0] M_score_d, M_score_q = 7'h00;
+  
+  reg [7:0] M_end_position_d, M_end_position_q = 8'h01;
   
   wire [64-1:0] M_inter_one_player_initial_position;
   wire [3-1:0] M_inter_one_player_reg_selector;
   wire [64-1:0] M_inter_one_end_position;
   wire [64-1:0] M_inter_one_walls;
+  wire [64-1:0] M_inter_one_tokens;
   level_one_rom_11 inter_one (
     .player_initial_position(M_inter_one_player_initial_position),
     .player_reg_selector(M_inter_one_player_reg_selector),
     .end_position(M_inter_one_end_position),
-    .walls(M_inter_one_walls)
+    .walls(M_inter_one_walls),
+    .tokens(M_inter_one_tokens)
   );
   
   wire [64-1:0] M_move_player_player_location_out;
   wire [3-1:0] M_move_player_new_player_reg_selector;
-  reg [1-1:0] M_move_player_button_up;
-  reg [1-1:0] M_move_player_button_down;
-  reg [1-1:0] M_move_player_button_left;
-  reg [1-1:0] M_move_player_button_right;
   reg [3-1:0] M_move_player_player_reg_selector;
   reg [64-1:0] M_move_player_player_current_position;
   move_player_12 move_player (
-    .button_up(M_move_player_button_up),
-    .button_down(M_move_player_button_down),
-    .button_left(M_move_player_button_left),
-    .button_right(M_move_player_button_right),
     .player_reg_selector(M_move_player_player_reg_selector),
     .player_current_position(M_move_player_player_current_position),
     .player_location_out(M_move_player_player_location_out),
     .new_player_reg_selector(M_move_player_new_player_reg_selector)
   );
   
+  wire [64-1:0] M_move_down_player_location_out;
+  wire [3-1:0] M_move_down_new_player_reg_selector;
+  reg [3-1:0] M_move_down_player_reg_selector;
+  reg [64-1:0] M_move_down_player_current_position;
+  move_player_down_13 move_down (
+    .player_reg_selector(M_move_down_player_reg_selector),
+    .player_current_position(M_move_down_player_current_position),
+    .player_location_out(M_move_down_player_location_out),
+    .new_player_reg_selector(M_move_down_new_player_reg_selector)
+  );
+  
+  wire [64-1:0] M_move_left_player_location_out;
+  wire [3-1:0] M_move_left_new_player_reg_selector;
+  reg [3-1:0] M_move_left_player_reg_selector;
+  reg [64-1:0] M_move_left_player_current_position;
+  move_player_left_14 move_left (
+    .player_reg_selector(M_move_left_player_reg_selector),
+    .player_current_position(M_move_left_player_current_position),
+    .player_location_out(M_move_left_player_location_out),
+    .new_player_reg_selector(M_move_left_new_player_reg_selector)
+  );
+  
+  wire [64-1:0] M_move_right_player_location_out;
+  wire [3-1:0] M_move_right_new_player_reg_selector;
+  reg [3-1:0] M_move_right_player_reg_selector;
+  reg [64-1:0] M_move_right_player_current_position;
+  move_player_right_15 move_right (
+    .player_reg_selector(M_move_right_player_reg_selector),
+    .player_current_position(M_move_right_player_current_position),
+    .player_location_out(M_move_right_player_location_out),
+    .new_player_reg_selector(M_move_right_new_player_reg_selector)
+  );
+  
+  wire [64-1:0] M_tutorial_player_initial_position;
+  wire [3-1:0] M_tutorial_player_reg_selector;
+  wire [64-1:0] M_tutorial_end_position;
+  wire [64-1:0] M_tutorial_walls;
+  wire [64-1:0] M_tutorial_tokens;
+  tutorial_rom_16 tutorial (
+    .player_initial_position(M_tutorial_player_initial_position),
+    .player_reg_selector(M_tutorial_player_reg_selector),
+    .end_position(M_tutorial_end_position),
+    .walls(M_tutorial_walls),
+    .tokens(M_tutorial_tokens)
+  );
+  
   always @* begin
     M_state_d = M_state_q;
     M_player_position_d = M_player_position_q;
+    M_end_position_d = M_end_position_q;
+    M_score_d = M_score_q;
     M_player_reg_selector_d = M_player_reg_selector_q;
+    M_token_map_d = M_token_map_q;
     
-    player_position_out = 64'h0000000000000000;
-    M_move_player_button_down = 1'h0;
-    M_move_player_button_left = 1'h0;
-    M_move_player_button_right = 1'h0;
-    M_move_player_button_up = 1'h0;
+    player_position_out = M_player_position_q;
+    tokens = M_token_map_q;
+    current_score = M_score_q;
     M_move_player_player_reg_selector = 3'bxxx;
     M_move_player_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
-    next_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_down_player_reg_selector = 3'bxxx;
+    M_move_down_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_left_player_reg_selector = 3'bxxx;
+    M_move_left_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_right_player_reg_selector = 3'bxxx;
+    M_move_right_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_player_position_d = M_player_position_q;
     M_player_reg_selector_d = M_player_reg_selector_q;
+    M_token_map_d = M_token_map_q;
+    M_score_d = M_score_q;
+    M_end_position_d = M_end_position_q;
     
     case (M_state_q)
       START_state: begin
         M_player_position_d = M_inter_one_player_initial_position;
         M_player_reg_selector_d = M_inter_one_player_reg_selector;
         player_position_out = M_player_position_q;
-        M_state_d = MOVE_state;
+        M_score_d = 7'h00;
+        M_state_d = TUTORIALROM_state;
       end
-      MOVE_state: begin
+      TUTORIALROM_state: begin
+        M_player_position_d = M_tutorial_player_initial_position;
+        M_player_reg_selector_d = M_tutorial_player_reg_selector;
+        player_position_out = M_player_position_q;
+        M_token_map_d = M_tutorial_tokens;
+        M_state_d = TUTORIAL_state;
+      end
+      TUTORIAL_state: begin
         if (button_up) begin
-          M_move_player_button_up = 1'h1;
           M_move_player_player_current_position = M_player_position_q;
           M_move_player_player_reg_selector = M_player_reg_selector_q;
           M_player_reg_selector_d = M_move_player_new_player_reg_selector;
-          next_position = M_move_player_player_location_out;
+          M_player_position_d = M_move_player_player_location_out;
         end
         if (button_down) begin
-          M_move_player_button_down = 1'h1;
-          M_move_player_player_reg_selector = M_player_reg_selector_q;
-          M_move_player_player_current_position = M_player_position_q;
-          M_player_reg_selector_d = M_move_player_new_player_reg_selector;
-          next_position = M_move_player_player_location_out;
+          M_move_down_player_current_position = M_player_position_q;
+          M_move_down_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_down_new_player_reg_selector;
+          M_player_position_d = M_move_down_player_location_out;
         end
         if (button_left) begin
-          M_move_player_button_left = 1'h1;
-          M_move_player_player_current_position = M_player_position_q;
-          M_move_player_player_reg_selector = M_player_reg_selector_q;
-          M_player_reg_selector_d = M_move_player_new_player_reg_selector;
-          next_position = M_move_player_player_location_out;
+          M_move_left_player_current_position = M_player_position_q;
+          M_move_left_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_left_new_player_reg_selector;
+          M_player_position_d = M_move_left_player_location_out;
         end
         if (button_right) begin
-          M_move_player_button_right = 1'h1;
+          M_move_right_player_current_position = M_player_position_q;
+          M_move_right_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_right_new_player_reg_selector;
+          M_player_position_d = M_move_right_player_location_out;
+        end
+      end
+      INTER1_state: begin
+        M_player_position_d = M_inter_one_player_initial_position;
+        M_player_reg_selector_d = M_inter_one_player_reg_selector;
+        player_position_out = M_player_position_q;
+        M_token_map_d = M_inter_one_tokens;
+        M_state_d = LEVEL1_state;
+      end
+      LEVEL1_state: begin
+        if (button_up) begin
           M_move_player_player_current_position = M_player_position_q;
           M_move_player_player_reg_selector = M_player_reg_selector_q;
           M_player_reg_selector_d = M_move_player_new_player_reg_selector;
-          next_position = M_move_player_player_location_out;
+          M_player_position_d = M_move_player_player_location_out;
         end
-        M_player_position_d = next_position;
-        player_position_out = next_position;
+        if (button_down) begin
+          M_move_down_player_current_position = M_player_position_q;
+          M_move_down_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_down_new_player_reg_selector;
+          M_player_position_d = M_move_down_player_location_out;
+        end
+        if (button_left) begin
+          M_move_left_player_current_position = M_player_position_q;
+          M_move_left_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_left_new_player_reg_selector;
+          M_player_position_d = M_move_left_player_location_out;
+        end
+        if (button_right) begin
+          M_move_right_player_current_position = M_player_position_q;
+          M_move_right_player_reg_selector = M_player_reg_selector_q;
+          M_player_reg_selector_d = M_move_right_new_player_reg_selector;
+          M_player_position_d = M_move_right_player_location_out;
+        end
+        if (M_player_position_q[56+7-:8] == M_end_position_q) begin
+          
+        end
       end
     endcase
   end
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_player_reg_selector_q <= 1'h0;
+      M_token_map_q <= 1'h0;
     end else begin
-      M_player_reg_selector_q <= M_player_reg_selector_d;
+      M_token_map_q <= M_token_map_d;
     end
   end
   
@@ -136,6 +232,33 @@ module game_states_2 (
   
   always @(posedge clk) begin
     M_state_q <= M_state_d;
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_end_position_q <= 8'h01;
+    end else begin
+      M_end_position_q <= M_end_position_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_score_q <= 7'h00;
+    end else begin
+      M_score_q <= M_score_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_player_reg_selector_q <= 1'h0;
+    end else begin
+      M_player_reg_selector_q <= M_player_reg_selector_d;
+    end
   end
   
 endmodule

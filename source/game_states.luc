@@ -2,84 +2,153 @@ module game_states (
     input clk,  // clock
     input rst,  // reset
     output player_position_out [8][8],
+    output tokens [8][8],
+    output current_score [7],
     input button_up,
     input button_down,
     input button_left,
     input button_right
   ) {
   
-  fsm state(.clk(clk), #INIT(START)) = {START, MOVE};
+  fsm state(.clk(clk), #INIT(START)) = {START, TUTORIALROM, TUTORIAL, INTER1, LEVEL1};
   
+  dff token_map [8][8](.clk(clk), .rst(rst));
   dff player_position [8][8](.clk(clk), .rst(rst), #INIT(8b10000000));
   dff player_reg_selector [3](.clk(clk), .rst(rst));
-  
-  sig next_position [8][8];
+  dff score [7](.clk(clk), .rst(rst), #INIT(7b0000000));
+  dff end_position [8](.clk(clk), .rst(rst), #INIT(8b00000001));
   
   // MODULES
   level_one_rom inter_one;
   move_player move_player;
+  move_player_down move_down;
+  move_player_left move_left;
+  move_player_right move_right;
+  tutorial_rom tutorial;
+    
 
   always {
-    player_position_out = 8x{{8b0}};
+    player_position_out = player_position.q;
+    tokens = token_map.q;
+    current_score = score.q; 
     
     /*
     INSTANTIATE VARIABLES FOR OTHER FILES
     */
-    move_player.button_down = 0;
-    move_player.button_left = 0;
-    move_player.button_right = 0;
-    move_player.button_up = 0;
     move_player.player_reg_selector = 3bxxx;
     move_player.player_current_position = 8x{{8hxx}};
-    
-    next_position = 8x{{8hxx}};
-    
+
+    move_down.player_reg_selector = 3bxxx;
+    move_down.player_current_position = 8x{{8hxx}};
+
+    move_left.player_reg_selector = 3bxxx;
+    move_left.player_current_position = 8x{{8hxx}};
+
+    move_right.player_reg_selector = 3bxxx;
+    move_right.player_current_position = 8x{{8hxx}};
+
     /*
     MAKE dff RETAIN PREVIOUS VALUES
     */
     player_position.d = player_position.q;
     player_reg_selector.d = player_reg_selector.q;
+    token_map.d = token_map.q;
+    score.d = score.q;
+    end_position.d = end_position.q;
     
 
-    case(state.q){ 
+    case(state.q){
       state.START:
         player_position.d = inter_one.player_initial_position;
         player_reg_selector.d = inter_one.player_reg_selector;
         player_position_out = player_position.q;
-        state.d = state.MOVE;
+        score.d = 7b0000000;
+        state.d = state.TUTORIALROM;
       
-      state.MOVE:
+      state.TUTORIALROM:
+        player_position.d = tutorial.player_initial_position;
+        player_reg_selector.d = tutorial.player_reg_selector;
+        player_position_out = player_position.q;
+        token_map.d = tutorial.tokens;
+        state.d = state.TUTORIAL;
+      
+      state.TUTORIAL:
         if(button_up){
-          move_player.button_up = 1;                                   // set button up for move_player file
-          move_player.player_current_position = player_position.q;     // output current position into move_player file
-          move_player.player_reg_selector = player_reg_selector.q;     // output register selector to move_player file
-          player_reg_selector.d = move_player.new_player_reg_selector;      // retrieve new register selector from move_player file
-          next_position = move_player.player_location_out;             // retrieve new player position from move_player file
+          /*
+          Give it values, retrieve return values
+          */
+          move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
+          move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
+          
+          player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
+          player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
         }
         if(button_down){
-          move_player.button_down = 1;
-          move_player.player_reg_selector = player_reg_selector.q;
-          move_player.player_current_position = player_position.q;
-          player_reg_selector.d = move_player.new_player_reg_selector;
-          next_position = move_player.player_location_out;
+          move_down.player_current_position = player_position.q;          
+          move_down.player_reg_selector = player_reg_selector.q;  
+          
+          player_reg_selector.d = move_down.new_player_reg_selector;
+          player_position.d = move_down.player_location_out;
         }
         if(button_left){
-          move_player.button_left = 1;
-          move_player.player_current_position = player_position.q;
-          move_player.player_reg_selector = player_reg_selector.q;
-          player_reg_selector.d = move_player.new_player_reg_selector;
-          next_position = move_player.player_location_out;
+          move_left.player_current_position = player_position.q;
+          move_left.player_reg_selector = player_reg_selector.q;
+          
+          player_reg_selector.d = move_left.new_player_reg_selector;
+          player_position.d = move_left.player_location_out;
         }
         if(button_right){
-          move_player.button_right = 1;
-          move_player.player_current_position = player_position.q;
-          move_player.player_reg_selector = player_reg_selector.q;
-          player_reg_selector.d = move_player.new_player_reg_selector;
-          next_position = move_player.player_location_out;
+          move_right.player_current_position = player_position.q;          
+          move_right.player_reg_selector = player_reg_selector.q;  
+          
+          player_reg_selector.d = move_right.new_player_reg_selector;   
+          player_position.d = move_right.player_location_out;
         }
-        player_position.d = next_position;
-        player_position_out = next_position;
         
+      state.INTER1:
+        player_position.d = inter_one.player_initial_position;
+        player_reg_selector.d = inter_one.player_reg_selector;
+        player_position_out = player_position.q;
+        token_map.d = inter_one.tokens;
+        state.d = state.LEVEL1;
+      
+      state.LEVEL1:
+        if(button_up){
+          /*
+          Give it values, retrieve return values
+          */
+          move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
+          move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
+          
+          player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
+          player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
+        }
+        if(button_down){
+          move_down.player_current_position = player_position.q;          
+          move_down.player_reg_selector = player_reg_selector.q;  
+          
+          player_reg_selector.d = move_down.new_player_reg_selector;   
+          player_position.d = move_down.player_location_out;
+        }
+        if(button_left){
+          move_left.player_current_position = player_position.q;          
+          move_left.player_reg_selector = player_reg_selector.q;  
+          
+          player_reg_selector.d = move_left.new_player_reg_selector;   
+          player_position.d = move_left.player_location_out;
+        }
+        if(button_right){
+          move_right.player_current_position = player_position.q;          
+          move_right.player_reg_selector = player_reg_selector.q;  
+          
+          player_reg_selector.d = move_right.new_player_reg_selector;   
+          player_position.d = move_right.player_location_out;
+        }
+         
+        // REACHED END CHECKPOINT, MOVE TO NEXT STATE
+        if(player_position.q[7] == end_position.q){
+  //        state.d = state.INTER2;
+        }
     }
   }
 }
