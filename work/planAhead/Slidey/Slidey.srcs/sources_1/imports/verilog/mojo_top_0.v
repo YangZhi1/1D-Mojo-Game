@@ -18,7 +18,11 @@ module mojo_top_0 (
     output reg avr_rx,
     input avr_rx_busy,
     output reg [7:0] green,
-    output reg [7:0] col
+    output reg [7:0] row,
+    input [3:0] buttons,
+    input [23:0] io_dip,
+    input [4:0] io_button,
+    output reg [23:0] io_led
   );
   
   
@@ -32,32 +36,120 @@ module mojo_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
-  reg [31:0] M_counter_d, M_counter_q = 1'h0;
+  wire [64-1:0] M_game_player_position_out;
+  reg [1-1:0] M_game_button_up;
+  reg [1-1:0] M_game_button_down;
+  reg [1-1:0] M_game_button_left;
+  reg [1-1:0] M_game_button_right;
+  game_states_2 game (
+    .clk(clk),
+    .rst(rst),
+    .button_up(M_game_button_up),
+    .button_down(M_game_button_down),
+    .button_left(M_game_button_left),
+    .button_right(M_game_button_right),
+    .player_position_out(M_game_player_position_out)
+  );
+  
+  wire [1-1:0] M_up_out;
+  reg [1-1:0] M_up_in;
+  edge_detector_3 up (
+    .clk(clk),
+    .in(M_up_in),
+    .out(M_up_out)
+  );
+  
+  wire [1-1:0] M_down_out;
+  reg [1-1:0] M_down_in;
+  edge_detector_3 down (
+    .clk(clk),
+    .in(M_down_in),
+    .out(M_down_out)
+  );
+  
+  wire [1-1:0] M_left_out;
+  reg [1-1:0] M_left_in;
+  edge_detector_3 left (
+    .clk(clk),
+    .in(M_left_in),
+    .out(M_left_out)
+  );
+  
+  wire [1-1:0] M_right_out;
+  reg [1-1:0] M_right_in;
+  edge_detector_3 right (
+    .clk(clk),
+    .in(M_right_in),
+    .out(M_right_out)
+  );
+  
+  wire [1-1:0] M_upb_out;
+  reg [1-1:0] M_upb_in;
+  button_conditioner_7 upb (
+    .clk(clk),
+    .in(M_upb_in),
+    .out(M_upb_out)
+  );
+  
+  wire [1-1:0] M_downb_out;
+  reg [1-1:0] M_downb_in;
+  button_conditioner_7 downb (
+    .clk(clk),
+    .in(M_downb_in),
+    .out(M_downb_out)
+  );
+  
+  wire [1-1:0] M_leftb_out;
+  reg [1-1:0] M_leftb_in;
+  button_conditioner_7 leftb (
+    .clk(clk),
+    .in(M_leftb_in),
+    .out(M_leftb_out)
+  );
+  
+  wire [1-1:0] M_rightb_out;
+  reg [1-1:0] M_rightb_in;
+  button_conditioner_7 rightb (
+    .clk(clk),
+    .in(M_rightb_in),
+    .out(M_rightb_out)
+  );
+  
+  integer i;
   
   always @* begin
-    M_counter_d = M_counter_q;
-    
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
     led = 8'h00;
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
-    col = 8'h00;
+    M_game_button_up = 1'h0;
+    M_game_button_down = 1'h0;
+    M_game_button_left = 1'h0;
+    M_game_button_right = 1'h0;
+    M_upb_in = io_button[0+0-:1];
+    M_downb_in = io_button[2+0-:1];
+    M_leftb_in = io_button[3+0-:1];
+    M_rightb_in = io_button[4+0-:1];
+    M_up_in = M_upb_out;
+    M_down_in = M_downb_out;
+    M_left_in = M_leftb_out;
+    M_right_in = M_rightb_out;
+    M_game_button_up = M_up_out;
+    M_game_button_down = M_down_out;
+    M_game_button_left = M_left_out;
+    M_game_button_right = M_right_out;
+    io_led = 24'h000000;
+    row = 8'h00;
     green = 8'h00;
-    M_counter_d = M_counter_q + 1'h1;
-    col[0+0-:1] = M_counter_q[23+0-:1];
-    col[1+0-:1] = M_counter_q[24+0-:1];
-    col[2+0-:1] = M_counter_q[25+0-:1];
-    col[3+0-:1] = M_counter_q[26+0-:1];
-    col[4+0-:1] = M_counter_q[27+0-:1];
-    col[5+0-:1] = M_counter_q[28+0-:1];
-    col[6+0-:1] = M_counter_q[29+0-:1];
-    col[7+0-:1] = M_counter_q[30+0-:1];
+    io_led[0+7-:8] = M_game_player_position_out[0+7-:8];
+    io_led[8+7-:8] = M_game_player_position_out[8+7-:8];
+    io_led[16+7-:8] = M_game_player_position_out[16+7-:8];
+    for (i = 1'h0; i < 4'h8; i = i + 1) begin
+      row[(i)*1+0-:1] = 1'h1;
+      green = ~M_game_player_position_out[(i)*8+7-:8];
+      row[(i)*1+0-:1] = 1'h0;
+    end
   end
-  
-  always @(posedge clk) begin
-    M_counter_q <= M_counter_d;
-  end
-  
 endmodule

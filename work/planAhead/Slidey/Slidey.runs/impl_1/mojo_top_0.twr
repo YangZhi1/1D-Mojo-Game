@@ -28,16 +28,16 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
 Timing constraint: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
 For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
- 496 paths analyzed, 103 endpoints analyzed, 0 failing endpoints
+ 7287 paths analyzed, 527 endpoints analyzed, 0 failing endpoints
  0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   2.666ns.
+ Minimum period is   7.608ns.
 --------------------------------------------------------------------------------
-Slack:                  17.457ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_29 (FF)
+Slack:                  12.392ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.469ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.513ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -48,49 +48,36 @@ Slack:                  17.457ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_29
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.303   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_29
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.469ns (1.860ns logic, 0.609ns route)
-                                                       (75.3% logic, 24.7% route)
+    Total                                      7.513ns (1.621ns logic, 5.892ns route)
+                                                       (21.6% logic, 78.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.488ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_30 (FF)
+Slack:                  12.651ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_13 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.438ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.254ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -101,49 +88,36 @@ Slack:                  17.488ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_30
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_13 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.272   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_30
+    SLICE_X14Y50.BQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_13
+    SLICE_X16Y49.A2      net (fanout=2)        0.758   leftb/M_ctr_q[13]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.438ns (1.829ns logic, 0.609ns route)
-                                                       (75.0% logic, 25.0% route)
+    Total                                      7.254ns (1.621ns logic, 5.633ns route)
+                                                       (22.3% logic, 77.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.546ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_27 (FF)
+Slack:                  12.709ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.383ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      7.196ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -154,46 +128,36 @@ Slack:                  17.546ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_27
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.313   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_27
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X8Y36.A3       net (fanout=26)       2.780   M_left_out
+    SLICE_X8Y36.A        Tilo                  0.254   game/N38
+                                                       game/move_player/alu/Mmux_aluOut26_SW1
+    SLICE_X9Y35.C1       net (fanout=1)        0.830   game/N39
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.383ns (1.777ns logic, 0.606ns route)
-                                                       (74.6% logic, 25.4% route)
+    Total                                      7.196ns (1.616ns logic, 5.580ns route)
+                                                       (22.5% logic, 77.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.547ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_28 (FF)
+Slack:                  12.767ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.379ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.138ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -204,49 +168,36 @@ Slack:                  17.547ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_28
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.213   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_28
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y34.D3       net (fanout=26)       2.820   M_left_out
+    SLICE_X9Y34.D        Tilo                  0.259   game/N23
+                                                       game/move_player/alu/Mmux_aluOut24_SW0
+    SLICE_X9Y35.B2       net (fanout=1)        0.727   game/N23
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.379ns (1.770ns logic, 0.609ns route)
-                                                       (74.4% logic, 25.6% route)
+    Total                                      7.138ns (1.621ns logic, 5.517ns route)
+                                                       (22.7% logic, 77.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.556ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_25 (FF)
+Slack:                  12.814ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_1 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.373ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      7.089ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.624 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -257,46 +208,36 @@ Slack:                  17.556ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_25
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_1
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.303   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_25
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X5Y31.A4       net (fanout=8)        2.324   out1_3
+    SLICE_X5Y31.A        Tilo                  0.259   M_game_player_position_out[23]
+                                                       game/move_player/Mmux_player_location_out1111
+    SLICE_X7Y40.B1       net (fanout=16)       1.370   game/Mmux_player_location_out111
+    SLICE_X7Y40.CLK      Tas                   0.373   game/M_player_position_q[3]
+                                                       game/Mmux_M_player_position_d121
+                                                       game/M_player_position_q_1
     -------------------------------------------------  ---------------------------
-    Total                                      2.373ns (1.767ns logic, 0.606ns route)
-                                                       (74.5% logic, 25.5% route)
+    Total                                      7.089ns (1.621ns logic, 5.468ns route)
+                                                       (22.9% logic, 77.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.587ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_26 (FF)
+Slack:                  12.833ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.342ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      7.072ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -307,46 +248,40 @@ Slack:                  17.587ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_26
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.272   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_26
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.448   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a211
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.CMUX     Tcinc                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.C3       net (fanout=2)        1.122   game/a[15]_b[15]_add_3_OUT[6]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.342ns (1.736ns logic, 0.606ns route)
-                                                       (74.1% logic, 25.9% route)
+    Total                                      7.072ns (2.099ns logic, 4.973ns route)
+                                                       (29.7% logic, 70.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.627ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_29 (FF)
+Slack:                  12.835ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.299ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.070ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -357,49 +292,40 @@ Slack:                  17.627ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_29
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.303   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_29
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.448   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a211
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.BMUX     Tcinb                 0.277   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.B3       net (fanout=2)        1.132   game/a[15]_b[15]_add_3_OUT[5]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.299ns (1.698ns logic, 0.601ns route)
-                                                       (73.9% logic, 26.1% route)
+    Total                                      7.070ns (2.087ns logic, 4.983ns route)
+                                                       (29.5% logic, 70.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.645ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_23 (FF)
+Slack:                  12.836ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_10 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.287ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.033ns (0.728 - 0.761)
+  Data Path Delay:      7.068ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.061ns (0.626 - 0.687)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -410,43 +336,36 @@ Slack:                  17.645ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_23
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_10 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.CLK      Tcinck                0.313   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-                                                       M_counter_q_23
+    SLICE_X14Y49.CQ      Tcko                  0.476   leftb/M_ctr_q[11]
+                                                       leftb/M_ctr_q_10
+    SLICE_X16Y49.A3      net (fanout=2)        0.572   leftb/M_ctr_q[10]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.287ns (1.684ns logic, 0.603ns route)
-                                                       (73.6% logic, 26.4% route)
+    Total                                      7.068ns (1.621ns logic, 5.447ns route)
+                                                       (22.9% logic, 77.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.646ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_24 (FF)
+Slack:                  12.850ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_7 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.283ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      7.055ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -457,46 +376,36 @@ Slack:                  17.646ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_24
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_7
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.213   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_24
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y34.C4       net (fanout=26)       2.749   M_left_out
+    SLICE_X9Y34.C        Tilo                  0.259   game/N23
+                                                       game/move_player/alu/Mmux_aluOut281_SW1
+    SLICE_X9Y35.D1       net (fanout=1)        0.715   game/N21
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d621
+                                                       game/M_player_position_q_7
     -------------------------------------------------  ---------------------------
-    Total                                      2.283ns (1.677ns logic, 0.606ns route)
-                                                       (73.5% logic, 26.5% route)
+    Total                                      7.055ns (1.621ns logic, 5.434ns route)
+                                                       (23.0% logic, 77.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.655ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_21 (FF)
+Slack:                  12.855ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.277ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.033ns (0.728 - 0.761)
+  Data Path Delay:      7.050ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -507,43 +416,36 @@ Slack:                  17.655ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_21
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.CLK      Tcinck                0.303   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-                                                       M_counter_q_21
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X5Y31.A4       net (fanout=8)        2.324   out1_3
+    SLICE_X5Y31.A        Tilo                  0.259   M_game_player_position_out[23]
+                                                       game/move_player/Mmux_player_location_out1111
+    SLICE_X9Y35.A2       net (fanout=16)       1.331   game/Mmux_player_location_out111
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.277ns (1.674ns logic, 0.603ns route)
-                                                       (73.5% logic, 26.5% route)
+    Total                                      7.050ns (1.621ns logic, 5.429ns route)
+                                                       (23.0% logic, 77.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.658ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_30 (FF)
+Slack:                  12.870ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.268ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.035ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -554,49 +456,40 @@ Slack:                  17.658ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_30
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.272   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_30
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.411   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a21
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.CMUX     Tcinc                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.C3       net (fanout=2)        1.122   game/a[15]_b[15]_add_3_OUT[6]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.268ns (1.667ns logic, 0.601ns route)
-                                                       (73.5% logic, 26.5% route)
+    Total                                      7.035ns (2.062ns logic, 4.973ns route)
+                                                       (29.3% logic, 70.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.686ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_22 (FF)
+Slack:                  12.872ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.246ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.033ns (0.728 - 0.761)
+  Data Path Delay:      7.033ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -607,43 +500,40 @@ Slack:                  17.686ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_22
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.CLK      Tcinck                0.272   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-                                                       M_counter_q_22
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.411   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a21
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.BMUX     Tcinb                 0.277   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.B3       net (fanout=2)        1.132   game/a[15]_b[15]_add_3_OUT[5]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.246ns (1.643ns logic, 0.603ns route)
-                                                       (73.2% logic, 26.8% route)
+    Total                                      7.033ns (2.050ns logic, 4.983ns route)
+                                                       (29.1% logic, 70.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.689ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_1 (FF)
-  Destination:          M_counter_q_29 (FF)
+Slack:                  12.874ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.237ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.031ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -654,49 +544,36 @@ Slack:                  17.689ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_1 to M_counter_q_29
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.BQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_1
-    SLICE_X0Y31.B5       net (fanout=1)        0.215   M_counter_q[1]
-    SLICE_X0Y31.COUT     Topcyb                0.483   M_counter_q[3]
-                                                       M_counter_q[1]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.303   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_29
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X5Y31.A4       net (fanout=8)        2.324   out1_3
+    SLICE_X5Y31.A        Tilo                  0.259   M_game_player_position_out[23]
+                                                       game/move_player/Mmux_player_location_out1111
+    SLICE_X9Y35.C2       net (fanout=16)       1.312   game/Mmux_player_location_out111
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.237ns (1.869ns logic, 0.368ns route)
-                                                       (83.5% logic, 16.5% route)
+    Total                                      7.031ns (1.621ns logic, 5.410ns route)
+                                                       (23.1% logic, 76.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.701ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_4 (FF)
-  Destination:          M_counter_q_29 (FF)
+Slack:                  12.885ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_9 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.241ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.023ns (0.185 - 0.208)
+  Data Path Delay:      7.019ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.061ns (0.626 - 0.687)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -707,46 +584,36 @@ Slack:                  17.701ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_4 to M_counter_q_29
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_9 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y32.AQ       Tcko                  0.525   M_counter_q[7]
-                                                       M_counter_q_4
-    SLICE_X0Y32.A5       net (fanout=1)        0.456   M_counter_q[4]
-    SLICE_X0Y32.COUT     Topcya                0.474   M_counter_q[7]
-                                                       M_counter_q[4]_rt
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.303   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_29
+    SLICE_X14Y49.BQ      Tcko                  0.476   leftb/M_ctr_q[11]
+                                                       leftb/M_ctr_q_9
+    SLICE_X16Y49.A4      net (fanout=2)        0.523   leftb/M_ctr_q[9]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.241ns (1.767ns logic, 0.474ns route)
-                                                       (78.8% logic, 21.2% route)
+    Total                                      7.019ns (1.621ns logic, 5.398ns route)
+                                                       (23.1% logic, 76.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.716ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_27 (FF)
+Slack:                  12.887ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.213ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      7.018ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -757,46 +624,36 @@ Slack:                  17.716ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_27
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.313   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_27
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.C6       net (fanout=26)       2.565   M_left_out
+    SLICE_X9Y36.C        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW1
+    SLICE_X9Y35.A3       net (fanout=1)        0.862   game/N27
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.213ns (1.615ns logic, 0.598ns route)
-                                                       (73.0% logic, 27.0% route)
+    Total                                      7.018ns (1.621ns logic, 5.397ns route)
+                                                       (23.1% logic, 76.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.717ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_28 (FF)
+Slack:                  12.903ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_7 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.209ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      7.002ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -807,49 +664,40 @@ Slack:                  17.717ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_28
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_7
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.213   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_28
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.448   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a211
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.DMUX     Tcind                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.D4       net (fanout=2)        1.052   game/a[15]_b[15]_add_3_OUT[7]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d621
+                                                       game/M_player_position_q_7
     -------------------------------------------------  ---------------------------
-    Total                                      2.209ns (1.608ns logic, 0.601ns route)
-                                                       (72.8% logic, 27.2% route)
+    Total                                      7.002ns (2.099ns logic, 4.903ns route)
+                                                       (30.0% logic, 70.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.720ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_1 (FF)
-  Destination:          M_counter_q_30 (FF)
+Slack:                  12.940ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_7 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.206ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      6.965ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -860,49 +708,40 @@ Slack:                  17.720ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_1 to M_counter_q_30
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_7
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.BQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_1
-    SLICE_X0Y31.B5       net (fanout=1)        0.215   M_counter_q[1]
-    SLICE_X0Y31.COUT     Topcyb                0.483   M_counter_q[3]
-                                                       M_counter_q[1]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.272   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_30
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.411   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a21
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.DMUX     Tcind                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.D4       net (fanout=2)        1.052   game/a[15]_b[15]_add_3_OUT[7]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d621
+                                                       game/M_player_position_q_7
     -------------------------------------------------  ---------------------------
-    Total                                      2.206ns (1.838ns logic, 0.368ns route)
-                                                       (83.3% logic, 16.7% route)
+    Total                                      6.965ns (2.062ns logic, 4.903ns route)
+                                                       (29.6% logic, 70.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.726ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_25 (FF)
+Slack:                  12.944ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.203ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      6.959ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.624 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -913,46 +752,36 @@ Slack:                  17.726ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_25
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.303   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_25
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X5Y31.A4       net (fanout=8)        2.324   out1_3
+    SLICE_X5Y31.A        Tilo                  0.259   M_game_player_position_out[23]
+                                                       game/move_player/Mmux_player_location_out1111
+    SLICE_X7Y40.D3       net (fanout=16)       1.240   game/Mmux_player_location_out111
+    SLICE_X7Y40.CLK      Tas                   0.373   game/M_player_position_q[3]
+                                                       game/Mmux_M_player_position_d341
+                                                       game/M_player_position_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      2.203ns (1.605ns logic, 0.598ns route)
-                                                       (72.9% logic, 27.1% route)
+    Total                                      6.959ns (1.621ns logic, 5.338ns route)
+                                                       (23.3% logic, 76.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.732ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_4 (FF)
-  Destination:          M_counter_q_30 (FF)
+Slack:                  12.947ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_8 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.210ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.023ns (0.185 - 0.208)
+  Data Path Delay:      6.957ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.061ns (0.626 - 0.687)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -963,46 +792,36 @@ Slack:                  17.732ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_4 to M_counter_q_30
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_8 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y32.AQ       Tcko                  0.525   M_counter_q[7]
-                                                       M_counter_q_4
-    SLICE_X0Y32.A5       net (fanout=1)        0.456   M_counter_q[4]
-    SLICE_X0Y32.COUT     Topcya                0.474   M_counter_q[7]
-                                                       M_counter_q[4]_rt
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.272   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_30
+    SLICE_X14Y49.AQ      Tcko                  0.476   leftb/M_ctr_q[11]
+                                                       leftb/M_ctr_q_8
+    SLICE_X16Y49.A5      net (fanout=2)        0.461   leftb/M_ctr_q[8]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.210ns (1.736ns logic, 0.474ns route)
-                                                       (78.6% logic, 21.4% route)
+    Total                                      6.957ns (1.621ns logic, 5.336ns route)
+                                                       (23.3% logic, 76.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.743ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_19 (FF)
+Slack:                  12.968ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_13 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.191ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.031ns (0.730 - 0.761)
+  Data Path Delay:      6.937ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1013,40 +832,36 @@ Slack:                  17.743ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_19
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_13 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.CLK      Tcinck                0.313   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-                                                       M_counter_q_19
+    SLICE_X14Y50.BQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_13
+    SLICE_X16Y49.A2      net (fanout=2)        0.758   leftb/M_ctr_q[13]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X8Y36.A3       net (fanout=26)       2.780   M_left_out
+    SLICE_X8Y36.A        Tilo                  0.254   game/N38
+                                                       game/move_player/alu/Mmux_aluOut26_SW1
+    SLICE_X9Y35.C1       net (fanout=1)        0.830   game/N39
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.191ns (1.591ns logic, 0.600ns route)
-                                                       (72.6% logic, 27.4% route)
+    Total                                      6.937ns (1.616ns logic, 5.321ns route)
+                                                       (23.3% logic, 76.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.745ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_20 (FF)
+Slack:                  12.974ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.187ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.033ns (0.728 - 0.761)
+  Data Path Delay:      6.931ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1057,43 +872,40 @@ Slack:                  17.745ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_20
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.CLK      Tcinck                0.213   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-                                                       M_counter_q_20
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.D2       net (fanout=8)        2.046   out1_3
+    SLICE_X6Y41.COUT     Topcyd                0.335   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a41
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.CMUX     Tcinc                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.C3       net (fanout=2)        1.122   game/a[15]_b[15]_add_3_OUT[6]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.187ns (1.584ns logic, 0.603ns route)
-                                                       (72.4% logic, 27.6% route)
+    Total                                      6.931ns (1.986ns logic, 4.945ns route)
+                                                       (28.7% logic, 71.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.753ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_17 (FF)
+Slack:                  12.974ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.181ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.031ns (0.730 - 0.761)
+  Data Path Delay:      6.931ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1104,40 +916,40 @@ Slack:                  17.753ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_17
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.CLK      Tcinck                0.303   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-                                                       M_counter_q_17
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.448   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a211
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.AMUX     Tcina                 0.210   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.A4       net (fanout=2)        1.060   game/a[15]_b[15]_add_3_OUT[4]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.181ns (1.581ns logic, 0.600ns route)
-                                                       (72.5% logic, 27.5% route)
+    Total                                      6.931ns (2.020ns logic, 4.911ns route)
+                                                       (29.1% logic, 70.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.757ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_3 (FF)
-  Destination:          M_counter_q_26 (FF)
+Slack:                  12.976ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.172ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      6.929ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1148,46 +960,40 @@ Slack:                  17.757ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_3 to M_counter_q_26
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.DQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_3
-    SLICE_X0Y31.D5       net (fanout=1)        0.448   M_counter_q[3]
-    SLICE_X0Y31.COUT     Topcyd                0.312   M_counter_q[3]
-                                                       M_counter_q[3]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.272   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_26
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.D2       net (fanout=8)        2.046   out1_3
+    SLICE_X6Y41.COUT     Topcyd                0.335   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a41
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.BMUX     Tcinb                 0.277   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.B3       net (fanout=2)        1.132   game/a[15]_b[15]_add_3_OUT[5]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.172ns (1.574ns logic, 0.598ns route)
-                                                       (72.5% logic, 27.5% route)
+    Total                                      6.929ns (1.974ns logic, 4.955ns route)
+                                                       (28.5% logic, 71.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.778ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_1 (FF)
-  Destination:          M_counter_q_27 (FF)
+Slack:                  12.977ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_2 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.151ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      6.926ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.624 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1198,46 +1004,36 @@ Slack:                  17.778ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_1 to M_counter_q_27
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_2
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.BQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_1
-    SLICE_X0Y31.B5       net (fanout=1)        0.215   M_counter_q[1]
-    SLICE_X0Y31.COUT     Topcyb                0.483   M_counter_q[3]
-                                                       M_counter_q[1]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.313   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_27
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X5Y31.A4       net (fanout=8)        2.324   out1_3
+    SLICE_X5Y31.A        Tilo                  0.259   M_game_player_position_out[23]
+                                                       game/move_player/Mmux_player_location_out1111
+    SLICE_X7Y40.C3       net (fanout=16)       1.207   game/Mmux_player_location_out111
+    SLICE_X7Y40.CLK      Tas                   0.373   game/M_player_position_q[3]
+                                                       game/Mmux_M_player_position_d231
+                                                       game/M_player_position_q_2
     -------------------------------------------------  ---------------------------
-    Total                                      2.151ns (1.786ns logic, 0.365ns route)
-                                                       (83.0% logic, 17.0% route)
+    Total                                      6.926ns (1.621ns logic, 5.305ns route)
+                                                       (23.4% logic, 76.6% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.779ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_1 (FF)
-  Destination:          M_counter_q_28 (FF)
+Slack:                  13.011ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.147ns (Levels of Logic = 8)
-  Clock Path Skew:      -0.039ns (0.722 - 0.761)
+  Data Path Delay:      6.894ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1248,49 +1044,40 @@ Slack:                  17.779ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_1 to M_counter_q_28
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.BQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_1
-    SLICE_X0Y31.B5       net (fanout=1)        0.215   M_counter_q[1]
-    SLICE_X0Y31.COUT     Topcyb                0.483   M_counter_q[3]
-                                                       M_counter_q[1]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.213   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_28
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.B1       net (fanout=8)        2.074   out1_3
+    SLICE_X6Y41.COUT     Topcyb                0.411   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a21
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.AMUX     Tcina                 0.210   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.A4       net (fanout=2)        1.060   game/a[15]_b[15]_add_3_OUT[4]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.147ns (1.779ns logic, 0.368ns route)
-                                                       (82.9% logic, 17.1% route)
+    Total                                      6.894ns (1.983ns logic, 4.911ns route)
+                                                       (28.8% logic, 71.2% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.784ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_0 (FF)
-  Destination:          M_counter_q_18 (FF)
+Slack:                  13.019ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_6 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.150ns (Levels of Logic = 5)
-  Clock Path Skew:      -0.031ns (0.730 - 0.761)
+  Data Path Delay:      6.886ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1301,40 +1088,40 @@ Slack:                  17.784ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_0 to M_counter_q_18
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_6
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.AQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_0
-    SLICE_X0Y31.A5       net (fanout=1)        0.456   M_counter_q[0]
-    SLICE_X0Y31.COUT     Topcya                0.474   M_counter_q[3]
-                                                       Mcount_M_counter_q_lut<0>_INV_0
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.CLK      Tcinck                0.272   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-                                                       M_counter_q_18
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.D2       net (fanout=8)        2.046   out1_3
+    SLICE_X6Y41.COUT     Topcyd                0.290   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a411
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.CMUX     Tcinc                 0.289   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.C3       net (fanout=2)        1.122   game/a[15]_b[15]_add_3_OUT[6]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d611
+                                                       game/M_player_position_q_6
     -------------------------------------------------  ---------------------------
-    Total                                      2.150ns (1.550ns logic, 0.600ns route)
-                                                       (72.1% logic, 27.9% route)
+    Total                                      6.886ns (1.941ns logic, 4.945ns route)
+                                                       (28.2% logic, 71.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.788ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_1 (FF)
-  Destination:          M_counter_q_25 (FF)
+Slack:                  13.021ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.141ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.036ns (0.725 - 0.761)
+  Data Path Delay:      6.884ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1345,46 +1132,40 @@ Slack:                  17.788ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_1 to M_counter_q_25
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y31.BQ       Tcko                  0.525   M_counter_q[3]
-                                                       M_counter_q_1
-    SLICE_X0Y31.B5       net (fanout=1)        0.215   M_counter_q[1]
-    SLICE_X0Y31.COUT     Topcyb                0.483   M_counter_q[3]
-                                                       M_counter_q[1]_rt
-                                                       Mcount_M_counter_q_cy<3>
-    SLICE_X0Y32.CIN      net (fanout=1)        0.135   Mcount_M_counter_q_cy[3]
-    SLICE_X0Y32.COUT     Tbyp                  0.093   M_counter_q[7]
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.303   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_25
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.C2      net (fanout=4)        0.757   out2_0
+    SLICE_X15Y49.C       Tilo                  0.259   out1_0
+                                                       left/out1_1
+    SLICE_X6Y41.D2       net (fanout=8)        2.046   out1_3
+    SLICE_X6Y41.COUT     Topcyd                0.290   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+                                                       game/move_player/Mmux_M_alu_a411
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy<3>
+    SLICE_X6Y42.CIN      net (fanout=1)        0.003   game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_cy[3]
+    SLICE_X6Y42.BMUX     Tcinb                 0.277   game/a[15]_b[15]_add_3_OUT[7]
+                                                       game/move_player/alu/adder/Madd_a[15]_b[15]_add_3_OUT_xor<7>
+    SLICE_X9Y35.B3       net (fanout=2)        1.132   game/a[15]_b[15]_add_3_OUT[5]
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.141ns (1.776ns logic, 0.365ns route)
-                                                       (83.0% logic, 17.0% route)
+    Total                                      6.884ns (1.929ns logic, 4.955ns route)
+                                                       (28.0% logic, 72.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.790ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_4 (FF)
-  Destination:          M_counter_q_27 (FF)
+Slack:                  13.026ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_13 (FF)
+  Destination:          game/M_player_position_q_5 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.155ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.020ns (0.188 - 0.208)
+  Data Path Delay:      6.879ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1395,43 +1176,36 @@ Slack:                  17.790ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_4 to M_counter_q_27
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_13 to game/M_player_position_q_5
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y32.AQ       Tcko                  0.525   M_counter_q[7]
-                                                       M_counter_q_4
-    SLICE_X0Y32.A5       net (fanout=1)        0.456   M_counter_q[4]
-    SLICE_X0Y32.COUT     Topcya                0.474   M_counter_q[7]
-                                                       M_counter_q[4]_rt
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.CLK      Tcinck                0.313   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-                                                       M_counter_q_27
+    SLICE_X14Y50.BQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_13
+    SLICE_X16Y49.A2      net (fanout=2)        0.758   leftb/M_ctr_q[13]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y34.D3       net (fanout=26)       2.820   M_left_out
+    SLICE_X9Y34.D        Tilo                  0.259   game/N23
+                                                       game/move_player/alu/Mmux_aluOut24_SW0
+    SLICE_X9Y35.B2       net (fanout=1)        0.727   game/N23
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d561
+                                                       game/M_player_position_q_5
     -------------------------------------------------  ---------------------------
-    Total                                      2.155ns (1.684ns logic, 0.471ns route)
-                                                       (78.1% logic, 21.9% route)
+    Total                                      6.879ns (1.621ns logic, 5.258ns route)
+                                                       (23.6% logic, 76.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.791ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_4 (FF)
-  Destination:          M_counter_q_28 (FF)
+Slack:                  13.029ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_16 (FF)
+  Destination:          game/M_player_position_q_4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.151ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.023ns (0.185 - 0.208)
+  Data Path Delay:      6.878ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.058ns (0.626 - 0.684)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1442,46 +1216,36 @@ Slack:                  17.791ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_4 to M_counter_q_28
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_16 to game/M_player_position_q_4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y32.AQ       Tcko                  0.525   M_counter_q[7]
-                                                       M_counter_q_4
-    SLICE_X0Y32.A5       net (fanout=1)        0.456   M_counter_q[4]
-    SLICE_X0Y32.COUT     Topcya                0.474   M_counter_q[7]
-                                                       M_counter_q[4]_rt
-                                                       Mcount_M_counter_q_cy<7>
-    SLICE_X0Y33.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[7]
-    SLICE_X0Y33.COUT     Tbyp                  0.093   M_counter_q[11]
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.213   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_28
+    SLICE_X14Y51.AQ      Tcko                  0.476   leftb/M_ctr_q[19]
+                                                       leftb/M_ctr_q_16
+    SLICE_X15Y49.D2      net (fanout=2)        0.958   leftb/M_ctr_q[16]
+    SLICE_X15Y49.D       Tilo                  0.259   out1_0
+                                                       leftb/out2
+    SLICE_X15Y49.A3      net (fanout=4)        0.372   out1_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y36.B3       net (fanout=26)       2.792   M_left_out
+    SLICE_X9Y36.B        Tilo                  0.259   M_game_player_position_out[19]
+                                                       game/move_player/alu/Mmux_aluOut22_SW0
+    SLICE_X9Y35.A1       net (fanout=1)        1.130   game/N26
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d451
+                                                       game/M_player_position_q_4
     -------------------------------------------------  ---------------------------
-    Total                                      2.151ns (1.677ns logic, 0.474ns route)
-                                                       (78.0% logic, 22.0% route)
+    Total                                      6.878ns (1.626ns logic, 5.252ns route)
+                                                       (23.6% logic, 76.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  17.798ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               M_counter_q_8 (FF)
-  Destination:          M_counter_q_29 (FF)
+Slack:                  13.030ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               leftb/M_ctr_q_12 (FF)
+  Destination:          game/M_player_position_q_7 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      2.145ns (Levels of Logic = 6)
-  Clock Path Skew:      -0.022ns (0.185 - 0.207)
+  Data Path Delay:      6.875ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.060ns (0.626 - 0.686)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1492,35 +1256,28 @@ Slack:                  17.798ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: M_counter_q_8 to M_counter_q_29
+  Maximum Data Path at Slow Process Corner: leftb/M_ctr_q_12 to game/M_player_position_q_7
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X0Y33.AQ       Tcko                  0.525   M_counter_q[11]
-                                                       M_counter_q_8
-    SLICE_X0Y33.A5       net (fanout=1)        0.456   M_counter_q[8]
-    SLICE_X0Y33.COUT     Topcya                0.474   M_counter_q[11]
-                                                       M_counter_q[8]_rt
-                                                       Mcount_M_counter_q_cy<11>
-    SLICE_X0Y34.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[11]
-    SLICE_X0Y34.COUT     Tbyp                  0.093   M_counter_q[15]
-                                                       Mcount_M_counter_q_cy<15>
-    SLICE_X0Y35.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[15]
-    SLICE_X0Y35.COUT     Tbyp                  0.093   M_counter_q[19]
-                                                       Mcount_M_counter_q_cy<19>
-    SLICE_X0Y36.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[19]
-    SLICE_X0Y36.COUT     Tbyp                  0.093   M_counter_q[23]
-                                                       Mcount_M_counter_q_cy<23>
-    SLICE_X0Y37.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[23]
-    SLICE_X0Y37.COUT     Tbyp                  0.093   M_counter_q[27]
-                                                       Mcount_M_counter_q_cy<27>
-    SLICE_X0Y38.CIN      net (fanout=1)        0.003   Mcount_M_counter_q_cy[27]
-    SLICE_X0Y38.CLK      Tcinck                0.303   M_counter_q[30]
-                                                       Mcount_M_counter_q_xor<30>
-                                                       M_counter_q_29
+    SLICE_X14Y50.AQ      Tcko                  0.476   leftb/M_ctr_q[15]
+                                                       leftb/M_ctr_q_12
+    SLICE_X16Y49.A1      net (fanout=2)        1.017   leftb/M_ctr_q[12]
+    SLICE_X16Y49.A       Tilo                  0.254   left/M_last_q
+                                                       leftb/out3
+    SLICE_X15Y49.A2      net (fanout=4)        0.953   out2_0
+    SLICE_X15Y49.A       Tilo                  0.259   out1_0
+                                                       left/out1
+    SLICE_X9Y34.B6       net (fanout=26)       2.572   M_left_out
+    SLICE_X9Y34.B        Tilo                  0.259   game/N23
+                                                       game/move_player/alu/Mmux_aluOut281_SW0
+    SLICE_X9Y35.D2       net (fanout=1)        0.712   game/N20
+    SLICE_X9Y35.CLK      Tas                   0.373   game/M_player_position_q[7]
+                                                       game/Mmux_M_player_position_d621
+                                                       game/M_player_position_q_7
     -------------------------------------------------  ---------------------------
-    Total                                      2.145ns (1.674ns logic, 0.471ns route)
-                                                       (78.0% logic, 22.0% route)
+    Total                                      6.875ns (1.621ns logic, 5.254ns route)
+                                                       (23.6% logic, 76.4% route)
 
 --------------------------------------------------------------------------------
 
@@ -1534,236 +1291,236 @@ Slack: 17.334ns (period - min period limit)
   Location pin: BUFGMUX_X2Y11.I0
   Clock network: clk_BUFGP/IBUFG
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 18.601ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[3]/CLK
-  Logical resource: M_counter_q_0/CK
-  Location pin: SLICE_X0Y31.CLK
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: downb/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y58.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: leftb/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y58.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: upb/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y58.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: rightb/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[3]/CLK
-  Logical resource: M_counter_q_1/CK
-  Location pin: SLICE_X0Y31.CLK
+  Physical resource: rightb/M_ctr_q[3]/CLK
+  Logical resource: rightb/M_ctr_q_0/CK
+  Location pin: SLICE_X4Y42.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[3]/CLK
-  Logical resource: M_counter_q_2/CK
-  Location pin: SLICE_X0Y31.CLK
+  Physical resource: rightb/M_ctr_q[3]/CLK
+  Logical resource: rightb/M_ctr_q_1/CK
+  Location pin: SLICE_X4Y42.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[3]/CLK
-  Logical resource: M_counter_q_3/CK
-  Location pin: SLICE_X0Y31.CLK
+  Physical resource: rightb/M_ctr_q[3]/CLK
+  Logical resource: rightb/M_ctr_q_2/CK
+  Location pin: SLICE_X4Y42.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[7]/CLK
-  Logical resource: M_counter_q_4/CK
-  Location pin: SLICE_X0Y32.CLK
+  Physical resource: rightb/M_ctr_q[3]/CLK
+  Logical resource: rightb/M_ctr_q_3/CK
+  Location pin: SLICE_X4Y42.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[7]/CLK
-  Logical resource: M_counter_q_5/CK
-  Location pin: SLICE_X0Y32.CLK
+  Physical resource: rightb/M_ctr_q[7]/CLK
+  Logical resource: rightb/M_ctr_q_4/CK
+  Location pin: SLICE_X4Y43.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[7]/CLK
-  Logical resource: M_counter_q_6/CK
-  Location pin: SLICE_X0Y32.CLK
+  Physical resource: rightb/M_ctr_q[7]/CLK
+  Logical resource: rightb/M_ctr_q_5/CK
+  Location pin: SLICE_X4Y43.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[7]/CLK
-  Logical resource: M_counter_q_7/CK
-  Location pin: SLICE_X0Y32.CLK
+  Physical resource: rightb/M_ctr_q[7]/CLK
+  Logical resource: rightb/M_ctr_q_6/CK
+  Location pin: SLICE_X4Y43.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[11]/CLK
-  Logical resource: M_counter_q_8/CK
-  Location pin: SLICE_X0Y33.CLK
+  Physical resource: rightb/M_ctr_q[7]/CLK
+  Logical resource: rightb/M_ctr_q_7/CK
+  Location pin: SLICE_X4Y43.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[11]/CLK
-  Logical resource: M_counter_q_9/CK
-  Location pin: SLICE_X0Y33.CLK
+  Physical resource: rightb/M_ctr_q[11]/CLK
+  Logical resource: rightb/M_ctr_q_8/CK
+  Location pin: SLICE_X4Y44.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[11]/CLK
-  Logical resource: M_counter_q_10/CK
-  Location pin: SLICE_X0Y33.CLK
+  Physical resource: rightb/M_ctr_q[11]/CLK
+  Logical resource: rightb/M_ctr_q_9/CK
+  Location pin: SLICE_X4Y44.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[11]/CLK
-  Logical resource: M_counter_q_11/CK
-  Location pin: SLICE_X0Y33.CLK
+  Physical resource: rightb/M_ctr_q[11]/CLK
+  Logical resource: rightb/M_ctr_q_10/CK
+  Location pin: SLICE_X4Y44.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[15]/CLK
-  Logical resource: M_counter_q_12/CK
-  Location pin: SLICE_X0Y34.CLK
+  Physical resource: rightb/M_ctr_q[11]/CLK
+  Logical resource: rightb/M_ctr_q_11/CK
+  Location pin: SLICE_X4Y44.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[15]/CLK
-  Logical resource: M_counter_q_13/CK
-  Location pin: SLICE_X0Y34.CLK
+  Physical resource: rightb/M_ctr_q[15]/CLK
+  Logical resource: rightb/M_ctr_q_12/CK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[15]/CLK
-  Logical resource: M_counter_q_14/CK
-  Location pin: SLICE_X0Y34.CLK
+  Physical resource: rightb/M_ctr_q[15]/CLK
+  Logical resource: rightb/M_ctr_q_13/CK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[15]/CLK
-  Logical resource: M_counter_q_15/CK
-  Location pin: SLICE_X0Y34.CLK
+  Physical resource: rightb/M_ctr_q[15]/CLK
+  Logical resource: rightb/M_ctr_q_14/CK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[19]/CLK
-  Logical resource: M_counter_q_16/CK
-  Location pin: SLICE_X0Y35.CLK
+  Physical resource: rightb/M_ctr_q[15]/CLK
+  Logical resource: rightb/M_ctr_q_15/CK
+  Location pin: SLICE_X4Y45.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[19]/CLK
-  Logical resource: M_counter_q_17/CK
-  Location pin: SLICE_X0Y35.CLK
+  Physical resource: rightb/M_ctr_q[19]/CLK
+  Logical resource: rightb/M_ctr_q_16/CK
+  Location pin: SLICE_X4Y46.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[19]/CLK
-  Logical resource: M_counter_q_18/CK
-  Location pin: SLICE_X0Y35.CLK
+  Physical resource: rightb/M_ctr_q[19]/CLK
+  Logical resource: rightb/M_ctr_q_17/CK
+  Location pin: SLICE_X4Y46.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[19]/CLK
-  Logical resource: M_counter_q_19/CK
-  Location pin: SLICE_X0Y35.CLK
+  Physical resource: rightb/M_ctr_q[19]/CLK
+  Logical resource: rightb/M_ctr_q_18/CK
+  Location pin: SLICE_X4Y46.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[23]/CLK
-  Logical resource: M_counter_q_20/CK
-  Location pin: SLICE_X0Y36.CLK
+  Physical resource: rightb/M_ctr_q[19]/CLK
+  Logical resource: rightb/M_ctr_q_19/CK
+  Location pin: SLICE_X4Y46.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[23]/CLK
-  Logical resource: M_counter_q_21/CK
-  Location pin: SLICE_X0Y36.CLK
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: downb/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X4Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[23]/CLK
-  Logical resource: M_counter_q_22/CK
-  Location pin: SLICE_X0Y36.CLK
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: leftb/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X4Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[23]/CLK
-  Logical resource: M_counter_q_23/CK
-  Location pin: SLICE_X0Y36.CLK
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: upb/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X4Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[27]/CLK
-  Logical resource: M_counter_q_24/CK
-  Location pin: SLICE_X0Y37.CLK
+  Physical resource: rightb/M_sync_out/CLK
+  Logical resource: rightb/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X4Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[27]/CLK
-  Logical resource: M_counter_q_25/CK
-  Location pin: SLICE_X0Y37.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[27]/CLK
-  Logical resource: M_counter_q_26/CK
-  Location pin: SLICE_X0Y37.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[27]/CLK
-  Logical resource: M_counter_q_27/CK
-  Location pin: SLICE_X0Y37.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: M_counter_q[30]/CLK
-  Logical resource: M_counter_q_28/CK
-  Location pin: SLICE_X0Y38.CLK
+  Physical resource: M_state_q/CLK
+  Logical resource: game/M_state_q/CK
+  Location pin: SLICE_X8Y37.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 
@@ -1780,7 +1537,7 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    2.543|         |         |         |
+clk            |    7.608|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
@@ -1789,23 +1546,23 @@ Timing summary:
 
 Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
 
-Constraints cover 496 paths, 0 nets, and 47 connections
+Constraints cover 7287 paths, 0 nets, and 598 connections
 
 Design statistics:
-   Minimum period:   2.666ns{1}   (Maximum frequency: 375.094MHz)
+   Minimum period:   7.608ns{1}   (Maximum frequency: 131.441MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Wed Nov 20 18:16:09 2019 
+Analysis completed Sat Nov 23 12:42:07 2019 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 4550 MB
+Peak Memory Usage: 4552 MB
 
 
 

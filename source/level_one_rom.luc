@@ -1,7 +1,8 @@
 module level_one_rom (
     output player_initial_position [8][8],
     output player_reg_selector[3],
-    output end_position [8][8]
+    output end_position [8][8],
+    output walls[8][8]
   ) {
 
   always {
@@ -9,5 +10,14 @@ module level_one_rom (
     player_initial_position[7:1] = 7x{{8b0}};
     player_reg_selector = 3b000;
     end_position[7] = 8b00000001;
+    
+    walls[0] = 8b00000001;
+    walls[1] = 8b10000000;
+    walls[2] = 8b01000000;
+    walls[3] = 8b00001000;
+    walls[4] = 8b00000001;
+    walls[5] = 8b00000010;
+    walls[6] = 8b00000000;
+    walls[7] = 8b00000000;
   }
 }

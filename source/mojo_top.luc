@@ -12,7 +12,11 @@ module mojo_top (
     output avr_rx,          // AVR RX (FPGA TX)
     input avr_rx_busy,       // AVR RX buffer full
     output green[8],
-    output col[8]
+    output row[8],
+    input buttons[4],
+    input io_dip [3][8],    // remove once done!
+    input io_button [5],
+    output io_led [3][8] 
   ) {
   
   sig rst;                  // reset signal
@@ -21,10 +25,23 @@ module mojo_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
-    dff counter[32];
+    game_states game(.rst(rst));
   }
+  /*
+  DEBOUNCER LOGIC
+  */
+  edge_detector up(.clk(clk), #RISE(1), #FALL(0));
+  edge_detector down(.clk(clk), #RISE(1), #FALL(0));
+  edge_detector left(.clk(clk), #RISE(1), #FALL(0));
+  edge_detector right(.clk(clk), #RISE(1), #FALL(0));
+  button_conditioner upb(.clk(clk));
+  button_conditioner downb(.clk(clk));
+  button_conditioner leftb(.clk(clk));
+  button_conditioner rightb(.clk(clk));
   
-  always {
+  var i;
+  
+  always {  
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
     
@@ -33,19 +50,61 @@ module mojo_top (
     spi_channel = bzzzz;    // not using flags
     avr_rx = bz;            // not using serial port
     
-    col = 8x{0};
+    game.button_up = 0;
+    game.button_down = 0;
+    game.button_left = 0;
+    game.button_right = 0;
+    
+    
+    /*
+    BUTTON CONDITIONER INPUTS
+    */
+    upb.in = io_button[0];
+    downb.in = io_button[2];
+    leftb.in = io_button[3];
+    rightb.in = io_button[4];
+    
+    /*
+    EDGE DETECTOR INPUTS
+    */
+    up.in = upb.out;
+    down.in = downb.out;
+    left.in = leftb.out;
+    right.in = rightb.out;
+    
+    
+    /*
+    SEND BUTTON PRESS INPUTS TO GAME FILE
+    */
+    game.button_up = up.out;
+    game.button_down = down.out;
+    game.button_left = left.out;
+    game.button_right = right.out;
+    
+    // REMOVE THESE ONCE YOU'RE DONE!
+    io_led = 3x{{8b00}};
+    // REMOVE THIS
+    
+    row = 8x{0};
     green = 8x{0};
     
-    counter.d = counter.q + 1;
     
-    col[0] = counter.q[23];
-    col[1] = counter.q[24];
-    col[2] = counter.q[25];
-    col[3] = counter.q[26];
-    col[4] = counter.q[27];
-    col[5] = counter.q[28];
-    col[6] = counter.q[29];
-    col[7] = counter.q[30];
+    // REMOVE THESE ALSO
+    io_led[0] = game.player_position_out[0];
+    io_led[1] = game.player_position_out[1];
+    io_led[2] = game.player_position_out[2];      
+    // REMOVE THIS PART
+    
+//    game.button_up = buttons[0];
+//    game.button_down = buttons[1];
+//    game.button_left = buttons[2];
+//    game.button_right = buttons[3];
+    
+    for(i = 0; i < 8; i++){
+      row[i] = 1;
+      green = ~game.player_position_out[i];
+      row[i] = 0;
+    }
     
   }
 }

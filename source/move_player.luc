@@ -1,7 +1,4 @@
 module move_player (
-    input clk,  // clock
-    input rst,  // reset
-    
     input button_up,
     input button_down,
     input button_left,
@@ -12,17 +9,19 @@ module move_player (
     output new_player_reg_selector[3]
   ) {
   
-  dff new_player_position [8][8](.clk(clk), .rst(rst));
+  sig new_player_position [8][8];
+  sig temp_row_reg_selector [3];
   alu alu;
   
   
   always {
-    player_location_out = 8x{{8b0}};
+    player_location_out = 8x{{8bxxxxxxxx}};
     alu.a = 0;
     alu.b = 0;
     alu.alufn = 0;
+    temp_row_reg_selector = player_reg_selector;
     new_player_reg_selector = player_reg_selector;
-    player_location_out = 8x{{8b0}};
+    new_player_position = player_current_position;
     
     
     /*
@@ -35,28 +34,28 @@ module move_player (
         b000:
           // do nothing
           player_location_out[0] = player_current_position[0];
-          new_player_reg_selector = 3b000;
+          temp_row_reg_selector = 3b000;
         b001:
           player_location_out[0] = player_current_position[1];
-          new_player_reg_selector = 3b000;
+          temp_row_reg_selector = 3b000;
         b010:
           player_location_out[1] = player_current_position[2];
-          new_player_reg_selector = 3b001;
+          temp_row_reg_selector = 3b001;
         b011:
           player_location_out[2] = player_current_position[3];
-          new_player_reg_selector = 3b010;
+          temp_row_reg_selector = 3b010;
         b100:
           player_location_out[3] = player_current_position[4];
-          new_player_reg_selector = 3b011;
+          temp_row_reg_selector = 3b011;
         b101:
           player_location_out[4] = player_current_position[5];
-          new_player_reg_selector = 3b100;
+          temp_row_reg_selector = 3b100;
         b110:
           player_location_out[5] = player_current_position[6];
-          new_player_reg_selector = 3b101;
+          temp_row_reg_selector = 3b101;
         b111:
           player_location_out[6] = player_current_position[7];
-          new_player_reg_selector = 3b110;
+          temp_row_reg_selector = 3b110;
       }
     }
     
@@ -70,28 +69,28 @@ module move_player (
       case(player_reg_selector){
         b000:
           player_location_out[1] = player_current_position[0];
-          new_player_reg_selector = 3b001;
+          temp_row_reg_selector = 3b001;
         b001:
           player_location_out[2] = player_current_position[1];
-          new_player_reg_selector = 3b010;
+          temp_row_reg_selector = 3b010;
         b010:
           player_location_out[3] = player_current_position[2];
-          new_player_reg_selector = 3b011;
+          temp_row_reg_selector = 3b011;
         b011:
           player_location_out[4] = player_current_position[3];
-          new_player_reg_selector = 3b100;
+          temp_row_reg_selector = 3b100;
         b100:
           player_location_out[5] = player_current_position[4];
-          new_player_reg_selector = 3b101;
+          temp_row_reg_selector = 3b101;
         b101:
           player_location_out[6] = player_current_position[5];
-          new_player_reg_selector = 3b110;
+          temp_row_reg_selector = 3b110;
         b110:
           player_location_out[7] = player_current_position[6];
-          new_player_reg_selector = 3b111;
+          temp_row_reg_selector = 3b111;
         b111:
           player_location_out[7] = player_current_position[7];
-          new_player_reg_selector = 3b111;
+          temp_row_reg_selector = 3b111;
       }
     }
     
@@ -103,82 +102,82 @@ module move_player (
       case(player_reg_selector){
         b000:
           alu.a = player_current_position[0];
-          new_player_position.d[0] = alu.aluOut[7:0];
-          if(new_player_position.q[0] == 8b0){             // Overshot, ignore the shifting
+          new_player_position[0] = alu.aluOut[7:0];
+          if(new_player_position[0] == 8b0){             // Overshot, ignore the shifting
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[0] = new_player_position.q[0];
+            player_location_out[0] = new_player_position[0];
           }
           
         b001:
           alu.a = player_current_position[1];
-          new_player_position.d[1] = alu.aluOut[7:0];
-          if(new_player_position.q[1] == 8b0){
+          new_player_position[1] = alu.aluOut[7:0];
+          if(new_player_position[1] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[1] = new_player_position.q[1];
+            player_location_out[1] = new_player_position[1];
           }
           
         b010:
           alu.a = player_current_position[2];
-          new_player_position.d[2] = alu.aluOut[7:0];
-          if(new_player_position.q[2] == 8b0){
+          new_player_position[2] = alu.aluOut[7:0];
+          if(new_player_position[2] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[2] = new_player_position.q[2];
+            player_location_out[2] = new_player_position[2];
           }
           
         b011:
           alu.a = player_current_position[3];
-          new_player_position.d[3] = alu.aluOut[7:0];
-          if(new_player_position.q[3] == 8b0){
+          new_player_position[3] = alu.aluOut[7:0];
+          if(new_player_position[3] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[3] = new_player_position.q[3];
+            player_location_out[3] = new_player_position[3];
           }
           
         b100:
           alu.a = player_current_position[4];
-          new_player_position.d[4] = alu.aluOut[7:0];
-          if(new_player_position.q[4] == 8b0){
+          new_player_position[4] = alu.aluOut[7:0];
+          if(new_player_position[4] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[4] = new_player_position.q[4];
+            player_location_out[4] = new_player_position[4];
           }
           
         b101:
           alu.a = player_current_position[5];
-          new_player_position.d[5] = alu.aluOut[7:0];
-          if(new_player_position.q[5] == 8b0){
+          new_player_position[5] = alu.aluOut[7:0];
+          if(new_player_position[5] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[5] = new_player_position.q[5];
+            player_location_out[5] = new_player_position[5];
           }
           
         b110:
           alu.a = player_current_position[6];
-          new_player_position.d[6] = alu.aluOut[7:0];
-          if(new_player_position.q[6] == 8b0){
+          new_player_position[6] = alu.aluOut[7:0];
+          if(new_player_position[6] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[6] = new_player_position.q[6];
+            player_location_out[6] = new_player_position[6];
           }
           
         b111:
           alu.a = player_current_position[7];
-          new_player_position.d[7] = alu.aluOut[7:0];
-          if(new_player_position.q[7] == 8b0){
+          new_player_position[7] = alu.aluOut[7:0];
+          if(new_player_position[7] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[7] = new_player_position.q[7];
+            player_location_out[7] = new_player_position[7];
           }
       }
     }
@@ -190,85 +189,87 @@ module move_player (
       case(player_reg_selector){
         b000:
           alu.a = player_current_position[0];
-          new_player_position.d[0] = alu.aluOut[7:0];
-          if(new_player_position.q[0] == 8b0){
+          new_player_position[0] = alu.aluOut[7:0];
+          if(new_player_position[0] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[0] = new_player_position.q[0];
+            player_location_out[0] = new_player_position[0];
           }
           
         b001:
           alu.a = player_current_position[1];
-          new_player_position.d[1] = alu.aluOut[7:0];
-          if(new_player_position.q[1] == 8b0){
+          new_player_position[1] = alu.aluOut[7:0];
+          if(new_player_position[1] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[1] = new_player_position.q[1];
+            player_location_out[1] = new_player_position[1];
           }
           
         b010:
           alu.a = player_current_position[2];
-          new_player_position.d[2] = alu.aluOut[7:0];
-          if(new_player_position.q[2] == 8b0){
+          new_player_position[2] = alu.aluOut[7:0];
+          if(new_player_position[2] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[2] = new_player_position.q[2];
+            player_location_out[2] = new_player_position[2];
           }
           
         b011:
           alu.a = player_current_position[3];
-          new_player_position.d[3] = alu.aluOut[7:0];
-          if(new_player_position.q[3] == 8b0){
+          new_player_position[3] = alu.aluOut[7:0];
+          if(new_player_position[3] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[3] = new_player_position.q[3];
+            player_location_out[3] = new_player_position[3];
           }
           
         b100:
           alu.a = player_current_position[4];
-          new_player_position.d[4] = alu.aluOut[7:0];
-          if(new_player_position.q[4] == 8b0){
+          new_player_position[4] = alu.aluOut[7:0];
+          if(new_player_position[4] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[4] = new_player_position.q[4];
+            player_location_out[4] = new_player_position[4];
           }
           
         b101:
           alu.a = player_current_position[5];
-          new_player_position.d[5] = alu.aluOut[7:0];
-          if(new_player_position.q[5] == 8b0){
+          new_player_position[5] = alu.aluOut[7:0];
+          if(new_player_position[5] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[5] = new_player_position.q[5];
+            player_location_out[5] = new_player_position[5];
           }
           
         b110:
           alu.a = player_current_position[6];
-          new_player_position.d[6] = alu.aluOut[7:0];
-          if(new_player_position.q[6] == 8b0){
+          new_player_position[6] = alu.aluOut[7:0];
+          if(new_player_position[6] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[6] = new_player_position.q[6];
+            player_location_out[6] = new_player_position[6];
           }
           
         b111:
           alu.a = player_current_position[7];
-          new_player_position.d[7] = alu.aluOut[7:0];
-          if(new_player_position.q[7] == 8b0){
+          new_player_position[7] = alu.aluOut[7:0];
+          if(new_player_position[7] == 8b0){
             player_location_out = player_current_position;
           }
           else{
-            player_location_out[7] = new_player_position.q[7];
+            player_location_out[7] = new_player_position[7];
           }
       }
     }
+    player_location_out = new_player_position;
+    new_player_reg_selector = temp_row_reg_selector;
     
   }
 }
