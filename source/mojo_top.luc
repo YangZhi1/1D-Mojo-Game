@@ -59,22 +59,22 @@ module mojo_top (
     /*
     BUTTON CONDITIONER INPUTS
     */
-    upb.in = io_button[0];
-    downb.in = io_button[2];
-    leftb.in = io_button[3];
-    rightb.in = io_button[4];
+    upb.in = buttons[0];
+    downb.in = buttons[1];
+    leftb.in = buttons[2];
+    rightb.in = buttons[3];
     
     /*
     EDGE DETECTOR INPUTS
     */
-    up.in = upb.out;
-    down.in = downb.out;
-    left.in = leftb.out;
-    right.in = rightb.out;
+    up.in = ~upb.out;
+    down.in = ~downb.out;
+    left.in = ~leftb.out;
+    right.in = ~rightb.out;
     
     
     /*
-    SEND BUTTON PRESS INPUTS TO GAME FILE
+    SEND INVERSE OF BUTTON PRESS INPUTS TO GAME FILE
     */
     game.button_up = up.out;
     game.button_down = down.out;

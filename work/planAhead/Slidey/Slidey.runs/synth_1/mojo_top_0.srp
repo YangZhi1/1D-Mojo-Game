@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.07 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> Reading design: mojo_top_0.prj
 
@@ -144,9 +144,8 @@ Elaborating module <pipeline_17>.
 
 Synthesizing Unit <mojo_top_0>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v".
-WARNING:Xst:647 - Input <buttons> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <io_dip> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <io_button<1:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <io_button> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <cclk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_ss> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_mosi> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -623,15 +622,15 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 783
+# BELS                             : 792
 #      GND                         : 11
 #      INV                         : 11
 #      LUT1                        : 91
-#      LUT2                        : 21
-#      LUT3                        : 59
-#      LUT4                        : 18
-#      LUT5                        : 25
-#      LUT6                        : 327
+#      LUT2                        : 27
+#      LUT3                        : 58
+#      LUT4                        : 24
+#      LUT5                        : 24
+#      LUT6                        : 326
 #      MUXCY                       : 91
 #      MUXF7                       : 24
 #      VCC                         : 9
@@ -659,16 +658,16 @@ Selected Device : 6slx9tqg144-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:             189  out of  11440     1%  
- Number of Slice LUTs:                  556  out of   5720     9%  
-    Number used as Logic:               552  out of   5720     9%  
+ Number of Slice LUTs:                  565  out of   5720     9%  
+    Number used as Logic:               561  out of   5720     9%  
     Number used as Memory:                4  out of   1440     0%  
        Number used as SRL:                4
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    575
-   Number with an unused Flip Flop:     386  out of    575    67%  
-   Number with an unused LUT:            19  out of    575     3%  
-   Number of fully used LUT-FF pairs:   170  out of    575    29%  
+ Number of LUT Flip Flop pairs used:    584
+   Number with an unused Flip Flop:     395  out of    584    67%  
+   Number with an unused LUT:            19  out of    584     3%  
+   Number of fully used LUT-FF pairs:   170  out of    584    29%  
    Number of unique control sets:        17
 
 IO Utilization: 
@@ -722,7 +721,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 7.472ns (frequency: 133.833MHz)
-  Total number of paths / destination ports: 30371 / 378
+  Total number of paths / destination ports: 30383 / 378
 -------------------------------------------------------------------------
 Delay:               7.472ns (Levels of Logic = 8)
   Source:            game/M_player_position_q_7 (FF)
@@ -739,7 +738,7 @@ Delay:               7.472ns (Levels of Logic = 8)
      LUT6:I0->O            1   0.254   0.000  Mmux_M_alu_a_44 (Mmux_M_alu_a_44_0)
      MUXF7:I0->O           9   0.163   0.976  Mmux_M_alu_a_2_f7_3 (M_alu_aluOut<6>)
      LUT4:I3->O           12   0.254   1.069  M_alu_aluOut[7]_GND_16_o_equal_15_o<7>_SW0 (N0)
-     LUT6:I5->O            1   0.254   0.000  M_alu_aluOut[7]_GND_16_o_equal_15_o<7>_G (N116)
+     LUT6:I5->O            1   0.254   0.000  M_alu_aluOut[7]_GND_16_o_equal_15_o<7>_G (N122)
      MUXF7:I1->O          12   0.175   1.069  M_alu_aluOut[7]_GND_16_o_equal_15_o<7> (M_alu_aluOut[7]_GND_16_o_equal_15_o)
      LUT2:I1->O            1   0.254   0.790  GND_16_o_player_current_position[63]_mux_1_OUT<55>1 (player_location_out<55>)
      end scope: 'game/move_right:player_location_out<55>'
@@ -807,14 +806,14 @@ clk            |    7.472|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 10.37 secs
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 11.04 secs
  
 --> 
 
 Total memory usage is 4518180 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  100 (   0 filtered)
+Number of warnings :   99 (   0 filtered)
 Number of infos    :   16 (   0 filtered)
 
