@@ -103,57 +103,59 @@ module mojo_top (
     
     case(state.q){
       state.A:
-        counter.d = 0;
         row[0] = 1;
         green = ~game.player_position_out[0];
-        if(counter.q[10] == 1){
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.B;
         }
       state.B:
-        counter.d = 0;
         row[1] = 1;
-        green = ~game.player_position_out[0];
-        if(counter.q[10] == 1){
+        green = ~game.player_position_out[1];
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.C;
         }
       state.C:
-        counter.d = 0;
         row[2] = 1;
-        green = ~game.player_position_out[0];
-        if(counter.q[10] == 1){
+        green = ~game.player_position_out[2];
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.D;
         }
       state.D:
-        counter.d = 0;
         row[3] = 1;
         green = ~game.player_position_out[3];
-        if(counter.q[10] == 1){
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.E;
         }
       state.E:
-        counter.d = 0;
         row[4] = 1;
         green = ~game.player_position_out[4];
-        state.d = state.F;
+        if(counter.q[15] == 1){
+          counter.d = 0;
+          state.d = state.F;
+        }
       state.F:
-        counter.d = 0;
         row[5] = 1;
-        green = game.player_position_out[5];
-        if(counter.q[10] == 1){
+        green = ~game.player_position_out[5];
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.G;
         }
       state.G:
-        counter.d = 0;
         row[6] = 1;
         green = ~game.player_position_out[6];
-        if(counter.q[10] == 1){
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.H;
         }
       state.H:
-        counter.d = 0;
         row[7] = 1;
         green = ~game.player_position_out[7];
-        if(counter.q[10] == 1){
+        if(counter.q[15] == 1){
+          counter.d = 0;
           state.d = state.A;
         }
        

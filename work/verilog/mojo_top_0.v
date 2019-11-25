@@ -167,64 +167,66 @@ module mojo_top_0 (
     
     case (M_state_q)
       A_state: begin
-        M_counter_d = 1'h0;
         row[0+0-:1] = 1'h1;
         green = ~M_game_player_position_out[0+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = B_state;
         end
       end
       B_state: begin
-        M_counter_d = 1'h0;
         row[1+0-:1] = 1'h1;
-        green = ~M_game_player_position_out[0+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        green = ~M_game_player_position_out[8+7-:8];
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = C_state;
         end
       end
       C_state: begin
-        M_counter_d = 1'h0;
         row[2+0-:1] = 1'h1;
-        green = ~M_game_player_position_out[0+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        green = ~M_game_player_position_out[16+7-:8];
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = D_state;
         end
       end
       D_state: begin
-        M_counter_d = 1'h0;
         row[3+0-:1] = 1'h1;
         green = ~M_game_player_position_out[24+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = E_state;
         end
       end
       E_state: begin
-        M_counter_d = 1'h0;
         row[4+0-:1] = 1'h1;
         green = ~M_game_player_position_out[32+7-:8];
-        M_state_d = F_state;
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
+          M_state_d = F_state;
+        end
       end
       F_state: begin
-        M_counter_d = 1'h0;
         row[5+0-:1] = 1'h1;
-        green = M_game_player_position_out[40+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        green = ~M_game_player_position_out[40+7-:8];
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = G_state;
         end
       end
       G_state: begin
-        M_counter_d = 1'h0;
         row[6+0-:1] = 1'h1;
         green = ~M_game_player_position_out[48+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = H_state;
         end
       end
       H_state: begin
-        M_counter_d = 1'h0;
         row[7+0-:1] = 1'h1;
         green = ~M_game_player_position_out[56+7-:8];
-        if (M_counter_q[10+0-:1] == 1'h1) begin
+        if (M_counter_q[15+0-:1] == 1'h1) begin
+          M_counter_d = 1'h0;
           M_state_d = A_state;
         end
       end

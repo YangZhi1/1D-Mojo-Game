@@ -214,9 +214,9 @@ module game_states_2 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_score_q <= 7'h00;
+      M_token_map_q <= 1'h0;
     end else begin
-      M_score_q <= M_score_d;
+      M_token_map_q <= M_token_map_d;
     end
   end
   
@@ -231,11 +231,6 @@ module game_states_2 (
   
   
   always @(posedge clk) begin
-    M_state_q <= M_state_d;
-  end
-  
-  
-  always @(posedge clk) begin
     if (rst == 1'b1) begin
       M_player_position_q <= 8'h80;
     end else begin
@@ -246,10 +241,15 @@ module game_states_2 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_token_map_q <= 1'h0;
+      M_score_q <= 7'h00;
     end else begin
-      M_token_map_q <= M_token_map_d;
+      M_score_q <= M_score_d;
     end
+  end
+  
+  
+  always @(posedge clk) begin
+    M_state_q <= M_state_d;
   end
   
   

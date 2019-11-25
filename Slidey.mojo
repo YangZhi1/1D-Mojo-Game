@@ -15,8 +15,8 @@
     <src>adder.luc</src>
     <src>move_player_right.luc</src>
     <ucf lib="true">io_shield.ucf</ucf>
-    <ucf lib="true">mojo.ucf</ucf>
     <ucf>custom.ucf</ucf>
+    <ucf lib="true">mojo.ucf</ucf>
     <component>reset_conditioner.luc</component>
     <component>pipeline.luc</component>
     <component>button_conditioner.luc</component>
