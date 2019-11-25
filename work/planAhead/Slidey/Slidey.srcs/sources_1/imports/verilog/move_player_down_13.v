@@ -13,47 +13,43 @@ module move_player_down_13 (
   
   
   
-  reg [2:0] temp_row_reg_selector;
-  
   always @* begin
-    temp_row_reg_selector = player_reg_selector;
     new_player_reg_selector = player_reg_selector;
     player_location_out = 64'h0000000000000000;
     
     case (player_reg_selector)
       3'h0: begin
         player_location_out[8+7-:8] = player_current_position[0+7-:8];
-        temp_row_reg_selector = 3'h1;
+        new_player_reg_selector = 3'h1;
       end
       3'h1: begin
         player_location_out[16+7-:8] = player_current_position[8+7-:8];
-        temp_row_reg_selector = 3'h2;
+        new_player_reg_selector = 3'h2;
       end
       3'h2: begin
         player_location_out[24+7-:8] = player_current_position[16+7-:8];
-        temp_row_reg_selector = 3'h3;
+        new_player_reg_selector = 3'h3;
       end
       3'h3: begin
         player_location_out[32+7-:8] = player_current_position[24+7-:8];
-        temp_row_reg_selector = 3'h4;
+        new_player_reg_selector = 3'h4;
       end
       3'h4: begin
         player_location_out[40+7-:8] = player_current_position[32+7-:8];
-        temp_row_reg_selector = 3'h5;
+        new_player_reg_selector = 3'h5;
       end
       3'h5: begin
         player_location_out[48+7-:8] = player_current_position[40+7-:8];
-        temp_row_reg_selector = 3'h6;
+        new_player_reg_selector = 3'h6;
       end
       3'h6: begin
         player_location_out[56+7-:8] = player_current_position[48+7-:8];
-        temp_row_reg_selector = 3'h7;
+        new_player_reg_selector = 3'h7;
       end
       3'h7: begin
         player_location_out[56+7-:8] = player_current_position[56+7-:8];
-        temp_row_reg_selector = 3'h7;
+        new_player_reg_selector = 3'h7;
       end
     endcase
-    new_player_reg_selector = temp_row_reg_selector;
   end
 endmodule

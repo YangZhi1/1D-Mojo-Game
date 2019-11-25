@@ -54,6 +54,16 @@ module mojo_top_0 (
     .tokens(M_game_tokens),
     .current_score(M_game_current_score)
   );
+  localparam A_state = 3'd0;
+  localparam B_state = 3'd1;
+  localparam C_state = 3'd2;
+  localparam D_state = 3'd3;
+  localparam E_state = 3'd4;
+  localparam F_state = 3'd5;
+  localparam G_state = 3'd6;
+  localparam H_state = 3'd7;
+  
+  reg [2:0] M_state_d, M_state_q = A_state;
   
   wire [1-1:0] M_up_out;
   reg [1-1:0] M_up_in;
@@ -119,9 +129,12 @@ module mojo_top_0 (
     .out(M_rightb_out)
   );
   
-  integer i;
+  reg [19:0] M_counter_d, M_counter_q = 1'h0;
   
   always @* begin
+    M_state_d = M_state_q;
+    M_counter_d = M_counter_q;
+    
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
     led = 8'h00;
@@ -147,13 +160,92 @@ module mojo_top_0 (
     io_led = 24'h000000;
     row = 8'h00;
     green = 8'h00;
+    M_counter_d = M_counter_q + 1'h1;
     io_led[0+7-:8] = M_game_player_position_out[0+7-:8];
     io_led[8+7-:8] = M_game_player_position_out[8+7-:8];
     io_led[16+7-:8] = M_game_player_position_out[16+7-:8];
-    for (i = 1'h0; i < 4'h8; i = i + 1) begin
-      row[(i)*1+0-:1] = 1'h1;
-      green = ~M_game_player_position_out[(i)*8+7-:8];
-      row[(i)*1+0-:1] = 1'h0;
+    
+    case (M_state_q)
+      A_state: begin
+        M_counter_d = 1'h0;
+        row[0+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[0+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = B_state;
+        end
+      end
+      B_state: begin
+        M_counter_d = 1'h0;
+        row[1+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[0+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = C_state;
+        end
+      end
+      C_state: begin
+        M_counter_d = 1'h0;
+        row[2+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[0+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = D_state;
+        end
+      end
+      D_state: begin
+        M_counter_d = 1'h0;
+        row[3+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[24+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = E_state;
+        end
+      end
+      E_state: begin
+        M_counter_d = 1'h0;
+        row[4+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[32+7-:8];
+        M_state_d = F_state;
+      end
+      F_state: begin
+        M_counter_d = 1'h0;
+        row[5+0-:1] = 1'h1;
+        green = M_game_player_position_out[40+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = G_state;
+        end
+      end
+      G_state: begin
+        M_counter_d = 1'h0;
+        row[6+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[48+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = H_state;
+        end
+      end
+      H_state: begin
+        M_counter_d = 1'h0;
+        row[7+0-:1] = 1'h1;
+        green = ~M_game_player_position_out[56+7-:8];
+        if (M_counter_q[10+0-:1] == 1'h1) begin
+          M_state_d = A_state;
+        end
+      end
+    endcase
+  end
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_state_q <= 1'h0;
+    end else begin
+      M_state_q <= M_state_d;
     end
   end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_counter_q <= 1'h0;
+    end else begin
+      M_counter_q <= M_counter_d;
+    end
+  end
+  
 endmodule

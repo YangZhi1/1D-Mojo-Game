@@ -109,12 +109,14 @@ WARNING:Xst:647 - Input <avr_tx> is never used. This port will be preserved and 
 WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 46: Output port <tokens> of the instance <game> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 46: Output port <current_score> of the instance <game> is unconnected or connected to loadless signal.
-    Found 1-bit tristate buffer for signal <spi_miso> created at line 124
-    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 124
-    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 124
-    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 124
-    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 124
-    Found 1-bit tristate buffer for signal <avr_rx> created at line 124
+    Found 3-bit register for signal <M_state_q>.
+    Found 1-bit tristate buffer for signal <spi_miso> created at line 134
+    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 134
+    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 134
+    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 134
+    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 134
+    Found 1-bit tristate buffer for signal <avr_rx> created at line 134
+    WARNING:Xst:2404 -  FFs/Latches <M_counter_q<19:0>> (without init value) have a constant value of 0 in block <mojo_top_0>.
     Summary:
 	inferred   6 Tristate(s).
 Unit <mojo_top_0> synthesized.
@@ -132,13 +134,13 @@ INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slid
 INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 45: Output port <walls> of the instance <inter_one> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 102: Output port <end_position> of the instance <tutorial> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 102: Output port <walls> of the instance <tutorial> is unconnected or connected to loadless signal.
-    Found 64-bit register for signal <M_player_position_q>.
-    Found 3-bit register for signal <M_state_q>.
-    Found 7-bit register for signal <M_score_q>.
     Found 3-bit register for signal <M_player_reg_selector_q>.
+    Found 3-bit register for signal <M_state_q>.
+    Found 64-bit register for signal <M_player_position_q>.
     Found 64-bit register for signal <M_token_map_q>.
+    Found 7-bit register for signal <M_score_q>.
 INFO:Xst:1799 - State 100 is never reached in FSM <M_state_q>.
-    Found finite state machine <FSM_0> for signal <M_state_q>.
+    Found finite state machine <FSM_1> for signal <M_state_q>.
     -----------------------------------------------------------------------
     | States             | 4                                              |
     | Transitions        | 3                                              |
@@ -151,7 +153,7 @@ INFO:Xst:1799 - State 100 is never reached in FSM <M_state_q>.
     -----------------------------------------------------------------------
     Summary:
 	inferred 131 D-type flip-flop(s).
-	inferred  17 Multiplexer(s).
+	inferred  18 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <game_states_2> synthesized.
 
@@ -164,8 +166,8 @@ Unit <level_one_rom_11> synthesized.
 
 Synthesizing Unit <move_player_12>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_12.v".
-    Found 8x3-bit Read Only RAM for signal <temp_row_reg_selector>
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 23.
+    Found 8x3-bit Read Only RAM for signal <new_player_reg_selector>
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 20.
     Summary:
 	inferred   1 RAM(s).
 	inferred   1 Multiplexer(s).
@@ -173,8 +175,8 @@ Unit <move_player_12> synthesized.
 
 Synthesizing Unit <move_player_down_13>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_down_13.v".
-    Found 8x3-bit Read Only RAM for signal <temp_row_reg_selector>
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 23.
+    Found 8x3-bit Read Only RAM for signal <new_player_reg_selector>
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 20.
     Summary:
 	inferred   1 RAM(s).
 	inferred   1 Multiplexer(s).
@@ -301,14 +303,14 @@ Macro Statistics
  3-bit register                                        : 1
  4-bit register                                        : 1
  64-bit register                                       : 2
-# Multiplexers                                         : 61
+# Multiplexers                                         : 62
  1-bit 2-to-1 multiplexer                              : 6
  1-bit 4-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 6
  16-bit 4-to-1 multiplexer                             : 8
  16-bit 8-to-1 multiplexer                             : 2
  3-bit 2-to-1 multiplexer                              : 7
- 64-bit 2-to-1 multiplexer                             : 26
+ 64-bit 2-to-1 multiplexer                             : 27
  64-bit 8-to-1 multiplexer                             : 4
 # Logic shifters                                       : 6
  16-bit shifter arithmetic right                       : 2
@@ -333,7 +335,7 @@ The following registers are absorbed into counter <M_ctr_q>: 1 register on signa
 Unit <button_conditioner_7> synthesized (advanced).
 
 Synthesizing (advanced) Unit <move_player_12>.
-INFO:Xst:3231 - The small RAM <Mram_temp_row_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+INFO:Xst:3231 - The small RAM <Mram_new_player_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -342,12 +344,12 @@ INFO:Xst:3231 - The small RAM <Mram_temp_row_reg_selector> will be implemented o
     |     weA            | connected to signal <GND>           | high     |
     |     addrA          | connected to signal <player_reg_selector> |          |
     |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to signal <temp_row_reg_selector> |          |
+    |     doA            | connected to signal <new_player_reg_selector> |          |
     -----------------------------------------------------------------------
 Unit <move_player_12> synthesized (advanced).
 
 Synthesizing (advanced) Unit <move_player_down_13>.
-INFO:Xst:3231 - The small RAM <Mram_temp_row_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+INFO:Xst:3231 - The small RAM <Mram_new_player_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -356,7 +358,7 @@ INFO:Xst:3231 - The small RAM <Mram_temp_row_reg_selector> will be implemented o
     |     weA            | connected to signal <GND>           | high     |
     |     addrA          | connected to signal <player_reg_selector> |          |
     |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to signal <temp_row_reg_selector> |          |
+    |     doA            | connected to signal <new_player_reg_selector> |          |
     -----------------------------------------------------------------------
 Unit <move_player_down_13> synthesized (advanced).
 
@@ -375,14 +377,14 @@ Macro Statistics
  20-bit up counter                                     : 4
 # Registers                                            : 147
  Flip-Flops                                            : 147
-# Multiplexers                                         : 61
+# Multiplexers                                         : 62
  1-bit 2-to-1 multiplexer                              : 6
  1-bit 4-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 6
  16-bit 4-to-1 multiplexer                             : 8
  16-bit 8-to-1 multiplexer                             : 2
  3-bit 2-to-1 multiplexer                              : 7
- 64-bit 2-to-1 multiplexer                             : 26
+ 64-bit 2-to-1 multiplexer                             : 27
  64-bit 8-to-1 multiplexer                             : 4
 # Logic shifters                                       : 6
  16-bit shifter arithmetic right                       : 2
@@ -399,7 +401,7 @@ Macro Statistics
 *                         Low Level Synthesis                           *
 =========================================================================
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <game/FSM_0> on signal <M_state_q[1:3]> with one-hot encoding.
+Optimizing FSM <game/FSM_1> on signal <M_state_q[1:3]> with one-hot encoding.
 -------------------
  State | Encoding
 -------------------
@@ -543,9 +545,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 7.424ns (Maximum Frequency: 134.698MHz)
+   Minimum period: 7.447ns (Maximum Frequency: 134.282MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 5.282ns
+   Maximum output required time after clock: 5.316ns
    Maximum combinational path delay: No path found
 
 =========================================================================

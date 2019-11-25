@@ -26,6 +26,8 @@ module mojo_top (
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
     game_states game(.rst(rst));
+    fsm state(.rst(rst)) = {A, B, C, D, E, F, G, H};
+    
   }
   /*
   DEBOUNCER LOGIC
@@ -39,8 +41,7 @@ module mojo_top (
   button_conditioner leftb(.clk(clk));
   button_conditioner rightb(.clk(clk));
   
-  var i;
-  
+  dff counter[20](.clk(clk), .rst(rst));
   always {  
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
@@ -54,7 +55,6 @@ module mojo_top (
     game.button_down = 0;
     game.button_left = 0;
     game.button_right = 0;
-    
     
     /*
     BUTTON CONDITIONER INPUTS
@@ -88,11 +88,12 @@ module mojo_top (
     row = 8x{0};
     green = 8x{0};
     
+    counter.d = counter.q + 1;
     
     // REMOVE THESE ALSO
     io_led[0] = game.player_position_out[0];
     io_led[1] = game.player_position_out[1];
-    io_led[2] = game.player_position_out[2];      
+    io_led[2] = game.player_position_out[2];  
     // REMOVE THIS PART
     
 //    game.button_up = buttons[0];
@@ -100,11 +101,62 @@ module mojo_top (
 //    game.button_left = buttons[2];
 //    game.button_right = buttons[3];
     
-    for(i = 0; i < 8; i++){
-      row[i] = 1;
-      green = ~game.player_position_out[i];
-      row[i] = 0;
+    case(state.q){
+      state.A:
+        counter.d = 0;
+        row[0] = 1;
+        green = ~game.player_position_out[0];
+        if(counter.q[10] == 1){
+          state.d = state.B;
+        }
+      state.B:
+        counter.d = 0;
+        row[1] = 1;
+        green = ~game.player_position_out[0];
+        if(counter.q[10] == 1){
+          state.d = state.C;
+        }
+      state.C:
+        counter.d = 0;
+        row[2] = 1;
+        green = ~game.player_position_out[0];
+        if(counter.q[10] == 1){
+          state.d = state.D;
+        }
+      state.D:
+        counter.d = 0;
+        row[3] = 1;
+        green = ~game.player_position_out[3];
+        if(counter.q[10] == 1){
+          state.d = state.E;
+        }
+      state.E:
+        counter.d = 0;
+        row[4] = 1;
+        green = ~game.player_position_out[4];
+        state.d = state.F;
+      state.F:
+        counter.d = 0;
+        row[5] = 1;
+        green = game.player_position_out[5];
+        if(counter.q[10] == 1){
+          state.d = state.G;
+        }
+      state.G:
+        counter.d = 0;
+        row[6] = 1;
+        green = ~game.player_position_out[6];
+        if(counter.q[10] == 1){
+          state.d = state.H;
+        }
+      state.H:
+        counter.d = 0;
+        row[7] = 1;
+        green = ~game.player_position_out[7];
+        if(counter.q[10] == 1){
+          state.d = state.A;
+        }
+       
     }
-    
   }
 }

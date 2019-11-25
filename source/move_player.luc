@@ -5,13 +5,10 @@ module move_player (
     output new_player_reg_selector[3]
   ) {
   
-  sig temp_row_reg_selector [3];
-  
   always {
     /*
     FILE TO DO SHIFTING FOR BUTTON_UP IS PRESSED
     */
-    temp_row_reg_selector = player_reg_selector;
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
     
@@ -20,36 +17,35 @@ module move_player (
       b000:
         // do nothing
         player_location_out[0] = player_current_position[0];
-        temp_row_reg_selector = 3b000;
+        new_player_reg_selector = 3b000;
       b001:
         player_location_out[0] = player_current_position[1];
-        temp_row_reg_selector = 3b000;
+        new_player_reg_selector = 3b000;
 
       b010:
         player_location_out[1] = player_current_position[2];
-        temp_row_reg_selector = 3b001;
+        new_player_reg_selector = 3b001;
         
       b011:
         player_location_out[2] = player_current_position[3];
-        temp_row_reg_selector = 3b010;
+        new_player_reg_selector = 3b010;
         
       b100:
         player_location_out[3] = player_current_position[4];
-        temp_row_reg_selector = 3b011;
+        new_player_reg_selector = 3b011;
        
       b101:
         player_location_out[4] = player_current_position[5];
-        temp_row_reg_selector = 3b100;
+        new_player_reg_selector = 3b100;
        
       b110:
         player_location_out[5] = player_current_position[6];
-        temp_row_reg_selector = 3b101;
+        new_player_reg_selector = 3b101;
         
       b111:
         player_location_out[6] = player_current_position[7];
-        temp_row_reg_selector = 3b110;
+        new_player_reg_selector = 3b110;
     }
-    new_player_reg_selector = temp_row_reg_selector;
     
   }
 }
