@@ -13,6 +13,9 @@ module move_player_right (
   wall_collide left_wall;
   token_collide token_collide;
   
+  /*
+  ONLY DIFFERENCE BETWEEN THIS AND move_player_left IS IN ALU FUNCTION, MIGHT CHANGE CODE TO REMOVE 1 OF THESE FILES
+  */
   always {
     score_token = 0;
     new_token_map = token_map;

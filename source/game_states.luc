@@ -16,10 +16,10 @@ module game_states (
   .clk(clk){
     .rst(rst){
       dff token_map [8][8];
-      dff player_position [8][8](#INIT(8b10000000));
+      dff player_position [8][8](#INIT(8b10000000));   // Initialize player position to start at top left corner
       dff player_reg_selector [3];
-      dff score [7](#INIT(7b0000000));              // Since 99 (max we can display) requires 7 bits to encode
-      dff level_score [4](#INIT(4b0000));           // Level score will not exceed 10
+      dff score [7](#INIT(7b0000000));                 // Since 99 (max we can display) requires 7 bits to encode
+      dff level_score [4](#INIT(4b0000));              // Level score will not exceed 10
       dff end_position [8](#INIT(8b00000001));
       dff current_stage[3](#INIT(3b000));
       dff walls [8][8](#INIT(8b00000000));
@@ -82,6 +82,9 @@ module game_states (
 
     case(state.q){
       state.START:
+        // TODO: CHANGE THIS CODE TO START STATE 
+        // ON START BUTTON: GO TO LEVEL 1, RESET PREVIOUS PLAYER SCORE TO 0
+        // DISPLAY HIGH SCORE, DISPLAY PREVIOUS SCORE OF THE PREVIOUS PLAYER
         player_position.d = inter_one.player_initial_position;
         player_reg_selector.d = inter_one.player_reg_selector;
         player_position_out = player_position.q;
@@ -112,30 +115,37 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         
+        // TODO: ADD IN CONDITION TO MOVE TO NEXT LEVEL
+        
+      /*
+      Give it values, retrieve return values, MOVE8TIMES states for all 4 directions
+      are all very similar, just that they take different values
+      */
       state.MOVE8TIMESUP:
-        /*
-        Give it values, retrieve return values
-        */
         move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
         move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
         move_player.walls = walls.q;                                      // output walls to move_player
-        move_player.token_map = token_map.q;
+        move_player.token_map = token_map.q;                              // outputs token map to move_player file
         
-        token_map.d = move_player.new_token_map;
-        if(move_player.score_token){
+        token_map.d = move_player.new_token_map;                          // retrieves new token map, in case there was a collision with a token
+        if(move_player.score_token){                                      // if there was a collision with token, score+1
           level_score.d = level_score.q + 1;
         }
         player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
         player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
         state.d = state.WAITUP;
-        
+      
+      /*
+      This state works hand in hand with MOVE8TIMESUP to create an effect (illusion)
+      that the player is "sliding" around without control of where to stop
+      ALMOST IDENTICAL TO OTHER WAIT__ STATES, BUT NEEDED DUE TO DIFFERENCE IN DIRECTIONS AND FUNCTIONS USED
+      */ 
       state.WAITUP:
-        if(delay_movement.q[22] == 1){
+        if(delay_movement.q[22] == 1){                 // Gives it around 0.085 seconds delay, which will not exceed 0.8 seconds
           delay_movement.d = 0;
-          if(number_times_moved.q == 3b111){
-            // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
-            number_times_moved.d = 0;
-            case(current_stage.q){
+          if(number_times_moved.q == 3b111){           // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
+            number_times_moved.d = 0;                  // Use a register to store the number of times moved                                  
+            case(current_stage.q){                     // Case to move back to the levels that we came from
               3b000:
                 state.d = state.TUTORIAL;
               3b001:
@@ -148,6 +158,7 @@ module game_states (
           }
         }
         
+      
       state.MOVE8TIMESDOWN:
         move_down.player_current_position = player_position.q;          
         move_down.player_reg_selector = player_reg_selector.q; 

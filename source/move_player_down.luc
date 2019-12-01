@@ -12,6 +12,10 @@ module move_player_down (
   wall_collide down_wall;
   token_collide token_collide;
   
+  /*
+  LOGIC SIMILAR TO move_player (move_up), BUT STRUCTURALLY DIFFERENT SO CANNOT USE SAME FILE
+  REFER TO move_player.luc ON HOW IT WORKS
+  */
   always {
     down_wall.player_current_position = player_current_position[0];
     down_wall.walls = walls[0];

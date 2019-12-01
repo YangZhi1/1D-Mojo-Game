@@ -12,10 +12,10 @@ module move_player (
   wall_collide up_wall;
   token_collide token_collide;
   
+  /*
+  FILE TO DO SHIFTING FOR BUTTON_UP IS PRESSED
+  */
   always {
-    /*
-    FILE TO DO SHIFTING FOR BUTTON_UP IS PRESSED
-    */
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
     
@@ -28,20 +28,31 @@ module move_player (
     new_token_map = token_map;
     score_token = 0;
     
-    // code to move up
+    /*
+    1. BOUNDARY COLLISION IS WHEN WE'RE AT ROW 0 (CAUSE ROW 0 CANNOT MOVE UP ANYMORE), SO WE DON'T MOVE 
+    2. CHECK FOR COLLISION AGAINST WALL 
+    3. CHECK FOR COLLISION AGAINST TOKEN 
+       3a. IF THERE IS, score_token+1 (UPDATES SCORE WITH SCORE+1, DONE IN game_states)
+    
+    After calculations are made, we return to game_states file
+    */
     case(player_reg_selector){
       b000:
-        // do nothing
+        // do nothing for row 0
         player_location_out[0] = player_current_position[0];
         new_player_reg_selector = 3b000;
       b001:
+        // CHECK FOR WALL COLLISION FIRST
         up_wall.player_current_position = player_current_position[1];
         up_wall.walls = walls[0];
         
+        // IF THERE'S A COLLISION, WE STAY AT THE SAME POSITION
         if(up_wall.collide){
           player_location_out[1] = player_current_position[1];
           new_player_reg_selector = 3b001;
         }
+          
+        // OTHERWISE, WE CHECK FOR TOKEN COLLISION AND UPDATE PLAYER'S POSITION 
         else{
           token_collide.token_map = token_map[0];
           token_collide.player_next_position = player_current_position[1];

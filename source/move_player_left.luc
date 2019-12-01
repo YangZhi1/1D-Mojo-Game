@@ -13,6 +13,17 @@ module move_player_left (
   wall_collide left_wall;
   token_collide token_collide;
   
+  /*
+  1. CHECK IF PLAYER HAS COLLIDED WITH BOUNDARY (MOVED OUT OF BOUNDS)
+  2. CHECK IF PLAYER HAS COLLIDED WITH WALL 
+  3. CHECK IF PLAYER HAS COLLIDED WITH TOKEN
+     3a. IF PLAYER COLLIDES WITH TOKEN, score_token+1
+  4. RETURN TO game_states
+     
+  Makes use of a register, player_reg_selector, to determine which row the player is at
+     
+  NOTE: ONLY DIFFERENCE BETWEEN THIS FILE AND move_player_right IS THE ALUFN 
+  */
   always {
     score_token = 0;
     new_token_map = token_map;
@@ -28,7 +39,11 @@ module move_player_left (
     token_collide.player_next_position = player_current_position[0];
     token_collide.token_map = token_map[0];
 
-    // code to move left
+    /*
+    CODE TO MOVE LEFT 
+    USE ALU FUNCTION SHIFT LEFT TO GET NEW POSITION OF PLAYER 
+    USE NEW POSITION OF PLAYER TO CHECK FOR WALL AND TOKEN COLLISION 
+    */
     alu.alufn = 6b100000;
     alu.b = 16b1;
     case(player_reg_selector){
