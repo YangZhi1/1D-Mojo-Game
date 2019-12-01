@@ -53,13 +53,13 @@ module move_player_left_14 (
     
     case (player_reg_selector)
       3'h0: begin
-        M_left_wall_player_current_position = player_current_position[0+7-:8];
+        M_alu_a = player_current_position[0+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
+        M_left_wall_player_current_position = new_player_position[0+0-:1];
         M_left_wall_walls = walls[0+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[0+7-:8] = player_current_position[0+7-:8];
         end else begin
-          M_alu_a = player_current_position[0+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -68,13 +68,13 @@ module move_player_left_14 (
         end
       end
       3'h1: begin
+        M_alu_a = player_current_position[8+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[8+7-:8];
         M_left_wall_walls = walls[8+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[8+7-:8] = player_current_position[8+7-:8];
         end else begin
-          M_alu_a = player_current_position[8+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -83,13 +83,13 @@ module move_player_left_14 (
         end
       end
       3'h2: begin
+        M_alu_a = player_current_position[16+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[16+7-:8];
         M_left_wall_walls = walls[16+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[16+7-:8] = player_current_position[16+7-:8];
         end else begin
-          M_alu_a = player_current_position[16+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -98,13 +98,13 @@ module move_player_left_14 (
         end
       end
       3'h3: begin
+        M_alu_a = player_current_position[24+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[24+7-:8];
         M_left_wall_walls = walls[24+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[24+7-:8] = player_current_position[24+7-:8];
         end else begin
-          M_alu_a = player_current_position[24+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -113,13 +113,13 @@ module move_player_left_14 (
         end
       end
       3'h4: begin
+        M_alu_a = player_current_position[32+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[32+7-:8];
         M_left_wall_walls = walls[32+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[32+7-:8] = player_current_position[32+7-:8];
         end else begin
-          M_alu_a = player_current_position[32+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -128,13 +128,13 @@ module move_player_left_14 (
         end
       end
       3'h5: begin
+        M_alu_a = player_current_position[40+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[40+7-:8];
         M_left_wall_walls = walls[40+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[40+7-:8] = player_current_position[40+7-:8];
         end else begin
-          M_alu_a = player_current_position[40+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -143,13 +143,13 @@ module move_player_left_14 (
         end
       end
       3'h6: begin
+        M_alu_a = player_current_position[48+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[48+7-:8];
         M_left_wall_walls = walls[48+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[48+7-:8] = player_current_position[48+7-:8];
         end else begin
-          M_alu_a = player_current_position[48+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin
@@ -158,13 +158,13 @@ module move_player_left_14 (
         end
       end
       3'h7: begin
+        M_alu_a = player_current_position[56+7-:8];
+        new_player_position = M_alu_aluOut[0+7-:8];
         M_left_wall_player_current_position = player_current_position[56+7-:8];
         M_left_wall_walls = walls[56+7-:8];
         if (M_left_wall_collide) begin
           player_location_out[56+7-:8] = player_current_position[56+7-:8];
         end else begin
-          M_alu_a = player_current_position[56+7-:8];
-          new_player_position = M_alu_aluOut[0+7-:8];
           if (new_player_position == 8'h00) begin
             player_location_out = player_current_position;
           end else begin

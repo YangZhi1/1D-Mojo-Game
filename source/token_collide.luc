@@ -1,0 +1,42 @@
+module token_collide (
+    input token_map [8],
+    input player_next_position [8], // THIS ACTUALLY HAS TO TAKE IN INPUT OF PLAYER'S NEXT POSITION
+    output new_token_map [8],
+    output score_token
+    
+  ) {
+  alu alu;
+  sig check_overlap[8];
+  sig new_map[8];
+  
+  always {
+    new_token_map = token_map;
+    score_token = 0;
+    
+    /*
+    'AND' THE TWO INPUTS TO CHECK IF THEY OVERLAP
+    'XOR' TOKEN MAP AND THE OUTPUT OF THE 'AND' TO GET NEW TOKEN MAP 
+     IF OUTPUT OF 'AND' IS NOT 8b0 THEN WE KNOW THERE'S A COLLISION WITH A TOKEN, SO OUTPUT (score_token = TRUE (1) )
+    */
+    
+    alu.a = token_map;
+    alu.b = player_next_position;
+    alu.alufn = 6b011000;              // AND FUNCTION
+    
+    check_overlap = alu.aluOut[7:0];
+    if(check_overlap == 8b0){          // IF NO OVERLAP
+      new_token_map = token_map;
+      score_token = 0;
+    }
+    else{
+      alu.a = check_overlap;
+      alu.b = token_map;
+      alu.alufn = 6b010110;            // XOR FUNCTION
+      
+      new_map = alu.aluOut[7:0];
+      new_token_map = new_map;
+      score_token = 1;
+    }
+    
+  }
+}

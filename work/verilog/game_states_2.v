@@ -62,15 +62,19 @@ module game_states_2 (
   
   wire [64-1:0] M_move_player_player_location_out;
   wire [3-1:0] M_move_player_new_player_reg_selector;
+  wire [64-1:0] M_move_player_new_token_map;
   reg [3-1:0] M_move_player_player_reg_selector;
   reg [64-1:0] M_move_player_player_current_position;
   reg [64-1:0] M_move_player_walls;
+  reg [64-1:0] M_move_player_token_map;
   move_player_12 move_player (
     .player_reg_selector(M_move_player_player_reg_selector),
     .player_current_position(M_move_player_player_current_position),
     .walls(M_move_player_walls),
+    .token_map(M_move_player_token_map),
     .player_location_out(M_move_player_player_location_out),
-    .new_player_reg_selector(M_move_player_new_player_reg_selector)
+    .new_player_reg_selector(M_move_player_new_player_reg_selector),
+    .new_token_map(M_move_player_new_token_map)
   );
   
   wire [64-1:0] M_move_down_player_location_out;
@@ -144,6 +148,7 @@ module game_states_2 (
     M_move_player_player_reg_selector = 3'bxxx;
     M_move_player_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_player_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_player_token_map = M_token_map_q;
     M_move_down_player_reg_selector = 3'bxxx;
     M_move_down_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_down_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
@@ -199,6 +204,7 @@ module game_states_2 (
         M_move_player_player_current_position = M_player_position_q;
         M_move_player_player_reg_selector = M_player_reg_selector_q;
         M_move_player_walls = M_walls_q;
+        M_move_player_token_map = M_token_map_q;
         M_player_reg_selector_d = M_move_player_new_player_reg_selector;
         M_player_position_d = M_move_player_player_location_out;
         M_state_d = WAITUP_state;
@@ -347,11 +353,6 @@ module game_states_2 (
   end
   
   always @(posedge clk) begin
-    M_state_q <= M_state_d;
-  end
-  
-  
-  always @(posedge clk) begin
     if (rst == 1'b1) begin
       M_token_map_q <= 1'h0;
       M_player_position_q <= 8'h80;
@@ -380,6 +381,11 @@ module game_states_2 (
     end else begin
       M_delay_movement_q <= M_delay_movement_d;
     end
+  end
+  
+  
+  always @(posedge clk) begin
+    M_state_q <= M_state_d;
   end
   
 endmodule

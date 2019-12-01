@@ -8,8 +8,10 @@ module move_player_12 (
     input [2:0] player_reg_selector,
     input [63:0] player_current_position,
     input [63:0] walls,
+    input [63:0] token_map,
     output reg [63:0] player_location_out,
-    output reg [2:0] new_player_reg_selector
+    output reg [2:0] new_player_reg_selector,
+    output reg [63:0] new_token_map
   );
   
   
@@ -28,6 +30,7 @@ module move_player_12 (
     player_location_out = 64'h0000000000000000;
     M_up_wall_player_current_position = player_current_position[0+7-:8];
     M_up_wall_walls = walls[0+7-:8];
+    new_token_map = token_map;
     
     case (player_reg_selector)
       3'h0: begin

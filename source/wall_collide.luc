@@ -1,5 +1,5 @@
 module wall_collide (
-    input player_current_position [8],
+    input player_current_position [8], // THIS ACTUALLY TAKES IN PLAYER'S NEXT POSITION, BUT THERE'S TOO MUCH TO CHANGE IF I RENAME THIS VARIABLE
     input walls [8],
     output collide
   ) {

@@ -7,28 +7,29 @@ module move_player_right (
   ) {
   sig new_player_position [8];
   alu alu;
-  wall_collide right_wall;
+  wall_collide left_wall;
   
   always {
     alu.a = 0;
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
-    right_wall.walls = walls[0];
-    right_wall.player_current_position = player_current_position[0];
+    left_wall.walls = walls[0];
+    left_wall.player_current_position = player_current_position[0];
 
     // code to move right
     alu.alufn = 6b100001;
     alu.b = 16b1;
     case(player_reg_selector){
       b000:
-        right_wall.player_current_position = player_current_position[0];
-        right_wall.walls = walls[0];
-        if(right_wall.collide){
+        alu.a = player_current_position[0];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = new_player_position[0];
+        left_wall.walls = walls[0];
+        
+        if(left_wall.collide){
           player_location_out[0] = player_current_position[0];
         }
         else{
-          alu.a = player_current_position[0];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -38,14 +39,15 @@ module move_player_right (
         }
         
       b001:
-        right_wall.player_current_position = player_current_position[1];
-        right_wall.walls = walls[1];
-        if(right_wall.collide){
+        alu.a = player_current_position[1];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[1];
+        left_wall.walls = walls[1];
+        
+        if(left_wall.collide){
           player_location_out[1] = player_current_position[1];
         }
         else{
-          alu.a = player_current_position[1];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -55,14 +57,14 @@ module move_player_right (
         }
        
       b010:
-        right_wall.player_current_position = player_current_position[2];
-        right_wall.walls = walls[2];
-        if(right_wall.collide){
+        alu.a = player_current_position[2];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[2];
+        left_wall.walls = walls[2];
+        if(left_wall.collide){
           player_location_out[2] = player_current_position[2];
         }
         else{
-          alu.a = player_current_position[2];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -72,14 +74,14 @@ module move_player_right (
         }
         
       b011:
-        right_wall.player_current_position = player_current_position[3];
-        right_wall.walls = walls[3];
-        if(right_wall.collide){
+        alu.a = player_current_position[3];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[3];
+        left_wall.walls = walls[3];
+        if(left_wall.collide){
           player_location_out[3] = player_current_position[3];
         }
         else{
-          alu.a = player_current_position[3];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -89,14 +91,14 @@ module move_player_right (
         }
        
       b100:
-        right_wall.player_current_position = player_current_position[4];
-        right_wall.walls = walls[4];
-        if(right_wall.collide){
+        alu.a = player_current_position[4];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[4];
+        left_wall.walls = walls[4];
+        if(left_wall.collide){
           player_location_out[4] = player_current_position[4];
         }
         else{
-          alu.a = player_current_position[4];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -106,14 +108,14 @@ module move_player_right (
         }
       
       b101:
-        right_wall.player_current_position = player_current_position[5];
-        right_wall.walls = walls[5];
-        if(right_wall.collide){
+        alu.a = player_current_position[5];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[5];
+        left_wall.walls = walls[5];
+        if(left_wall.collide){
           player_location_out[5] = player_current_position[5];
         }
         else{
-          alu.a = player_current_position[5];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -123,14 +125,14 @@ module move_player_right (
         }
        
       b110:
-        right_wall.player_current_position = player_current_position[6];
-        right_wall.walls = walls[6];
-        if(right_wall.collide){
+        alu.a = player_current_position[6];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[6];
+        left_wall.walls = walls[6];
+        if(left_wall.collide){
           player_location_out[6] = player_current_position[6];
         }
         else{
-          alu.a = player_current_position[6];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
@@ -140,14 +142,14 @@ module move_player_right (
         }
       
       b111:
-        right_wall.player_current_position = player_current_position[7];
-        right_wall.walls = walls[7];
-        if(right_wall.collide){
+        alu.a = player_current_position[7];
+        new_player_position = alu.aluOut[7:0];
+        left_wall.player_current_position = player_current_position[7];
+        left_wall.walls = walls[7];
+        if(left_wall.collide){
           player_location_out[7] = player_current_position[7];
         }
         else{
-          alu.a = player_current_position[7];
-          new_player_position = alu.aluOut[7:0];
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }

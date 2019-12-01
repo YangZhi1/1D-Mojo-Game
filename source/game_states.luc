@@ -48,6 +48,7 @@ module game_states (
     move_player.player_reg_selector = 3bxxx;
     move_player.player_current_position = 8x{{8hxx}};
     move_player.walls = 8x{{8hxx}};
+    move_player.token_map = token_map.q;
 
     move_down.player_reg_selector = 3bxxx;
     move_down.player_current_position = 8x{{8hxx}};
@@ -113,6 +114,8 @@ module game_states (
         move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
         move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
         move_player.walls = walls.q;                                      // output walls to move_player
+        move_player.token_map = token_map.q;
+        
         player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
         player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
         state.d = state.WAITUP;
