@@ -2,19 +2,31 @@ module move_player_left (
     input player_reg_selector[3],
     input player_current_position [8][8],
     input walls [8][8],
+    input token_map [8][8],
     output player_location_out [8][8],
-    output new_player_reg_selector[3]
+    output new_player_reg_selector[3],
+    output new_token_map [8][8],
+    output score_token
   ) {
   sig new_player_position [8];
   alu alu;
   wall_collide left_wall;
+  token_collide token_collide;
   
   always {
+    score_token = 0;
+    new_token_map = token_map;
+    
+    
     alu.a = 0;
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
+    
     left_wall.walls = walls[0];
     left_wall.player_current_position = player_current_position[0];
+    
+    token_collide.player_next_position = player_current_position[0];
+    token_collide.token_map = token_map[0];
 
     // code to move left
     alu.alufn = 6b100000;
@@ -33,7 +45,12 @@ module move_player_left (
           if(new_player_position == 8b0){
             player_location_out = player_current_position;
           }
-          else{
+          else{                                                          // IF PLAYER CAN MOVE
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[0];
+            new_token_map[0] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[0] = new_player_position;
           }
         }
@@ -52,6 +69,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[1];
+            new_token_map[1] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[1] = new_player_position;
           }
         }
@@ -69,6 +91,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[2];
+            new_token_map[2] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[2] = new_player_position;
           }
         }
@@ -86,6 +113,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[3];
+            new_token_map[3] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[3] = new_player_position;
           }
         }
@@ -103,6 +135,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[4];
+            new_token_map[4] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[4] = new_player_position;
           }
         }
@@ -120,6 +157,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[5];
+            new_token_map[5] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[5] = new_player_position;
           }
         }
@@ -137,6 +179,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[6];
+            new_token_map[6] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[6] = new_player_position;
           }
         }
@@ -154,6 +201,11 @@ module move_player_left (
             player_location_out = player_current_position;
           }
           else{
+            token_collide.player_next_position = new_player_position;
+            token_collide.token_map = token_map[7];
+            new_token_map[7] = token_collide.new_token_map;
+            score_token = token_collide.score_token;
+            
             player_location_out[7] = new_player_position;
           }
         }

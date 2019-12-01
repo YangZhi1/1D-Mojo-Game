@@ -18,7 +18,8 @@ module game_states (
       dff token_map [8][8];
       dff player_position [8][8](#INIT(8b10000000));
       dff player_reg_selector [3];
-      dff score [7](#INIT(7b0000000));
+      dff score [7](#INIT(7b0000000));              // Since 99 (max we can display) requires 7 bits to encode
+      dff level_score [4](#INIT(4b0000));           // Level score will not exceed 10
       dff end_position [8](#INIT(8b00000001));
       dff current_stage[3](#INIT(3b000));
       dff walls [8][8](#INIT(8b00000000));
@@ -53,14 +54,17 @@ module game_states (
     move_down.player_reg_selector = 3bxxx;
     move_down.player_current_position = 8x{{8hxx}};
     move_down.walls = 8x{{8hxx}};
+    move_down.token_map = token_map.q;
 
     move_left.player_reg_selector = 3bxxx;
     move_left.player_current_position = 8x{{8hxx}};
     move_left.walls = 8x{{8hxx}};
+    move_left.token_map = token_map.q;
 
     move_right.player_reg_selector = 3bxxx;
     move_right.player_current_position = 8x{{8hxx}};
     move_right.walls = 8x{{8hxx}};
+    move_right.token_map = token_map.q;
 
     /*
     MAKE dff RETAIN PREVIOUS VALUES
@@ -72,6 +76,7 @@ module game_states (
     end_position.d = end_position.q;
     current_stage.d = current_stage.q;
     walls.d = walls.q;
+    level_score.d = level_score.q;
     number_times_moved.d = number_times_moved.q;
     delay_movement.d = delay_movement.q + 1;
 
@@ -116,6 +121,10 @@ module game_states (
         move_player.walls = walls.q;                                      // output walls to move_player
         move_player.token_map = token_map.q;
         
+        token_map.d = move_player.new_token_map;
+        if(move_player.score_token){
+          level_score.d = level_score.q + 1;
+        }
         player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
         player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
         state.d = state.WAITUP;
@@ -143,7 +152,12 @@ module game_states (
         move_down.player_current_position = player_position.q;          
         move_down.player_reg_selector = player_reg_selector.q; 
         move_down.walls = walls.q; 
+        move_down.token_map = token_map.q;
         
+        token_map.d = move_down.new_token_map;
+        if(move_down.score_token){
+          level_score.d = level_score.q + 1;
+        }
         player_reg_selector.d = move_down.new_player_reg_selector;
         player_position.d = move_down.player_location_out;
         state.d = state.WAITDOWN;
@@ -171,7 +185,12 @@ module game_states (
         move_left.player_current_position = player_position.q;
         move_left.player_reg_selector = player_reg_selector.q;
         move_left.walls = walls.q;
+        move_left.token_map = token_map.q;
         
+        token_map.d = move_left.new_token_map;
+        if(move_left.score_token){
+          level_score.d = level_score.q + 1;
+        }
         player_reg_selector.d = move_left.new_player_reg_selector;
         player_position.d = move_left.player_location_out;
         state.d = state.WAITLEFT;
@@ -198,7 +217,12 @@ module game_states (
         move_right.player_current_position = player_position.q;          
         move_right.player_reg_selector = player_reg_selector.q;  
         move_right.walls = walls.q;
+        move_right.token_map = token_map.q;
         
+        token_map.d = move_right.new_token_map;
+        if(move_right.score_token){
+          level_score.d = level_score.q + 1;
+        }
         player_reg_selector.d = move_right.new_player_reg_selector;   
         player_position.d = move_right.player_location_out;
         state.d = state.WAITRIGHT;
