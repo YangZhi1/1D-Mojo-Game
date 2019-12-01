@@ -1,44 +1,112 @@
 module move_player_down (
     input player_reg_selector[3],
     input player_current_position [8][8],
+    input walls [8][8],
     output player_location_out [8][8],
     output new_player_reg_selector[3]
   ) {
 
+  wall_collide down_wall;
   
   always {
+    down_wall.player_current_position = player_current_position[0];
+    down_wall.walls = walls[0];
+    
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
     
     // code to move down
     case(player_reg_selector){
       b000:
-        player_location_out[1] = player_current_position[0];
-        new_player_reg_selector = 3b001;
+        down_wall.player_current_position = player_current_position[0];
+        down_wall.walls = walls[1];
+        
+        if(down_wall.collide){
+          player_location_out[0] = player_current_position[0];
+          new_player_reg_selector = 3b000;
+        }
+        else{
+          player_location_out[1] = player_current_position[0];
+          new_player_reg_selector = 3b001;
+        }
        
       b001:
-        player_location_out[2] = player_current_position[1];
-        new_player_reg_selector = 3b010;
+        down_wall.player_current_position = player_current_position[1];
+        down_wall.walls = walls[2];
+        
+        if(down_wall.collide){
+          player_location_out[1] = player_current_position[1];
+          new_player_reg_selector = 3b001;
+        }
+        else{
+          player_location_out[2] = player_current_position[1];
+          new_player_reg_selector = 3b010;
+        }
         
       b010:
-        player_location_out[3] = player_current_position[2];
-        new_player_reg_selector = 3b011;
+        down_wall.player_current_position = player_current_position[2];
+        down_wall.walls = walls[3];
+        
+        if(down_wall.collide){
+          player_location_out[2] = player_current_position[2];
+          new_player_reg_selector = 3b010;
+        }
+        else{
+          player_location_out[3] = player_current_position[2];
+          new_player_reg_selector = 3b011; 
+        }
        
       b011:
-        player_location_out[4] = player_current_position[3];
-        new_player_reg_selector = 3b100;
+        down_wall.player_current_position = player_current_position[3];
+        down_wall.walls = walls[4];
+        
+        if(down_wall.collide){
+          player_location_out[3] = player_current_position[3];
+          new_player_reg_selector = 3b011;
+        }
+        else{
+          player_location_out[4] = player_current_position[3];
+          new_player_reg_selector = 3b100;
+        }
        
       b100:
-        player_location_out[5] = player_current_position[4];
-        new_player_reg_selector = 3b101;
+        down_wall.player_current_position = player_current_position[4];
+        down_wall.walls = walls[5];
+        
+        if(down_wall.collide){
+          player_location_out[4] = player_current_position[4];
+          new_player_reg_selector = 3b100;
+        }
+        else{
+          player_location_out[5] = player_current_position[4];
+          new_player_reg_selector = 3b101;
+        }
        
       b101:
-        player_location_out[6] = player_current_position[5];
-        new_player_reg_selector = 3b110;
+        down_wall.player_current_position = player_current_position[5];
+        down_wall.walls = walls[6];
+        
+        if(down_wall.collide){
+          player_location_out[5] = player_current_position[5];
+          new_player_reg_selector = 3b101;
+        }
+        else{
+          player_location_out[6] = player_current_position[5];
+          new_player_reg_selector = 3b110;
+        }
         
       b110:
-        player_location_out[7] = player_current_position[6];
-        new_player_reg_selector = 3b111;
+        down_wall.player_current_position = player_current_position[6];
+        down_wall.walls = walls[7];
+        
+        if(down_wall.collide){
+          player_location_out[6] = player_current_position[6];
+          new_player_reg_selector = 3b110;
+        }
+        else{
+          player_location_out[7] = player_current_position[6];
+          new_player_reg_selector = 3b111;
+        }
         
       b111:
         player_location_out[7] = player_current_position[7];

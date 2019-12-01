@@ -1,0 +1,33 @@
+module wall_collide (
+    input player_current_position [8],
+    input walls [8],
+    output collide
+  ) {
+  
+  alu alu;
+  sig new_player_loc [8];
+  always {
+  
+    /*
+    TO CHECK FOR COLLISION AGAINST WALL, WE NEED TO USE 'AND' TO CHECK
+    PLAYER LOCATION 'AND' WALL (NEXT POSITION)
+    
+    IF THE OUTPUT GIVEN IS 8b0, WE KNOW THAT THERE IS NO COLLISION AND ITS GOOD TO MOVE,
+    SO COLLIDE = 0. ELSE COLLIDE = 1
+    */
+    collide = 1;
+    alu.a = player_current_position;
+    alu.b = walls;
+    alu.alufn = 6b011000;
+    
+    new_player_loc = alu.aluOut[7:0];
+    if(new_player_loc == 8b0){
+      collide = 0;
+    }
+    else{
+      collide = 1;
+    }
+    
+    
+  }
+}

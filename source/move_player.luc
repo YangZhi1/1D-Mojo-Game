@@ -1,9 +1,12 @@
 module move_player (
     input player_reg_selector[3],
     input player_current_position [8][8],
+    input walls [8][8],
     output player_location_out [8][8],
     output new_player_reg_selector[3]
   ) {
+  
+  wall_collide up_wall;
   
   always {
     /*
@@ -12,6 +15,9 @@ module move_player (
     new_player_reg_selector = player_reg_selector;
     player_location_out = 8x{{8h00}};
     
+    up_wall.player_current_position = player_current_position[0];
+    up_wall.walls = walls[0];
+    
     // code to move up
     case(player_reg_selector){
       b000:
@@ -19,32 +25,93 @@ module move_player (
         player_location_out[0] = player_current_position[0];
         new_player_reg_selector = 3b000;
       b001:
-        player_location_out[0] = player_current_position[1];
-        new_player_reg_selector = 3b000;
+        up_wall.player_current_position = player_current_position[1];
+        up_wall.walls = walls[0];
+        
+        if(up_wall.collide){
+          player_location_out[1] = player_current_position[1];
+          new_player_reg_selector = 3b001;
+        }
+        else{
+          player_location_out[0] = player_current_position[1];
+          new_player_reg_selector = 3b000;
+        }
 
       b010:
-        player_location_out[1] = player_current_position[2];
-        new_player_reg_selector = 3b001;
+        up_wall.player_current_position = player_current_position[2];
+        up_wall.walls = walls[1];
         
+        if(up_wall.collide){
+          player_location_out[2] = player_current_position[2];
+          new_player_reg_selector = 3b010;
+        }
+        else{
+          player_location_out[1] = player_current_position[2];
+          new_player_reg_selector = 3b001;
+        }
       b011:
-        player_location_out[2] = player_current_position[3];
-        new_player_reg_selector = 3b010;
+        up_wall.player_current_position = player_current_position[3];
+        up_wall.walls = walls[2];
+        
+        if(up_wall.collide){
+          player_location_out[3] = player_current_position[3];
+          new_player_reg_selector = 3b011;
+        }
+        else{
+          player_location_out[2] = player_current_position[3];
+          new_player_reg_selector = 3b010;
+        }
         
       b100:
-        player_location_out[3] = player_current_position[4];
-        new_player_reg_selector = 3b011;
+        up_wall.player_current_position = player_current_position[4];
+        up_wall.walls = walls[3];
+        
+        if(up_wall.collide){
+          player_location_out[4] = player_current_position[4];
+          new_player_reg_selector = 3b100;
+        }
+        else{
+          player_location_out[3] = player_current_position[4];
+          new_player_reg_selector = 3b011;
+        }
        
       b101:
-        player_location_out[4] = player_current_position[5];
-        new_player_reg_selector = 3b100;
+        up_wall.player_current_position = player_current_position[5];
+        up_wall.walls = walls[4];
+        
+        if(up_wall.collide){
+          player_location_out[5] = player_current_position[5];
+          new_player_reg_selector = 3b101;
+        }
+        else{
+          player_location_out[4] = player_current_position[5];
+          new_player_reg_selector = 3b100;
+        }
        
       b110:
-        player_location_out[5] = player_current_position[6];
-        new_player_reg_selector = 3b101;
+        up_wall.player_current_position = player_current_position[6];
+        up_wall.walls = walls[5];
         
+        if(up_wall.collide){
+          player_location_out[6] = player_current_position[6];
+          new_player_reg_selector = 3b110;
+        }
+        else{
+          player_location_out[5] = player_current_position[6];
+          new_player_reg_selector = 3b101;
+        }
       b111:
-        player_location_out[6] = player_current_position[7];
-        new_player_reg_selector = 3b110;
+        up_wall.player_current_position = player_current_position[7];
+        up_wall.walls = walls[6];
+        
+        if(up_wall.collide){
+          player_location_out[7] = player_current_position[7];
+          new_player_reg_selector = 3b111;
+        }
+        else{
+          player_location_out[6] = player_current_position[7];
+          new_player_reg_selector = 3b110;
+        }
     }
     
   }

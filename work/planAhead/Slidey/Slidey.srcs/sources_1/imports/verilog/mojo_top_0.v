@@ -39,6 +39,7 @@ module mojo_top_0 (
   wire [64-1:0] M_game_player_position_out;
   wire [64-1:0] M_game_tokens;
   wire [7-1:0] M_game_current_score;
+  wire [64-1:0] M_game_wall;
   reg [1-1:0] M_game_button_up;
   reg [1-1:0] M_game_button_down;
   reg [1-1:0] M_game_button_left;
@@ -52,7 +53,8 @@ module mojo_top_0 (
     .button_right(M_game_button_right),
     .player_position_out(M_game_player_position_out),
     .tokens(M_game_tokens),
-    .current_score(M_game_current_score)
+    .current_score(M_game_current_score),
+    .wall(M_game_wall)
   );
   localparam A_state = 3'd0;
   localparam B_state = 3'd1;
@@ -169,7 +171,7 @@ module mojo_top_0 (
       A_state: begin
         row[0+0-:1] = 1'h1;
         green = ~M_game_player_position_out[0+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = B_state;
         end
@@ -177,7 +179,7 @@ module mojo_top_0 (
       B_state: begin
         row[1+0-:1] = 1'h1;
         green = ~M_game_player_position_out[8+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = C_state;
         end
@@ -185,7 +187,7 @@ module mojo_top_0 (
       C_state: begin
         row[2+0-:1] = 1'h1;
         green = ~M_game_player_position_out[16+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = D_state;
         end
@@ -193,7 +195,7 @@ module mojo_top_0 (
       D_state: begin
         row[3+0-:1] = 1'h1;
         green = ~M_game_player_position_out[24+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = E_state;
         end
@@ -201,7 +203,7 @@ module mojo_top_0 (
       E_state: begin
         row[4+0-:1] = 1'h1;
         green = ~M_game_player_position_out[32+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = F_state;
         end
@@ -209,7 +211,7 @@ module mojo_top_0 (
       F_state: begin
         row[5+0-:1] = 1'h1;
         green = ~M_game_player_position_out[40+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = G_state;
         end
@@ -217,7 +219,7 @@ module mojo_top_0 (
       G_state: begin
         row[6+0-:1] = 1'h1;
         green = ~M_game_player_position_out[48+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = H_state;
         end
@@ -225,7 +227,7 @@ module mojo_top_0 (
       H_state: begin
         row[7+0-:1] = 1'h1;
         green = ~M_game_player_position_out[56+7-:8];
-        if (M_counter_q[15+0-:1] == 1'h1) begin
+        if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = A_state;
         end

@@ -7,44 +7,105 @@
 module move_player_down_13 (
     input [2:0] player_reg_selector,
     input [63:0] player_current_position,
+    input [63:0] walls,
     output reg [63:0] player_location_out,
     output reg [2:0] new_player_reg_selector
   );
   
   
   
+  wire [1-1:0] M_down_wall_collide;
+  reg [8-1:0] M_down_wall_player_current_position;
+  reg [8-1:0] M_down_wall_walls;
+  wall_collide_21 down_wall (
+    .player_current_position(M_down_wall_player_current_position),
+    .walls(M_down_wall_walls),
+    .collide(M_down_wall_collide)
+  );
+  
   always @* begin
+    M_down_wall_player_current_position = player_current_position[0+7-:8];
+    M_down_wall_walls = walls[0+7-:8];
     new_player_reg_selector = player_reg_selector;
     player_location_out = 64'h0000000000000000;
     
     case (player_reg_selector)
       3'h0: begin
-        player_location_out[8+7-:8] = player_current_position[0+7-:8];
-        new_player_reg_selector = 3'h1;
+        M_down_wall_player_current_position = player_current_position[0+7-:8];
+        M_down_wall_walls = walls[8+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[0+7-:8] = player_current_position[0+7-:8];
+          new_player_reg_selector = 3'h0;
+        end else begin
+          player_location_out[8+7-:8] = player_current_position[0+7-:8];
+          new_player_reg_selector = 3'h1;
+        end
       end
       3'h1: begin
-        player_location_out[16+7-:8] = player_current_position[8+7-:8];
-        new_player_reg_selector = 3'h2;
+        M_down_wall_player_current_position = player_current_position[8+7-:8];
+        M_down_wall_walls = walls[16+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[8+7-:8] = player_current_position[8+7-:8];
+          new_player_reg_selector = 3'h1;
+        end else begin
+          player_location_out[16+7-:8] = player_current_position[8+7-:8];
+          new_player_reg_selector = 3'h2;
+        end
       end
       3'h2: begin
-        player_location_out[24+7-:8] = player_current_position[16+7-:8];
-        new_player_reg_selector = 3'h3;
+        M_down_wall_player_current_position = player_current_position[16+7-:8];
+        M_down_wall_walls = walls[24+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[16+7-:8] = player_current_position[16+7-:8];
+          new_player_reg_selector = 3'h2;
+        end else begin
+          player_location_out[24+7-:8] = player_current_position[16+7-:8];
+          new_player_reg_selector = 3'h3;
+        end
       end
       3'h3: begin
-        player_location_out[32+7-:8] = player_current_position[24+7-:8];
-        new_player_reg_selector = 3'h4;
+        M_down_wall_player_current_position = player_current_position[24+7-:8];
+        M_down_wall_walls = walls[32+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[24+7-:8] = player_current_position[24+7-:8];
+          new_player_reg_selector = 3'h3;
+        end else begin
+          player_location_out[32+7-:8] = player_current_position[24+7-:8];
+          new_player_reg_selector = 3'h4;
+        end
       end
       3'h4: begin
-        player_location_out[40+7-:8] = player_current_position[32+7-:8];
-        new_player_reg_selector = 3'h5;
+        M_down_wall_player_current_position = player_current_position[32+7-:8];
+        M_down_wall_walls = walls[40+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[32+7-:8] = player_current_position[32+7-:8];
+          new_player_reg_selector = 3'h4;
+        end else begin
+          player_location_out[40+7-:8] = player_current_position[32+7-:8];
+          new_player_reg_selector = 3'h5;
+        end
       end
       3'h5: begin
-        player_location_out[48+7-:8] = player_current_position[40+7-:8];
-        new_player_reg_selector = 3'h6;
+        M_down_wall_player_current_position = player_current_position[40+7-:8];
+        M_down_wall_walls = walls[48+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[40+7-:8] = player_current_position[40+7-:8];
+          new_player_reg_selector = 3'h5;
+        end else begin
+          player_location_out[48+7-:8] = player_current_position[40+7-:8];
+          new_player_reg_selector = 3'h6;
+        end
       end
       3'h6: begin
-        player_location_out[56+7-:8] = player_current_position[48+7-:8];
-        new_player_reg_selector = 3'h7;
+        M_down_wall_player_current_position = player_current_position[48+7-:8];
+        M_down_wall_walls = walls[56+7-:8];
+        if (M_down_wall_collide) begin
+          player_location_out[48+7-:8] = player_current_position[48+7-:8];
+          new_player_reg_selector = 3'h6;
+        end else begin
+          player_location_out[56+7-:8] = player_current_position[48+7-:8];
+          new_player_reg_selector = 3'h7;
+        end
       end
       3'h7: begin
         player_location_out[56+7-:8] = player_current_position[56+7-:8];

@@ -4,19 +4,28 @@ module game_states (
     output player_position_out [8][8],
     output tokens [8][8],
     output current_score [7],
+    output wall [8][8],
     input button_up,
     input button_down,
     input button_left,
     input button_right
   ) {
+  dff delay_movement[26](.clk(clk), .rst(rst));
   
-  fsm state(.clk(clk), #INIT(START)) = {START, TUTORIALROM, TUTORIAL, INTER1, LEVEL1};
-  
-  dff token_map [8][8](.clk(clk), .rst(rst));
-  dff player_position [8][8](.clk(clk), .rst(rst), #INIT(8b10000000));
-  dff player_reg_selector [3](.clk(clk), .rst(rst));
-  dff score [7](.clk(clk), .rst(rst), #INIT(7b0000000));
-  dff end_position [8](.clk(clk), .rst(rst), #INIT(8b00000001));
+  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1};
+  .clk(clk){
+    .rst(rst){
+      dff token_map [8][8];
+      dff player_position [8][8](#INIT(8b10000000));
+      dff player_reg_selector [3];
+      dff score [7](#INIT(7b0000000));
+      dff end_position [8](#INIT(8b00000001));
+      dff current_stage[3](#INIT(3b000));
+      dff walls [8][8](#INIT(8b00000000));
+      
+      dff number_times_moved[3](#INIT(3b000));
+    }
+  }
   
   // MODULES
   level_one_rom inter_one;
@@ -31,21 +40,26 @@ module game_states (
     player_position_out = player_position.q;
     tokens = token_map.q;
     current_score = score.q; 
+    wall = walls.q;
     
     /*
     INSTANTIATE VARIABLES FOR OTHER FILES
     */
     move_player.player_reg_selector = 3bxxx;
     move_player.player_current_position = 8x{{8hxx}};
+    move_player.walls = 8x{{8hxx}};
 
     move_down.player_reg_selector = 3bxxx;
     move_down.player_current_position = 8x{{8hxx}};
+    move_down.walls = 8x{{8hxx}};
 
     move_left.player_reg_selector = 3bxxx;
     move_left.player_current_position = 8x{{8hxx}};
+    move_left.walls = 8x{{8hxx}};
 
     move_right.player_reg_selector = 3bxxx;
     move_right.player_current_position = 8x{{8hxx}};
+    move_right.walls = 8x{{8hxx}};
 
     /*
     MAKE dff RETAIN PREVIOUS VALUES
@@ -55,7 +69,10 @@ module game_states (
     token_map.d = token_map.q;
     score.d = score.q;
     end_position.d = end_position.q;
-    
+    current_stage.d = current_stage.q;
+    walls.d = walls.q;
+    number_times_moved.d = number_times_moved.q;
+    delay_movement.d = delay_movement.q + 1;
 
     case(state.q){
       state.START:
@@ -70,39 +87,136 @@ module game_states (
         player_reg_selector.d = tutorial.player_reg_selector;
         player_position_out = player_position.q;
         token_map.d = tutorial.tokens;
+        walls.d = tutorial.walls;
         state.d = state.TUTORIAL;
       
       state.TUTORIAL:
+        walls.d = tutorial.walls;
+        current_stage.d = 3b000;
         if(button_up){
-          /*
-          Give it values, retrieve return values
-          */
-          move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
-          move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
-          
-          player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
-          player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
+          state.d = state.WAITUP;
         }
         if(button_down){
-          move_down.player_current_position = player_position.q;          
-          move_down.player_reg_selector = player_reg_selector.q;  
-          
-          player_reg_selector.d = move_down.new_player_reg_selector;
-          player_position.d = move_down.player_location_out;
+          state.d = state.WAITDOWN;
         }
         if(button_left){
-          move_left.player_current_position = player_position.q;
-          move_left.player_reg_selector = player_reg_selector.q;
-          
-          player_reg_selector.d = move_left.new_player_reg_selector;
-          player_position.d = move_left.player_location_out;
+          state.d = state.WAITLEFT;
         }
         if(button_right){
-          move_right.player_current_position = player_position.q;          
-          move_right.player_reg_selector = player_reg_selector.q;  
+          state.d = state.WAITRIGHT;
+        }
+        
+      state.MOVE8TIMESUP:
+        /*
+        Give it values, retrieve return values
+        */
+        move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
+        move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
+        move_player.walls = walls.q;                                      // output walls to move_player
+        player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
+        player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
+        state.d = state.WAITUP;
+        
+      state.WAITUP:
+        if(delay_movement.q[22] == 1){
+          delay_movement.d = 0;
+          if(number_times_moved.q == 3b111){
+            // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
+            number_times_moved.d = 0;
+            case(current_stage.q){
+              3b000:
+                state.d = state.TUTORIAL;
+              3b001:
+                state.d = state.LEVEL1;
+            }
+          }
+          else{
+            number_times_moved.d = number_times_moved.q + 1;
+            state.d = state.MOVE8TIMESUP;
+          }
+        }
+        
+      state.MOVE8TIMESDOWN:
+        move_down.player_current_position = player_position.q;          
+        move_down.player_reg_selector = player_reg_selector.q; 
+        move_down.walls = walls.q; 
+        
+        player_reg_selector.d = move_down.new_player_reg_selector;
+        player_position.d = move_down.player_location_out;
+        state.d = state.WAITDOWN;
+        
+      state.WAITDOWN:
+        if(delay_movement.q[22] == 1){
+          delay_movement.d = 0;
+          if(number_times_moved.q == 3b111){
+            // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
+            number_times_moved.d = 0;
+            case(current_stage.q){
+              3b000:
+                state.d = state.TUTORIAL;
+              3b001:
+                state.d = state.LEVEL1;
+            }
+          }
+          else{
+            number_times_moved.d = number_times_moved.q + 1;
+            state.d = state.MOVE8TIMESDOWN;
+          }
+        }
+      
+      state.MOVE8TIMESLEFT:
+        move_left.player_current_position = player_position.q;
+        move_left.player_reg_selector = player_reg_selector.q;
+        move_left.walls = walls.q;
+        
+        player_reg_selector.d = move_left.new_player_reg_selector;
+        player_position.d = move_left.player_location_out;
+        state.d = state.WAITLEFT;
           
-          player_reg_selector.d = move_right.new_player_reg_selector;   
-          player_position.d = move_right.player_location_out;
+      state.WAITLEFT:
+        if(delay_movement.q[22] == 1){
+          delay_movement.d = 0;
+          if(number_times_moved.q == 3b111){
+            // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
+            number_times_moved.d = 0;
+            case(current_stage.q){
+              3b000:
+                state.d = state.TUTORIAL;
+              3b001:
+                state.d = state.LEVEL1;
+            }
+          }
+          else{
+            number_times_moved.d = number_times_moved.q + 1;
+            state.d = state.MOVE8TIMESLEFT;
+          }
+        }
+      state.MOVE8TIMESRIGHT:
+        move_right.player_current_position = player_position.q;          
+        move_right.player_reg_selector = player_reg_selector.q;  
+        move_right.walls = walls.q;
+        
+        player_reg_selector.d = move_right.new_player_reg_selector;   
+        player_position.d = move_right.player_location_out;
+        state.d = state.WAITRIGHT;
+        
+      state.WAITRIGHT:
+        if(delay_movement.q[22] == 1){
+          delay_movement.d = 0;
+          if(number_times_moved.q == 3b111){
+            // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
+            number_times_moved.d = 0;
+            case(current_stage.q){
+              3b000:
+                state.d = state.TUTORIAL;
+              3b001:
+                state.d = state.LEVEL1;
+            }
+          }
+          else{
+            number_times_moved.d = number_times_moved.q + 1;
+            state.d = state.MOVE8TIMESRIGHT;
+          }
         }
         
       state.INTER1:

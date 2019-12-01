@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.20 secs
  
 --> Reading design: mojo_top_0.prj
 
@@ -53,16 +53,18 @@ Netlist Hierarchy                  : rebuilt
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/shifter_24.v" into library work
-Parsing module <shifter_24>.
-Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/compare_26.v" into library work
-Parsing module <compare_26>.
-Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/boolean_25.v" into library work
-Parsing module <boolean_25>.
-Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/adder_23.v" into library work
-Parsing module <adder_23>.
-Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/alu_21.v" into library work
-Parsing module <alu_21>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/shifter_30.v" into library work
+Parsing module <shifter_30>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/compare_32.v" into library work
+Parsing module <compare_32>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/boolean_31.v" into library work
+Parsing module <boolean_31>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/adder_29.v" into library work
+Parsing module <adder_29>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/alu_23.v" into library work
+Parsing module <alu_23>.
+Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" into library work
+Parsing module <wall_collide_21>.
 Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/tutorial_rom_16.v" into library work
 Parsing module <tutorial_rom_16>.
 Analyzing Verilog file "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/pipeline_17.v" into library work
@@ -99,38 +101,43 @@ Elaborating module <reset_conditioner_1>.
 Elaborating module <game_states_2>.
 
 Elaborating module <level_one_rom_11>.
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 48: Assignment to M_inter_one_end_position ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 49: Assignment to M_inter_one_walls ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 58: Assignment to M_inter_one_end_position ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 59: Assignment to M_inter_one_walls ignored, since the identifier is never used
 
 Elaborating module <move_player_12>.
+
+Elaborating module <wall_collide_21>.
+
+Elaborating module <alu_23>.
+
+Elaborating module <adder_29>.
+
+Elaborating module <shifter_30>.
+
+Elaborating module <boolean_31>.
+
+Elaborating module <compare_32>.
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" Line 27: Assignment to M_alu_z ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" Line 28: Assignment to M_alu_v ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" Line 29: Assignment to M_alu_n ignored, since the identifier is never used
 
 Elaborating module <move_player_down_13>.
 
 Elaborating module <move_player_left_14>.
-
-Elaborating module <alu_21>.
-
-Elaborating module <adder_23>.
-
-Elaborating module <shifter_24>.
-
-Elaborating module <boolean_25>.
-
-Elaborating module <compare_26>.
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 30: Assignment to M_alu_z ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 31: Assignment to M_alu_v ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 32: Assignment to M_alu_n ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 31: Assignment to M_alu_z ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 32: Assignment to M_alu_v ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" Line 33: Assignment to M_alu_n ignored, since the identifier is never used
 
 Elaborating module <move_player_right_15>.
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 30: Assignment to M_alu_z ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 31: Assignment to M_alu_v ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 32: Assignment to M_alu_n ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 31: Assignment to M_alu_z ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 32: Assignment to M_alu_v ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" Line 33: Assignment to M_alu_n ignored, since the identifier is never used
 
 Elaborating module <tutorial_rom_16>.
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 105: Assignment to M_tutorial_end_position ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 106: Assignment to M_tutorial_walls ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 54: Assignment to M_game_tokens ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 55: Assignment to M_game_current_score ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" Line 123: Assignment to M_tutorial_end_position ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 55: Assignment to M_game_tokens ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 56: Assignment to M_game_current_score ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 57: Assignment to M_game_wall ignored, since the identifier is never used
 
 Elaborating module <edge_detector_3>.
 
@@ -152,8 +159,9 @@ WARNING:Xst:647 - Input <spi_mosi> is never used. This port will be preserved an
 WARNING:Xst:647 - Input <spi_sck> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_tx> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 46: Output port <tokens> of the instance <game> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 46: Output port <current_score> of the instance <game> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 47: Output port <tokens> of the instance <game> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 47: Output port <current_score> of the instance <game> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/mojo_top_0.v" line 47: Output port <wall> of the instance <game> is unconnected or connected to loadless signal.
     Found 20-bit register for signal <M_counter_q>.
     Found 3-bit register for signal <M_state_q>.
     Found finite state machine <FSM_0> for signal <M_state_q>.
@@ -170,14 +178,14 @@ INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slid
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 20-bit adder for signal <M_counter_q[19]_GND_1_o_add_0_OUT> created at line 163.
-    Found 8-bit 8-to-1 multiplexer for signal <green> created at line 168.
-    Found 1-bit tristate buffer for signal <spi_miso> created at line 134
-    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 134
-    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 134
-    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 134
-    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 134
-    Found 1-bit tristate buffer for signal <avr_rx> created at line 134
+    Found 20-bit adder for signal <M_counter_q[19]_GND_1_o_add_0_OUT> created at line 165.
+    Found 8-bit 8-to-1 multiplexer for signal <green> created at line 170.
+    Found 1-bit tristate buffer for signal <spi_miso> created at line 136
+    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 136
+    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 136
+    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 136
+    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 136
+    Found 1-bit tristate buffer for signal <avr_rx> created at line 136
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  20 D-type flip-flop(s).
@@ -195,30 +203,35 @@ Unit <reset_conditioner_1> synthesized.
 
 Synthesizing Unit <game_states_2>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v".
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 45: Output port <end_position> of the instance <inter_one> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 45: Output port <walls> of the instance <inter_one> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 102: Output port <end_position> of the instance <tutorial> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 102: Output port <walls> of the instance <tutorial> is unconnected or connected to loadless signal.
-    Found 3-bit register for signal <M_player_reg_selector_q>.
-    Found 64-bit register for signal <M_player_position_q>.
-    Found 7-bit register for signal <M_score_q>.
-    Found 3-bit register for signal <M_state_q>.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 55: Output port <end_position> of the instance <inter_one> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 55: Output port <walls> of the instance <inter_one> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/game_states_2.v" line 120: Output port <end_position> of the instance <tutorial> is unconnected or connected to loadless signal.
     Found 64-bit register for signal <M_token_map_q>.
-INFO:Xst:1799 - State 100 is never reached in FSM <M_state_q>.
+    Found 64-bit register for signal <M_player_position_q>.
+    Found 3-bit register for signal <M_player_reg_selector_q>.
+    Found 7-bit register for signal <M_score_q>.
+    Found 3-bit register for signal <M_current_stage_q>.
+    Found 64-bit register for signal <M_walls_q>.
+    Found 3-bit register for signal <M_number_times_moved_q>.
+    Found 26-bit register for signal <M_delay_movement_q>.
+    Found 4-bit register for signal <M_state_q>.
     Found finite state machine <FSM_1> for signal <M_state_q>.
     -----------------------------------------------------------------------
-    | States             | 4                                              |
-    | Transitions        | 3                                              |
-    | Inputs             | 0                                              |
-    | Outputs            | 2                                              |
+    | States             | 12                                             |
+    | Transitions        | 32                                             |
+    | Inputs             | 9                                              |
+    | Outputs            | 4                                              |
     | Clock              | clk (rising_edge)                              |
-    | Power Up State     | 000                                            |
+    | Power Up State     | 0000                                           |
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
+    Found 26-bit adder for signal <M_delay_movement_q[25]_GND_3_o_add_0_OUT> created at line 164.
+    Found 3-bit adder for signal <M_number_times_moved_q[2]_GND_3_o_add_47_OUT> created at line 305.
     Summary:
-	inferred 131 D-type flip-flop(s).
-	inferred  18 Multiplexer(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred 224 D-type flip-flop(s).
+	inferred  25 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <game_states_2> synthesized.
 
@@ -231,42 +244,33 @@ Unit <level_one_rom_11> synthesized.
 
 Synthesizing Unit <move_player_12>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_12.v".
-    Found 8x3-bit Read Only RAM for signal <new_player_reg_selector>
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 20.
+WARNING:Xst:647 - Input <walls<63:56>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8-bit 8-to-1 multiplexer for signal <M_up_wall_player_current_position> created at line 32.
+    Found 8-bit 7-to-1 multiplexer for signal <M_up_wall_walls> created at line 32.
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 32.
+    Found 3-bit 8-to-1 multiplexer for signal <new_player_reg_selector> created at line 32.
     Summary:
-	inferred   1 RAM(s).
-	inferred   1 Multiplexer(s).
+	inferred  11 Multiplexer(s).
 Unit <move_player_12> synthesized.
 
-Synthesizing Unit <move_player_down_13>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_down_13.v".
-    Found 8x3-bit Read Only RAM for signal <new_player_reg_selector>
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 20.
+Synthesizing Unit <wall_collide_21>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v".
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" line 22: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" line 22: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/wall_collide_21.v" line 22: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
     Summary:
-	inferred   1 RAM(s).
-	inferred   1 Multiplexer(s).
-Unit <move_player_down_13> synthesized.
+	no macro.
+Unit <wall_collide_21> synthesized.
 
-Synthesizing Unit <move_player_left_14>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v".
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 25: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 25: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 25: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
-    Found 16-bit 8-to-1 multiplexer for signal <M_alu_a> created at line 42.
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 42.
-    Summary:
-	inferred  10 Multiplexer(s).
-Unit <move_player_left_14> synthesized.
-
-Synthesizing Unit <alu_21>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/alu_21.v".
+Synthesizing Unit <alu_23>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/alu_23.v".
     Found 16-bit 4-to-1 multiplexer for signal <aluOut> created at line 90.
     Summary:
 	inferred   4 Multiplexer(s).
-Unit <alu_21> synthesized.
+Unit <alu_23> synthesized.
 
-Synthesizing Unit <adder_23>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/adder_23.v".
+Synthesizing Unit <adder_29>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/adder_29.v".
 WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit subtractor for signal <a[15]_b[15]_sub_2_OUT> created at line 32.
     Found 16-bit adder for signal <a[15]_b[15]_add_3_OUT> created at line 40.
@@ -277,10 +281,10 @@ WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved 
 	inferred   1 Multiplier(s).
 	inferred   2 Adder/Subtractor(s).
 	inferred   2 Multiplexer(s).
-Unit <adder_23> synthesized.
+Unit <adder_29> synthesized.
 
-Synthesizing Unit <shifter_24>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/shifter_24.v".
+Synthesizing Unit <shifter_30>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/shifter_30.v".
 WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit shifter logical left for signal <a[15]_b[15]_shift_left_0_OUT> created at line 21
     Found 16-bit shifter logical right for signal <a[15]_b[15]_shift_right_1_OUT> created at line 24
@@ -289,34 +293,59 @@ WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved 
     Summary:
 	inferred   4 Multiplexer(s).
 	inferred   3 Combinational logic shifter(s).
-Unit <shifter_24> synthesized.
+Unit <shifter_30> synthesized.
 
-Synthesizing Unit <boolean_25>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/boolean_25.v".
+Synthesizing Unit <boolean_31>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/boolean_31.v".
 WARNING:Xst:647 - Input <alufn<5:4>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit adder for signal <a[15]_b[15]_add_3_OUT> created at line 33.
     Summary:
 	inferred   1 Adder/Subtractor(s).
-Unit <boolean_25> synthesized.
+Unit <boolean_31> synthesized.
 
-Synthesizing Unit <compare_26>.
-    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/compare_26.v".
+Synthesizing Unit <compare_32>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/compare_32.v".
 WARNING:Xst:647 - Input <alufn<0:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <alufn<5:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 16-bit 4-to-1 multiplexer for signal <aluOut> created at line 20.
     Summary:
 	inferred   1 Multiplexer(s).
-Unit <compare_26> synthesized.
+Unit <compare_32> synthesized.
+
+Synthesizing Unit <move_player_down_13>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_down_13.v".
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 32.
+    Found 3-bit 8-to-1 multiplexer for signal <new_player_reg_selector> created at line 32.
+    Found 8-bit 8-to-1 multiplexer for signal <M_down_wall_player_current_position> created at line 32.
+    Found 8-bit 8-to-1 multiplexer for signal <M_down_wall_walls> created at line 32.
+    Summary:
+	inferred  11 Multiplexer(s).
+Unit <move_player_down_13> synthesized.
+
+Synthesizing Unit <move_player_left_14>.
+    Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v".
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 26: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 26: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_left_14.v" line 26: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
+    Found 8-bit 8-to-1 multiplexer for signal <M_left_wall_player_current_position> created at line 54.
+    Found 8-bit 8-to-1 multiplexer for signal <M_left_wall_walls> created at line 54.
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 54.
+    Found 16-bit 8-to-1 multiplexer for signal <M_alu_a> created at line 54.
+    Summary:
+	inferred  28 Multiplexer(s).
+Unit <move_player_left_14> synthesized.
 
 Synthesizing Unit <move_player_right_15>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v".
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 25: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 25: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 25: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
-    Found 16-bit 8-to-1 multiplexer for signal <M_alu_a> created at line 42.
-    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 42.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 26: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 26: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/move_player_right_15.v" line 26: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
+    Found 8-bit 8-to-1 multiplexer for signal <M_right_wall_player_current_position> created at line 54.
+    Found 8-bit 8-to-1 multiplexer for signal <M_right_wall_walls> created at line 54.
+    Found 64-bit 8-to-1 multiplexer for signal <player_location_out> created at line 54.
+    Found 16-bit 8-to-1 multiplexer for signal <M_alu_a> created at line 54.
     Summary:
-	inferred  10 Multiplexer(s).
+	inferred  28 Multiplexer(s).
 Unit <move_player_right_15> synthesized.
 
 Synthesizing Unit <tutorial_rom_16>.
@@ -336,7 +365,7 @@ Unit <edge_detector_3> synthesized.
 Synthesizing Unit <button_conditioner_7>.
     Related source file is "C:/Users/ymf_m/Documents/mojo/Slidey/work/planAhead/Slidey/Slidey.srcs/sources_1/imports/verilog/button_conditioner_7.v".
     Found 20-bit register for signal <M_ctr_q>.
-    Found 20-bit adder for signal <M_ctr_q[19]_GND_19_o_add_2_OUT> created at line 39.
+    Found 20-bit adder for signal <M_ctr_q[19]_GND_20_o_add_2_OUT> created at line 39.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  20 D-type flip-flop(s).
@@ -353,41 +382,45 @@ Unit <pipeline_17> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 2
- 8x3-bit single-port Read Only RAM                     : 2
-# Multipliers                                          : 2
- 16x16-bit multiplier                                  : 2
-# Adders/Subtractors                                   : 11
- 16-bit adder                                          : 4
- 16-bit subtractor                                     : 2
+# Multipliers                                          : 6
+ 16x16-bit multiplier                                  : 6
+# Adders/Subtractors                                   : 25
+ 16-bit adder                                          : 12
+ 16-bit subtractor                                     : 6
  20-bit adder                                          : 5
-# Registers                                            : 17
+ 26-bit adder                                          : 1
+ 3-bit adder                                           : 1
+# Registers                                            : 20
  1-bit register                                        : 4
  2-bit register                                        : 4
  20-bit register                                       : 5
- 3-bit register                                        : 1
+ 26-bit register                                       : 1
+ 3-bit register                                        : 2
  4-bit register                                        : 1
- 64-bit register                                       : 2
-# Multiplexers                                         : 63
- 1-bit 2-to-1 multiplexer                              : 6
- 1-bit 4-to-1 multiplexer                              : 2
- 16-bit 2-to-1 multiplexer                             : 6
- 16-bit 4-to-1 multiplexer                             : 8
+ 64-bit register                                       : 3
+# Multiplexers                                         : 170
+ 1-bit 2-to-1 multiplexer                              : 18
+ 1-bit 4-to-1 multiplexer                              : 6
+ 16-bit 2-to-1 multiplexer                             : 34
+ 16-bit 4-to-1 multiplexer                             : 24
  16-bit 8-to-1 multiplexer                             : 2
- 3-bit 2-to-1 multiplexer                              : 7
- 64-bit 2-to-1 multiplexer                             : 27
+ 26-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 11
+ 3-bit 8-to-1 multiplexer                              : 2
+ 64-bit 2-to-1 multiplexer                             : 58
  64-bit 8-to-1 multiplexer                             : 4
- 8-bit 8-to-1 multiplexer                              : 1
-# Logic shifters                                       : 6
- 16-bit shifter arithmetic right                       : 2
- 16-bit shifter logical left                           : 2
- 16-bit shifter logical right                          : 2
+ 8-bit 7-to-1 multiplexer                              : 1
+ 8-bit 8-to-1 multiplexer                              : 8
+# Logic shifters                                       : 18
+ 16-bit shifter arithmetic right                       : 6
+ 16-bit shifter logical left                           : 6
+ 16-bit shifter logical right                          : 6
 # Tristates                                            : 6
  1-bit tristate buffer                                 : 6
 # FSMs                                                 : 2
-# Xors                                                 : 4
- 1-bit xor2                                            : 2
- 16-bit xor2                                           : 2
+# Xors                                                 : 12
+ 1-bit xor2                                            : 6
+ 16-bit xor2                                           : 6
 
 =========================================================================
 
@@ -400,77 +433,59 @@ Synthesizing (advanced) Unit <button_conditioner_7>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
 Unit <button_conditioner_7> synthesized (advanced).
 
+Synthesizing (advanced) Unit <game_states_2>.
+The following registers are absorbed into counter <M_number_times_moved_q>: 1 register on signal <M_number_times_moved_q>.
+Unit <game_states_2> synthesized (advanced).
+
 Synthesizing (advanced) Unit <mojo_top_0>.
 The following registers are absorbed into counter <M_counter_q>: 1 register on signal <M_counter_q>.
 Unit <mojo_top_0> synthesized (advanced).
-
-Synthesizing (advanced) Unit <move_player_12>.
-INFO:Xst:3231 - The small RAM <Mram_new_player_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
-    -----------------------------------------------------------------------
-    | ram_type           | Distributed                         |          |
-    -----------------------------------------------------------------------
-    | Port A                                                              |
-    |     aspect ratio   | 8-word x 3-bit                      |          |
-    |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <player_reg_selector> |          |
-    |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to signal <new_player_reg_selector> |          |
-    -----------------------------------------------------------------------
-Unit <move_player_12> synthesized (advanced).
-
-Synthesizing (advanced) Unit <move_player_down_13>.
-INFO:Xst:3231 - The small RAM <Mram_new_player_reg_selector> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
-    -----------------------------------------------------------------------
-    | ram_type           | Distributed                         |          |
-    -----------------------------------------------------------------------
-    | Port A                                                              |
-    |     aspect ratio   | 8-word x 3-bit                      |          |
-    |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <player_reg_selector> |          |
-    |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to signal <new_player_reg_selector> |          |
-    -----------------------------------------------------------------------
-Unit <move_player_down_13> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 2
- 8x3-bit single-port distributed Read Only RAM         : 2
-# Multipliers                                          : 2
- 16x16-bit multiplier                                  : 2
-# Adders/Subtractors                                   : 6
- 16-bit adder                                          : 4
- 16-bit subtractor                                     : 2
-# Counters                                             : 5
+# Multipliers                                          : 6
+ 16x16-bit multiplier                                  : 6
+# Adders/Subtractors                                   : 19
+ 16-bit adder                                          : 12
+ 16-bit subtractor                                     : 6
+ 26-bit adder                                          : 1
+# Counters                                             : 6
  20-bit up counter                                     : 5
-# Registers                                            : 147
- Flip-Flops                                            : 147
-# Multiplexers                                         : 63
- 1-bit 2-to-1 multiplexer                              : 6
- 1-bit 4-to-1 multiplexer                              : 2
- 16-bit 2-to-1 multiplexer                             : 6
- 16-bit 4-to-1 multiplexer                             : 8
+ 3-bit up counter                                      : 1
+# Registers                                            : 237
+ Flip-Flops                                            : 237
+# Multiplexers                                         : 169
+ 1-bit 2-to-1 multiplexer                              : 18
+ 1-bit 4-to-1 multiplexer                              : 6
+ 16-bit 2-to-1 multiplexer                             : 34
+ 16-bit 4-to-1 multiplexer                             : 24
  16-bit 8-to-1 multiplexer                             : 2
- 3-bit 2-to-1 multiplexer                              : 7
- 64-bit 2-to-1 multiplexer                             : 27
+ 26-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 10
+ 3-bit 8-to-1 multiplexer                              : 2
+ 64-bit 2-to-1 multiplexer                             : 58
  64-bit 8-to-1 multiplexer                             : 4
- 8-bit 8-to-1 multiplexer                              : 1
-# Logic shifters                                       : 6
- 16-bit shifter arithmetic right                       : 2
- 16-bit shifter logical left                           : 2
- 16-bit shifter logical right                          : 2
+ 8-bit 7-to-1 multiplexer                              : 1
+ 8-bit 8-to-1 multiplexer                              : 8
+# Logic shifters                                       : 18
+ 16-bit shifter arithmetic right                       : 6
+ 16-bit shifter logical left                           : 6
+ 16-bit shifter logical right                          : 6
 # FSMs                                                 : 2
-# Xors                                                 : 4
- 1-bit xor2                                            : 2
- 16-bit xor2                                           : 2
+# Xors                                                 : 12
+ 1-bit xor2                                            : 6
+ 16-bit xor2                                           : 6
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+INFO:Xst:2261 - The FF/Latch <M_walls_q_1> in Unit <game_states_2> is equivalent to the following 62 FFs/Latches, which will be removed : <M_walls_q_2> <M_walls_q_3> <M_walls_q_4> <M_walls_q_5> <M_walls_q_6> <M_walls_q_7> <M_walls_q_8> <M_walls_q_9> <M_walls_q_10> <M_walls_q_11> <M_walls_q_12> <M_walls_q_13> <M_walls_q_14> <M_walls_q_15> <M_walls_q_16> <M_walls_q_17> <M_walls_q_18> <M_walls_q_19> <M_walls_q_20> <M_walls_q_21> <M_walls_q_22> <M_walls_q_23> <M_walls_q_24> <M_walls_q_25> <M_walls_q_26> <M_walls_q_27> <M_walls_q_28> <M_walls_q_29> <M_walls_q_30> <M_walls_q_31> <M_walls_q_32> <M_walls_q_33> <M_walls_q_34> <M_walls_q_35> <M_walls_q_36> <M_walls_q_37> <M_walls_q_38> <M_walls_q_39> <M_walls_q_40> <M_walls_q_41> <M_walls_q_42> <M_walls_q_43> <M_walls_q_44> <M_walls_q_45> <M_walls_q_46> <M_walls_q_47> <M_walls_q_48> <M_walls_q_49> <M_walls_q_50> <M_walls_q_51> <M_walls_q_52> <M_walls_q_53> <M_walls_q_54> <M_walls_q_55> <M_walls_q_56> <M_walls_q_57> <M_walls_q_58> <M_walls_q_59> <M_walls_q_60>
+   <M_walls_q_61> <M_walls_q_62> <M_walls_q_63> 
+WARNING:Xst:1293 - FF/Latch <M_walls_q_1> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <FSM_0> on signal <M_state_q[1:3]> with user encoding.
 -------------------
@@ -486,16 +501,26 @@ Optimizing FSM <FSM_0> on signal <M_state_q[1:3]> with user encoding.
  111   | 111
 -------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <game/FSM_1> on signal <M_state_q[1:3]> with one-hot encoding.
+Optimizing FSM <game/FSM_1> on signal <M_state_q[1:4]> with sequential encoding.
 -------------------
  State | Encoding
 -------------------
- 000   | 001
- 001   | 010
- 010   | 100
- 100   | unreached
+ 0000  | 0000
+ 1001  | 0001
+ 0101  | 0010
+ 1010  | 0011
+ 1100  | 0100
+ 1000  | 0101
+ 0111  | 0110
+ 0110  | 0111
+ 0001  | 1000
+ 0100  | 1001
+ 0011  | 1010
+ 0010  | 1011
 -------------------
-WARNING:Xst:1293 - FF/Latch <M_token_map_q_32> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <M_token_map_q_30> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_31> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_32> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_33> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_34> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_35> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
@@ -504,19 +529,15 @@ WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_37> h
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_38> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_39> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_40> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_41> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_42> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_43> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_44> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_45> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_46> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_47> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_48> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_49> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_50> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_51> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_52> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_53> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_54> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_55> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_56> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
@@ -525,7 +546,6 @@ WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_59> h
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_60> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_61> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_62> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_63> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_0> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_2> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_3> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
@@ -555,32 +575,55 @@ WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_26> h
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_27> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_28> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_29> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_30> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_token_map_q_31> has a constant value of 0 in block <game_states_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1426 - The value init of the FF/Latch M_state_q_FSM_FFd3 hinder the constant cleaning in the block game_states_2.
-   You should achieve better results by setting this init to 0.
-WARNING:Xst:2973 - All outputs of instance <move_left/alu/boolean> of block <boolean_25> are unconnected in block <game_states_2>. Underlying logic will be removed.
-WARNING:Xst:2973 - All outputs of instance <move_right/alu/boolean> of block <boolean_25> are unconnected in block <game_states_2>. Underlying logic will be removed.
+WARNING:Xst:2677 - Node <M_delay_movement_q_23> of sequential type is unconnected in block <game_states_2>.
+WARNING:Xst:2677 - Node <M_delay_movement_q_24> of sequential type is unconnected in block <game_states_2>.
+WARNING:Xst:2677 - Node <M_delay_movement_q_25> of sequential type is unconnected in block <game_states_2>.
+WARNING:Xst:2677 - Node <M_counter_q_4> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_5> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_6> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_7> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_8> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_9> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_10> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_11> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_12> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_13> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <M_counter_q_16> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_14> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <M_counter_q_15> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <M_counter_q_17> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <M_counter_q_18> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <M_counter_q_19> of sequential type is unconnected in block <mojo_top_0>.
+INFO:Xst:2261 - The FF/Latch <M_token_map_q_41> in Unit <game_states_2> is equivalent to the following 4 FFs/Latches, which will be removed : <M_token_map_q_47> <M_token_map_q_48> <M_token_map_q_53> <M_token_map_q_63> 
+INFO:Xst:2261 - The FF/Latch <M_token_map_q_1> in Unit <game_states_2> is equivalent to the following FF/Latch, which will be removed : <M_token_map_q_57> 
 
 Optimizing unit <mojo_top_0> ...
 
 Optimizing unit <game_states_2> ...
 
-Optimizing unit <boolean_25> ...
-WARNING:Xst:2677 - Node <game/M_state_q_FSM_FFd2> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <game/M_token_map_q_57> of sequential type is unconnected in block <mojo_top_0>.
+Optimizing unit <alu_23> ...
+
+Optimizing unit <boolean_31> ...
+
+Optimizing unit <move_player_12> ...
+WARNING:Xst:2677 - Node <game/M_token_map_q_41> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <game/M_token_map_q_1> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <game/move_down/down_wall/alu/adder/Mmult_n0030> is unconnected in block <mojo_top_0>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <game/move_left/alu/adder/Mmult_n0030> is unconnected in block <mojo_top_0>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <game/move_left/left_wall/alu/adder/Mmult_n0030> is unconnected in block <mojo_top_0>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <game/move_right/right_wall/alu/adder/Mmult_n0030> is unconnected in block <mojo_top_0>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <game/move_player/up_wall/alu/adder/Mmult_n0030> is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <game/move_right/alu/adder/Mmult_n0030> of sequential type is unconnected in block <mojo_top_0>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 19.
-FlipFlop game/M_player_reg_selector_q_0 has been replicated 3 time(s)
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 23.
+FlipFlop game/M_player_reg_selector_q_0 has been replicated 2 time(s)
 FlipFlop game/M_player_reg_selector_q_1 has been replicated 3 time(s)
-FlipFlop game/M_player_reg_selector_q_2 has been replicated 3 time(s)
+FlipFlop game/M_player_reg_selector_q_2 has been replicated 2 time(s)
+FlipFlop game/M_state_q_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop game/M_state_q_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop game/M_walls_q_0 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -596,8 +639,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 185
- Flip-Flops                                            : 185
+# Registers                                            : 203
+ Flip-Flops                                            : 203
 # Shift Registers                                      : 4
  2-bit shift register                                  : 4
 
@@ -622,24 +665,24 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 792
-#      GND                         : 11
-#      INV                         : 11
-#      LUT1                        : 91
-#      LUT2                        : 27
-#      LUT3                        : 58
-#      LUT4                        : 24
-#      LUT5                        : 24
-#      LUT6                        : 326
-#      MUXCY                       : 91
-#      MUXF7                       : 24
-#      VCC                         : 9
-#      XORCY                       : 96
-# FlipFlops/Latches                : 189
-#      FD                          : 70
-#      FDE                         : 4
-#      FDR                         : 31
-#      FDRE                        : 80
+# BELS                             : 1167
+#      GND                         : 13
+#      INV                         : 12
+#      LUT1                        : 101
+#      LUT2                        : 13
+#      LUT3                        : 34
+#      LUT4                        : 143
+#      LUT5                        : 95
+#      LUT6                        : 489
+#      MUXCY                       : 101
+#      MUXF7                       : 49
+#      VCC                         : 10
+#      XORCY                       : 107
+# FlipFlops/Latches                : 207
+#      FD                          : 10
+#      FDE                         : 68
+#      FDR                         : 30
+#      FDRE                        : 95
 #      FDS                         : 4
 # Shift Registers                  : 4
 #      SRLC16E                     : 4
@@ -657,18 +700,18 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             189  out of  11440     1%  
- Number of Slice LUTs:                  565  out of   5720     9%  
-    Number used as Logic:               561  out of   5720     9%  
+ Number of Slice Registers:             207  out of  11440     1%  
+ Number of Slice LUTs:                  891  out of   5720    15%  
+    Number used as Logic:               887  out of   5720    15%  
     Number used as Memory:                4  out of   1440     0%  
        Number used as SRL:                4
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    584
-   Number with an unused Flip Flop:     395  out of    584    67%  
-   Number with an unused LUT:            19  out of    584     3%  
-   Number of fully used LUT-FF pairs:   170  out of    584    29%  
-   Number of unique control sets:        17
+ Number of LUT Flip Flop pairs used:    915
+   Number with an unused Flip Flop:     708  out of    915    77%  
+   Number with an unused LUT:            24  out of    915     2%  
+   Number of fully used LUT-FF pairs:   183  out of    915    20%  
+   Number of unique control sets:        21
 
 IO Utilization: 
  Number of IOs:                          95
@@ -698,7 +741,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 193   |
+clk                                | BUFGP                  | 211   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -709,7 +752,7 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 7.472ns (Maximum Frequency: 133.833MHz)
+   Minimum period: 9.529ns (Maximum Frequency: 104.945MHz)
    Minimum input arrival time before clock: 3.526ns
    Maximum output required time after clock: 6.438ns
    Maximum combinational path delay: No path found
@@ -720,33 +763,41 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 7.472ns (frequency: 133.833MHz)
-  Total number of paths / destination ports: 30383 / 378
+  Clock period: 9.529ns (frequency: 104.945MHz)
+  Total number of paths / destination ports: 81225 / 488
 -------------------------------------------------------------------------
-Delay:               7.472ns (Levels of Logic = 8)
-  Source:            game/M_player_position_q_7 (FF)
-  Destination:       game/M_player_position_q_55 (FF)
+Delay:               9.529ns (Levels of Logic = 12)
+  Source:            game/M_player_position_q_40 (FF)
+  Destination:       game/M_player_position_q_7 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: game/M_player_position_q_7 to game/M_player_position_q_55
+  Data Path: game/M_player_position_q_40 to game/M_player_position_q_7
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               7   0.525   1.365  M_player_position_q_7 (M_player_position_q_7)
-     begin scope: 'game/move_right:player_current_position<7>'
-     LUT6:I0->O            1   0.254   0.000  Mmux_M_alu_a_44 (Mmux_M_alu_a_44_0)
-     MUXF7:I0->O           9   0.163   0.976  Mmux_M_alu_a_2_f7_3 (M_alu_aluOut<6>)
-     LUT4:I3->O           12   0.254   1.069  M_alu_aluOut[7]_GND_16_o_equal_15_o<7>_SW0 (N0)
-     LUT6:I5->O            1   0.254   0.000  M_alu_aluOut[7]_GND_16_o_equal_15_o<7>_G (N122)
-     MUXF7:I1->O          12   0.175   1.069  M_alu_aluOut[7]_GND_16_o_equal_15_o<7> (M_alu_aluOut[7]_GND_16_o_equal_15_o)
-     LUT2:I1->O            1   0.254   0.790  GND_16_o_player_current_position[63]_mux_1_OUT<55>1 (player_location_out<55>)
-     end scope: 'game/move_right:player_location_out<55>'
-     LUT6:I4->O            1   0.250   0.000  Mmux_M_player_position_d[63]_GND_3_o_mux_60_OUT514 (M_player_position_d[63]_GND_3_o_mux_60_OUT<55>)
-     FD:D                      0.074          M_player_position_q_55
+     FDE:C->Q              8   0.525   1.220  M_player_position_q_40 (M_player_position_q_40)
+     begin scope: 'game/move_left:player_current_position<40>'
+     LUT6:I2->O            1   0.254   0.000  Mmux_M_left_wall_player_current_position_3 (Mmux_M_left_wall_player_current_position_3)
+     MUXF7:I1->O         121   0.175   2.274  Mmux_M_left_wall_player_current_position_2_f7 (M_left_wall_player_current_position<0>)
+     end scope: 'game/move_left:M_left_wall_player_current_position<0>'
+     begin scope: 'game/move_right:M_left_wall_player_current_position<0>'
+     begin scope: 'game/move_right/right_wall:player_current_position<0>'
+     begin scope: 'game/move_right/right_wall/alu:a<0>'
+     begin scope: 'game/move_right/right_wall/alu/boolean:a<0>'
+     LUT5:I4->O           91   0.254   2.139  aluOut<0>1 (aluOut<0>)
+     end scope: 'game/move_right/right_wall/alu/boolean:aluOut<0>'
+     end scope: 'game/move_right/right_wall/alu:M_left_wall_collide'
+     end scope: 'game/move_right/right_wall:M_left_wall_collide'
+     LUT6:I5->O            1   0.254   0.000  Mmux_player_location_out_2_f7_60_SW0_G (N1143)
+     MUXF7:I1->O           1   0.175   0.910  Mmux_player_location_out_2_f7_60_SW0 (N862)
+     end scope: 'game/move_right:N862'
+     LUT6:I3->O            1   0.235   0.790  Mmux_M_player_position_d[63]_GND_3_o_mux_101_OUT1865 (Mmux_M_player_position_d[63]_GND_3_o_mux_101_OUT1864)
+     LUT5:I3->O            1   0.250   0.000  Mmux_M_player_position_d[63]_GND_3_o_mux_101_OUT1866 (M_player_position_d[63]_GND_3_o_mux_101_OUT<7>)
+     FDE:D                     0.074          M_player_position_q_7
     ----------------------------------------
-    Total                      7.472ns (2.203ns logic, 5.269ns route)
-                                       (29.5% logic, 70.5% route)
+    Total                      9.529ns (2.196ns logic, 7.333ns route)
+                                       (23.0% logic, 77.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
@@ -800,20 +851,20 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    7.472|         |         |         |
+clk            |    9.529|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 11.00 secs
-Total CPU time to Xst completion: 11.04 secs
+Total REAL time to Xst completion: 30.00 secs
+Total CPU time to Xst completion: 30.26 secs
  
 --> 
 
-Total memory usage is 4518180 kilobytes
+Total memory usage is 4556964 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   99 (   0 filtered)
-Number of infos    :   16 (   0 filtered)
+Number of warnings :  116 (   0 filtered)
+Number of infos    :   19 (   0 filtered)
 

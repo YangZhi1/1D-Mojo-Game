@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Slidey" board="Mojo V3" language="Lucid">
   <files>
-    <src>tutorial_rom.luc</src>
-    <src>boolean.luc</src>
-    <src>alu.luc</src>
     <src>move_player_left.luc</src>
+    <src>alu.luc</src>
+    <src>boolean.luc</src>
+    <src>tutorial_rom.luc</src>
+    <src>wall_collide.luc</src>
     <src>level_one_rom.luc</src>
     <src>game_states.luc</src>
     <src>compare.luc</src>
