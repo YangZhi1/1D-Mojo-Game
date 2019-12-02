@@ -402,8 +402,8 @@ module mojo_top_0 (
         row[7+0-:1] = 1'h1;
         red = 8'hff;
         blue = 8'hff;
-        green[0+6-:7] = ~M_game_player_position_out[56+0+6-:7];
-        green[7+0-:1] = 1'h0;
+        green[1+6-:7] = ~M_game_player_position_out[56+1+6-:7];
+        green[0+0-:1] = 1'h0;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = H2_state;
@@ -434,18 +434,18 @@ module mojo_top_0 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
+      M_counter_q <= 1'h0;
     end else begin
-      M_state_q <= M_state_d;
+      M_counter_q <= M_counter_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_counter_q <= 1'h0;
+      M_state_q <= 1'h0;
     end else begin
-      M_counter_q <= M_counter_d;
+      M_state_q <= M_state_d;
     end
   end
   

@@ -303,8 +303,8 @@ module mojo_top (
         row[7] = 1;
         red = 8x{1};
         blue = 8x{1};
-        green[6:0] = ~game.player_position_out[7][6:0];
-        green[7] = 0;
+        green[7:1] = ~game.player_position_out[7][7:1];
+        green[0] = 0;
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.H2;

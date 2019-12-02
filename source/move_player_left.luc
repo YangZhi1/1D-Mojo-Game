@@ -50,7 +50,7 @@ module move_player_left (
       b000:
         alu.a = player_current_position[0];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = new_player_position[0];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[0];
         
         if(left_wall.collide){
@@ -73,7 +73,7 @@ module move_player_left (
       b001:
         alu.a = player_current_position[1];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[1];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[1];
         
         if(left_wall.collide){
@@ -96,7 +96,7 @@ module move_player_left (
       b010:
         alu.a = player_current_position[2];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[2];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[2];
         if(left_wall.collide){
           player_location_out[2] = player_current_position[2];
@@ -118,7 +118,7 @@ module move_player_left (
       b011:
         alu.a = player_current_position[3];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[3];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[3];
         if(left_wall.collide){
           player_location_out[3] = player_current_position[3];
@@ -140,7 +140,7 @@ module move_player_left (
       b100:
         alu.a = player_current_position[4];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[4];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[4];
         if(left_wall.collide){
           player_location_out[4] = player_current_position[4];
@@ -162,7 +162,7 @@ module move_player_left (
       b101:
         alu.a = player_current_position[5];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[5];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[5];
         if(left_wall.collide){
           player_location_out[5] = player_current_position[5];
@@ -184,7 +184,7 @@ module move_player_left (
       b110:
         alu.a = player_current_position[6];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[6];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[6];
         if(left_wall.collide){
           player_location_out[6] = player_current_position[6];
@@ -206,7 +206,7 @@ module move_player_left (
       b111:
         alu.a = player_current_position[7];
         new_player_position = alu.aluOut[7:0];
-        left_wall.player_current_position = player_current_position[7];
+        left_wall.player_current_position = new_player_position;
         left_wall.walls = walls[7];
         if(left_wall.collide){
           player_location_out[7] = player_current_position[7];
