@@ -1,0 +1,102 @@
+module level_three_rom (
+    input rngeezus [2],
+    output player_initial_position [8][8],
+    output player_reg_selector[3],
+    output end_position [8][8],
+    output walls[8][8],
+    output tokens[8][8]
+  ) {
+
+  /*
+  ROM file that stores map values --> Position of tokens and walls
+  Each time player enters a new level we will pick a stage at random
+  from these values
+  */
+  always {
+    player_initial_position[0] = 8b10000000;
+    player_initial_position[7:1] = 7x{{8b0}};
+    player_reg_selector = 3b000;
+    end_position[7] = 8b00000001;
+    
+    walls = 8x{{8hxx}};
+    tokens = 8x{{8hxx}};
+    
+    case(rngeezus){
+      b00:
+        tokens[0] = 8b00000001;
+        tokens[1] = 8b00000000;
+        tokens[2] = 8b10000000;
+        tokens[3] = 8b00000101;
+        tokens[4] = 8b00000000;
+        tokens[5] = 8b00000000;
+        tokens[6] = 8b00000000;
+        tokens[7] = 8b00001000;
+        
+        walls[0] = 8b00000010;
+        walls[1] = 8b10100000;
+        walls[2] = 8b00000101;
+        walls[3] = 8b00000000;
+        walls[4] = 8b00010001;
+        walls[5] = 8b00000010;
+        walls[6] = 8b00000000;
+        walls[7] = 8b10000010;
+        
+      b01:
+        tokens[0] = 8b00000001;
+        tokens[1] = 8b00000000;
+        tokens[2] = 8b10000000;
+        tokens[3] = 8b00000000;
+        tokens[4] = 8b00000001;
+        tokens[5] = 8b00000000;
+        tokens[6] = 8b00000010;
+        tokens[7] = 8b10000000;
+
+        walls[0] = 8b00000000;
+        walls[1] = 8b10000100;
+        walls[2] = 8b00000001;
+        walls[3] = 8b00000000;
+        walls[4] = 8b00010010;
+        walls[5] = 8b10001111;
+        walls[6] = 8b00101000;
+        walls[7] = 8b01000010;
+        
+      b10:
+        tokens[0] = 8b00000010;
+        tokens[1] = 8b00000000;
+        tokens[2] = 8b00001000;
+        tokens[3] = 8b00000000;
+        tokens[4] = 8b00000001;
+        tokens[5] = 8b00000000;
+        tokens[6] = 8b00000010;
+        tokens[7] = 8b10000000;
+
+        walls[0] = 8b00000001;
+        walls[1] = 8b00010000;
+        walls[2] = 8b00000101;
+        walls[3] = 8b00000000;
+        walls[4] = 8b00000000;
+        walls[5] = 8b00000110;
+        walls[6] = 8b11000000;
+        walls[7] = 8b00000010;
+        
+      b11:
+        tokens[0] = 8b00000010;
+        tokens[1] = 8b00000000;
+        tokens[2] = 8b00001000;
+        tokens[3] = 8b00000000;
+        tokens[4] = 8b00000001;
+        tokens[5] = 8b00000000;
+        tokens[6] = 8b00000010;
+        tokens[7] = 8b10000000;
+
+        walls[0] = 8b00000001;
+        walls[1] = 8b00010000;
+        walls[2] = 8b00000101;
+        walls[3] = 8b00000000;
+        walls[4] = 8b00000000;
+        walls[5] = 8b00000110;
+        walls[6] = 8b11000000;
+        walls[7] = 8b00000010;
+    }
+  }
+}
