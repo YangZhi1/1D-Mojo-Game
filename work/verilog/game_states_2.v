@@ -33,19 +33,23 @@ module game_states_2 (
   localparam MOVE8TIMESDOWN_state = 4'd8;
   localparam TUTORIALROM_state = 4'd9;
   localparam TUTORIAL_state = 4'd10;
-  localparam INTER1_state = 4'd11;
-  localparam LEVEL1_state = 4'd12;
+  localparam TUTORIALWAIT_state = 4'd11;
+  localparam INTER1_state = 4'd12;
+  localparam LEVEL1_state = 4'd13;
   
   reg [3:0] M_state_d, M_state_q = START_state;
   
-  reg [63:0] M_token_map_d, M_token_map_q = 1'h0;
+  reg [63:0] M_token_map_d, M_token_map_q = 8'h02;
   reg [63:0] M_player_position_d, M_player_position_q = 8'h80;
   reg [2:0] M_player_reg_selector_d, M_player_reg_selector_q = 1'h0;
   reg [6:0] M_score_d, M_score_q = 7'h00;
+  reg [3:0] M_level_score_d, M_level_score_q = 4'h0;
   reg [7:0] M_end_position_d, M_end_position_q = 8'h01;
   reg [2:0] M_current_stage_d, M_current_stage_q = 3'h0;
   reg [63:0] M_walls_d, M_walls_q = 8'h00;
   reg [2:0] M_number_times_moved_d, M_number_times_moved_q = 3'h0;
+  
+  reg [63:0] intermediate_tokens;
   
   wire [64-1:0] M_inter_one_player_initial_position;
   wire [3-1:0] M_inter_one_player_reg_selector;
@@ -63,6 +67,7 @@ module game_states_2 (
   wire [64-1:0] M_move_player_player_location_out;
   wire [3-1:0] M_move_player_new_player_reg_selector;
   wire [64-1:0] M_move_player_new_token_map;
+  wire [1-1:0] M_move_player_score_token;
   reg [3-1:0] M_move_player_player_reg_selector;
   reg [64-1:0] M_move_player_player_current_position;
   reg [64-1:0] M_move_player_walls;
@@ -74,46 +79,65 @@ module game_states_2 (
     .token_map(M_move_player_token_map),
     .player_location_out(M_move_player_player_location_out),
     .new_player_reg_selector(M_move_player_new_player_reg_selector),
-    .new_token_map(M_move_player_new_token_map)
+    .new_token_map(M_move_player_new_token_map),
+    .score_token(M_move_player_score_token)
   );
   
   wire [64-1:0] M_move_down_player_location_out;
   wire [3-1:0] M_move_down_new_player_reg_selector;
+  wire [64-1:0] M_move_down_new_token_map;
+  wire [1-1:0] M_move_down_score_token;
   reg [3-1:0] M_move_down_player_reg_selector;
   reg [64-1:0] M_move_down_player_current_position;
   reg [64-1:0] M_move_down_walls;
+  reg [64-1:0] M_move_down_token_map;
   move_player_down_13 move_down (
     .player_reg_selector(M_move_down_player_reg_selector),
     .player_current_position(M_move_down_player_current_position),
     .walls(M_move_down_walls),
+    .token_map(M_move_down_token_map),
     .player_location_out(M_move_down_player_location_out),
-    .new_player_reg_selector(M_move_down_new_player_reg_selector)
+    .new_player_reg_selector(M_move_down_new_player_reg_selector),
+    .new_token_map(M_move_down_new_token_map),
+    .score_token(M_move_down_score_token)
   );
   
   wire [64-1:0] M_move_left_player_location_out;
   wire [3-1:0] M_move_left_new_player_reg_selector;
+  wire [64-1:0] M_move_left_new_token_map;
+  wire [1-1:0] M_move_left_score_token;
   reg [3-1:0] M_move_left_player_reg_selector;
   reg [64-1:0] M_move_left_player_current_position;
   reg [64-1:0] M_move_left_walls;
+  reg [64-1:0] M_move_left_token_map;
   move_player_left_14 move_left (
     .player_reg_selector(M_move_left_player_reg_selector),
     .player_current_position(M_move_left_player_current_position),
     .walls(M_move_left_walls),
+    .token_map(M_move_left_token_map),
     .player_location_out(M_move_left_player_location_out),
-    .new_player_reg_selector(M_move_left_new_player_reg_selector)
+    .new_player_reg_selector(M_move_left_new_player_reg_selector),
+    .new_token_map(M_move_left_new_token_map),
+    .score_token(M_move_left_score_token)
   );
   
   wire [64-1:0] M_move_right_player_location_out;
   wire [3-1:0] M_move_right_new_player_reg_selector;
+  wire [64-1:0] M_move_right_new_token_map;
+  wire [1-1:0] M_move_right_score_token;
   reg [3-1:0] M_move_right_player_reg_selector;
   reg [64-1:0] M_move_right_player_current_position;
   reg [64-1:0] M_move_right_walls;
+  reg [64-1:0] M_move_right_token_map;
   move_player_right_15 move_right (
     .player_reg_selector(M_move_right_player_reg_selector),
     .player_current_position(M_move_right_player_current_position),
     .walls(M_move_right_walls),
+    .token_map(M_move_right_token_map),
     .player_location_out(M_move_right_player_location_out),
-    .new_player_reg_selector(M_move_right_new_player_reg_selector)
+    .new_player_reg_selector(M_move_right_new_player_reg_selector),
+    .new_token_map(M_move_right_new_token_map),
+    .score_token(M_move_right_score_token)
   );
   
   wire [64-1:0] M_tutorial_player_initial_position;
@@ -135,6 +159,7 @@ module game_states_2 (
     M_walls_d = M_walls_q;
     M_current_stage_d = M_current_stage_q;
     M_delay_movement_d = M_delay_movement_q;
+    M_level_score_d = M_level_score_q;
     M_end_position_d = M_end_position_q;
     M_score_d = M_score_q;
     M_number_times_moved_d = M_number_times_moved_q;
@@ -148,16 +173,19 @@ module game_states_2 (
     M_move_player_player_reg_selector = 3'bxxx;
     M_move_player_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_player_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
-    M_move_player_token_map = M_token_map_q;
+    M_move_player_token_map = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_down_player_reg_selector = 3'bxxx;
     M_move_down_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_down_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_down_token_map = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_left_player_reg_selector = 3'bxxx;
     M_move_left_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_left_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_left_token_map = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_right_player_reg_selector = 3'bxxx;
     M_move_right_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_right_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_move_right_token_map = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_player_position_d = M_player_position_q;
     M_player_reg_selector_d = M_player_reg_selector_q;
     M_token_map_d = M_token_map_q;
@@ -165,6 +193,7 @@ module game_states_2 (
     M_end_position_d = M_end_position_q;
     M_current_stage_d = M_current_stage_q;
     M_walls_d = M_walls_q;
+    M_level_score_d = M_level_score_q;
     M_number_times_moved_d = M_number_times_moved_q;
     M_delay_movement_d = M_delay_movement_q + 1'h1;
     
@@ -180,7 +209,8 @@ module game_states_2 (
         M_player_position_d = M_tutorial_player_initial_position;
         M_player_reg_selector_d = M_tutorial_player_reg_selector;
         player_position_out = M_player_position_q;
-        M_token_map_d = M_tutorial_tokens;
+        intermediate_tokens = M_tutorial_tokens;
+        M_token_map_d = intermediate_tokens;
         M_walls_d = M_tutorial_walls;
         M_state_d = TUTORIAL_state;
       end
@@ -199,12 +229,19 @@ module game_states_2 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (M_player_position_q[56+7-:8] == 8'h01) begin
+          M_state_d = INTER1_state;
+        end
       end
       MOVE8TIMESUP_state: begin
         M_move_player_player_current_position = M_player_position_q;
         M_move_player_player_reg_selector = M_player_reg_selector_q;
         M_move_player_walls = M_walls_q;
         M_move_player_token_map = M_token_map_q;
+        M_token_map_d = M_move_player_new_token_map;
+        if (M_move_player_score_token) begin
+          M_level_score_d = M_level_score_q + 1'h1;
+        end
         M_player_reg_selector_d = M_move_player_new_player_reg_selector;
         M_player_position_d = M_move_player_player_location_out;
         M_state_d = WAITUP_state;
@@ -233,6 +270,11 @@ module game_states_2 (
         M_move_down_player_current_position = M_player_position_q;
         M_move_down_player_reg_selector = M_player_reg_selector_q;
         M_move_down_walls = M_walls_q;
+        M_move_down_token_map = M_token_map_q;
+        M_token_map_d = M_move_down_new_token_map;
+        if (M_move_down_score_token) begin
+          M_level_score_d = M_level_score_q + 1'h1;
+        end
         M_player_reg_selector_d = M_move_down_new_player_reg_selector;
         M_player_position_d = M_move_down_player_location_out;
         M_state_d = WAITDOWN_state;
@@ -261,6 +303,11 @@ module game_states_2 (
         M_move_left_player_current_position = M_player_position_q;
         M_move_left_player_reg_selector = M_player_reg_selector_q;
         M_move_left_walls = M_walls_q;
+        M_move_left_token_map = M_token_map_q;
+        M_token_map_d = M_move_left_new_token_map;
+        if (M_move_left_score_token) begin
+          M_level_score_d = M_level_score_q + 1'h1;
+        end
         M_player_reg_selector_d = M_move_left_new_player_reg_selector;
         M_player_position_d = M_move_left_player_location_out;
         M_state_d = WAITLEFT_state;
@@ -289,6 +336,11 @@ module game_states_2 (
         M_move_right_player_current_position = M_player_position_q;
         M_move_right_player_reg_selector = M_player_reg_selector_q;
         M_move_right_walls = M_walls_q;
+        M_move_right_token_map = M_token_map_q;
+        M_token_map_d = M_move_right_new_token_map;
+        if (M_move_right_score_token) begin
+          M_level_score_d = M_level_score_q + 1'h1;
+        end
         M_player_reg_selector_d = M_move_right_new_player_reg_selector;
         M_player_position_d = M_move_right_player_location_out;
         M_state_d = WAITRIGHT_state;
@@ -317,47 +369,45 @@ module game_states_2 (
         M_player_position_d = M_inter_one_player_initial_position;
         M_player_reg_selector_d = M_inter_one_player_reg_selector;
         player_position_out = M_player_position_q;
-        M_token_map_d = M_inter_one_tokens;
+        intermediate_tokens = M_inter_one_tokens;
+        M_token_map_d = intermediate_tokens;
+        M_walls_d = M_inter_one_walls;
         M_state_d = LEVEL1_state;
       end
       LEVEL1_state: begin
+        M_walls_d = M_inter_one_walls;
+        M_current_stage_d = 3'h1;
         if (button_up) begin
-          M_move_player_player_current_position = M_player_position_q;
-          M_move_player_player_reg_selector = M_player_reg_selector_q;
-          M_player_reg_selector_d = M_move_player_new_player_reg_selector;
-          M_player_position_d = M_move_player_player_location_out;
+          M_state_d = WAITUP_state;
         end
         if (button_down) begin
-          M_move_down_player_current_position = M_player_position_q;
-          M_move_down_player_reg_selector = M_player_reg_selector_q;
-          M_player_reg_selector_d = M_move_down_new_player_reg_selector;
-          M_player_position_d = M_move_down_player_location_out;
+          M_state_d = WAITDOWN_state;
         end
         if (button_left) begin
-          M_move_left_player_current_position = M_player_position_q;
-          M_move_left_player_reg_selector = M_player_reg_selector_q;
-          M_player_reg_selector_d = M_move_left_new_player_reg_selector;
-          M_player_position_d = M_move_left_player_location_out;
+          M_state_d = WAITLEFT_state;
         end
         if (button_right) begin
-          M_move_right_player_current_position = M_player_position_q;
-          M_move_right_player_reg_selector = M_player_reg_selector_q;
-          M_player_reg_selector_d = M_move_right_new_player_reg_selector;
-          M_player_position_d = M_move_right_player_location_out;
+          M_state_d = WAITRIGHT_state;
         end
-        if (M_player_position_q[56+7-:8] == M_end_position_q) begin
-          
+        if (M_player_position_q[56+7-:8] == 8'h01) begin
+          M_state_d = START_state;
         end
       end
     endcase
   end
   
   always @(posedge clk) begin
+    M_state_q <= M_state_d;
+  end
+  
+  
+  always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_token_map_q <= 1'h0;
+      M_token_map_q <= 8'h02;
       M_player_position_q <= 8'h80;
       M_player_reg_selector_q <= 1'h0;
       M_score_q <= 7'h00;
+      M_level_score_q <= 4'h0;
       M_end_position_q <= 8'h01;
       M_current_stage_q <= 3'h0;
       M_walls_q <= 8'h00;
@@ -367,6 +417,7 @@ module game_states_2 (
       M_player_position_q <= M_player_position_d;
       M_player_reg_selector_q <= M_player_reg_selector_d;
       M_score_q <= M_score_d;
+      M_level_score_q <= M_level_score_d;
       M_end_position_q <= M_end_position_d;
       M_current_stage_q <= M_current_stage_d;
       M_walls_q <= M_walls_d;
@@ -381,11 +432,6 @@ module game_states_2 (
     end else begin
       M_delay_movement_q <= M_delay_movement_d;
     end
-  end
-  
-  
-  always @(posedge clk) begin
-    M_state_q <= M_state_d;
   end
   
 endmodule

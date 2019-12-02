@@ -12,10 +12,10 @@ module game_states (
   ) {
   dff delay_movement[26](.clk(clk), .rst(rst));
   
-  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1};
+  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, TUTORIALWAIT, INTER1, LEVEL1};
   .clk(clk){
     .rst(rst){
-      dff token_map [8][8];
+      dff token_map [8][8](#INIT(8b00000010));
       dff player_position [8][8](#INIT(8b10000000));   // Initialize player position to start at top left corner
       dff player_reg_selector [3];
       dff score [7](#INIT(7b0000000));                 // Since 99 (max we can display) requires 7 bits to encode
@@ -25,8 +25,11 @@ module game_states (
       dff walls [8][8](#INIT(8b00000000));
       
       dff number_times_moved[3](#INIT(3b000));
+      
     }
   }
+  
+  sig intermediate_tokens [8][8];
   
   // MODULES
   level_one_rom inter_one;
@@ -49,22 +52,22 @@ module game_states (
     move_player.player_reg_selector = 3bxxx;
     move_player.player_current_position = 8x{{8hxx}};
     move_player.walls = 8x{{8hxx}};
-    move_player.token_map = token_map.q;
+    move_player.token_map = 8x{{8hxx}};
 
     move_down.player_reg_selector = 3bxxx;
     move_down.player_current_position = 8x{{8hxx}};
     move_down.walls = 8x{{8hxx}};
-    move_down.token_map = token_map.q;
+    move_down.token_map = 8x{{8hxx}};
 
     move_left.player_reg_selector = 3bxxx;
     move_left.player_current_position = 8x{{8hxx}};
     move_left.walls = 8x{{8hxx}};
-    move_left.token_map = token_map.q;
+    move_left.token_map = 8x{{8hxx}};
 
     move_right.player_reg_selector = 3bxxx;
     move_right.player_current_position = 8x{{8hxx}};
     move_right.walls = 8x{{8hxx}};
-    move_right.token_map = token_map.q;
+    move_right.token_map = 8x{{8hxx}};
 
     /*
     MAKE dff RETAIN PREVIOUS VALUES
@@ -95,10 +98,12 @@ module game_states (
         player_position.d = tutorial.player_initial_position;
         player_reg_selector.d = tutorial.player_reg_selector;
         player_position_out = player_position.q;
-        token_map.d = tutorial.tokens;
+        intermediate_tokens = tutorial.tokens;
+        token_map.d = intermediate_tokens;
+       // token_map.d = tutorial.tokens;
         walls.d = tutorial.walls;
         state.d = state.TUTORIAL;
-      
+        
       state.TUTORIAL:
         walls.d = tutorial.walls;
         current_stage.d = 3b000;
@@ -113,6 +118,9 @@ module game_states (
         }
         if(button_right){
           state.d = state.WAITRIGHT;
+        }
+        if(player_position.q[7] == 8b00000001){
+          state.d = state.INTER1;
         }
         
         // TODO: ADD IN CONDITION TO MOVE TO NEXT LEVEL
@@ -261,46 +269,30 @@ module game_states (
         player_position.d = inter_one.player_initial_position;
         player_reg_selector.d = inter_one.player_reg_selector;
         player_position_out = player_position.q;
-        token_map.d = inter_one.tokens;
+        intermediate_tokens = inter_one.tokens;
+        token_map.d = intermediate_tokens;
+        walls.d = inter_one.walls;
         state.d = state.LEVEL1;
-      
+        
       state.LEVEL1:
+        walls.d = inter_one.walls;
+        current_stage.d = 3b001;
         if(button_up){
-          /*
-          Give it values, retrieve return values
-          */
-          move_player.player_current_position = player_position.q;          // output current position into move_player (this is move_up) file
-          move_player.player_reg_selector = player_reg_selector.q;          // output register selector to move_player file
-          
-          player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
-          player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
+          state.d = state.WAITUP;
         }
         if(button_down){
-          move_down.player_current_position = player_position.q;          
-          move_down.player_reg_selector = player_reg_selector.q;  
-          
-          player_reg_selector.d = move_down.new_player_reg_selector;   
-          player_position.d = move_down.player_location_out;
+          state.d = state.WAITDOWN;
         }
         if(button_left){
-          move_left.player_current_position = player_position.q;          
-          move_left.player_reg_selector = player_reg_selector.q;  
-          
-          player_reg_selector.d = move_left.new_player_reg_selector;   
-          player_position.d = move_left.player_location_out;
+          state.d = state.WAITLEFT;
         }
         if(button_right){
-          move_right.player_current_position = player_position.q;          
-          move_right.player_reg_selector = player_reg_selector.q;  
-          
-          player_reg_selector.d = move_right.new_player_reg_selector;   
-          player_position.d = move_right.player_location_out;
+          state.d = state.WAITRIGHT;
         }
-         
-        // REACHED END CHECKPOINT, MOVE TO NEXT STATE
-        if(player_position.q[7] == end_position.q){
-  //        state.d = state.INTER2;
+        if(player_position.q[7] == 8b00000001){
+          state.d = state.START;
         }
+      
     }
   }
 }

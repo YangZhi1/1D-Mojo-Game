@@ -8,8 +8,11 @@ module move_player_down_13 (
     input [2:0] player_reg_selector,
     input [63:0] player_current_position,
     input [63:0] walls,
+    input [63:0] token_map,
     output reg [63:0] player_location_out,
-    output reg [2:0] new_player_reg_selector
+    output reg [2:0] new_player_reg_selector,
+    output reg [63:0] new_token_map,
+    output reg score_token
   );
   
   
@@ -23,11 +26,26 @@ module move_player_down_13 (
     .collide(M_down_wall_collide)
   );
   
+  wire [8-1:0] M_token_collide_new_token_map;
+  wire [1-1:0] M_token_collide_score_token;
+  reg [8-1:0] M_token_collide_token_map;
+  reg [8-1:0] M_token_collide_player_next_position;
+  token_collide_22 token_collide (
+    .token_map(M_token_collide_token_map),
+    .player_next_position(M_token_collide_player_next_position),
+    .new_token_map(M_token_collide_new_token_map),
+    .score_token(M_token_collide_score_token)
+  );
+  
   always @* begin
     M_down_wall_player_current_position = player_current_position[0+7-:8];
     M_down_wall_walls = walls[0+7-:8];
     new_player_reg_selector = player_reg_selector;
     player_location_out = 64'h0000000000000000;
+    M_token_collide_token_map = token_map[0+7-:8];
+    M_token_collide_player_next_position = player_current_position[0+7-:8];
+    new_token_map = token_map;
+    score_token = 1'h0;
     
     case (player_reg_selector)
       3'h0: begin
@@ -37,6 +55,10 @@ module move_player_down_13 (
           player_location_out[0+7-:8] = player_current_position[0+7-:8];
           new_player_reg_selector = 3'h0;
         end else begin
+          M_token_collide_token_map = token_map[8+7-:8];
+          M_token_collide_player_next_position = player_current_position[0+7-:8];
+          new_token_map[8+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[8+7-:8] = player_current_position[0+7-:8];
           new_player_reg_selector = 3'h1;
         end
@@ -48,6 +70,10 @@ module move_player_down_13 (
           player_location_out[8+7-:8] = player_current_position[8+7-:8];
           new_player_reg_selector = 3'h1;
         end else begin
+          M_token_collide_token_map = token_map[16+7-:8];
+          M_token_collide_player_next_position = player_current_position[8+7-:8];
+          new_token_map[16+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[16+7-:8] = player_current_position[8+7-:8];
           new_player_reg_selector = 3'h2;
         end
@@ -59,6 +85,10 @@ module move_player_down_13 (
           player_location_out[16+7-:8] = player_current_position[16+7-:8];
           new_player_reg_selector = 3'h2;
         end else begin
+          M_token_collide_token_map = token_map[24+7-:8];
+          M_token_collide_player_next_position = player_current_position[16+7-:8];
+          new_token_map[24+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[24+7-:8] = player_current_position[16+7-:8];
           new_player_reg_selector = 3'h3;
         end
@@ -70,6 +100,10 @@ module move_player_down_13 (
           player_location_out[24+7-:8] = player_current_position[24+7-:8];
           new_player_reg_selector = 3'h3;
         end else begin
+          M_token_collide_token_map = token_map[32+7-:8];
+          M_token_collide_player_next_position = player_current_position[24+7-:8];
+          new_token_map[32+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[32+7-:8] = player_current_position[24+7-:8];
           new_player_reg_selector = 3'h4;
         end
@@ -81,6 +115,10 @@ module move_player_down_13 (
           player_location_out[32+7-:8] = player_current_position[32+7-:8];
           new_player_reg_selector = 3'h4;
         end else begin
+          M_token_collide_token_map = token_map[40+7-:8];
+          M_token_collide_player_next_position = player_current_position[32+7-:8];
+          new_token_map[40+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[40+7-:8] = player_current_position[32+7-:8];
           new_player_reg_selector = 3'h5;
         end
@@ -92,6 +130,10 @@ module move_player_down_13 (
           player_location_out[40+7-:8] = player_current_position[40+7-:8];
           new_player_reg_selector = 3'h5;
         end else begin
+          M_token_collide_token_map = token_map[48+7-:8];
+          M_token_collide_player_next_position = player_current_position[40+7-:8];
+          new_token_map[48+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[48+7-:8] = player_current_position[40+7-:8];
           new_player_reg_selector = 3'h6;
         end
@@ -103,6 +145,10 @@ module move_player_down_13 (
           player_location_out[48+7-:8] = player_current_position[48+7-:8];
           new_player_reg_selector = 3'h6;
         end else begin
+          M_token_collide_token_map = token_map[56+7-:8];
+          M_token_collide_player_next_position = player_current_position[48+7-:8];
+          new_token_map[56+7-:8] = M_token_collide_new_token_map;
+          score_token = M_token_collide_score_token;
           player_location_out[56+7-:8] = player_current_position[48+7-:8];
           new_player_reg_selector = 3'h7;
         end

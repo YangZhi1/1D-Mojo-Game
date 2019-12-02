@@ -4,10 +4,11 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module wall_collide_21 (
-    input [7:0] player_current_position,
-    input [7:0] walls,
-    output reg collide
+module token_collide_22 (
+    input [7:0] token_map,
+    input [7:0] player_next_position,
+    output reg [7:0] new_token_map,
+    output reg score_token
   );
   
   
@@ -29,18 +30,24 @@ module wall_collide_21 (
     .n(M_alu_n)
   );
   
-  reg [7:0] new_player_loc;
+  reg [7:0] check_overlap;
+  
+  reg [7:0] new_map;
   
   always @* begin
-    collide = 1'h1;
-    M_alu_a = player_current_position;
-    M_alu_b = walls;
+    new_token_map = token_map;
+    score_token = 1'h0;
+    M_alu_a = token_map;
+    M_alu_b = player_next_position;
     M_alu_alufn = 6'h18;
-    new_player_loc = M_alu_aluOut[0+7-:8];
-    if (new_player_loc == 8'h00) begin
-      collide = 1'h0;
+    check_overlap = M_alu_aluOut[0+7-:8];
+    if (check_overlap == 8'h00) begin
+      new_token_map = token_map;
+      score_token = 1'h0;
     end else begin
-      collide = 1'h1;
+      new_map = check_overlap ^ token_map;
+      new_token_map = new_map;
+      score_token = 1'h1;
     end
   end
 endmodule

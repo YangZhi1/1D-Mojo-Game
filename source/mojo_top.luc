@@ -11,7 +11,9 @@ module mojo_top (
     input avr_tx,           // AVR TX (FPGA RX)
     output avr_rx,          // AVR RX (FPGA TX)
     input avr_rx_busy,       // AVR RX buffer full
+    output red[8],
     output green[8],
+    output blue[8],
     output row[8],
     input buttons[4],
     input io_dip [3][8],    // remove once done!
@@ -26,7 +28,7 @@ module mojo_top (
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
     game_states game(.rst(rst));
-    fsm state(.rst(rst)) = {A, B, C, D, E, F, G, H};
+    fsm state(.rst(rst)) = {A, A2, A3, B, B2, B3, C, C2, C3, D, D2, D3, E, E2, E3, F, F2, F3, G, G2, G3, H, H2, H3};
     
   }
   /*
@@ -86,7 +88,9 @@ module mojo_top (
     // REMOVE THIS
     
     row = 8x{0};
-    green = 8x{0};
+    green = 8x{1};
+    blue = 8x{1};
+    red = 8x{1};
     
     counter.d = counter.q + 1;
     
@@ -104,61 +108,225 @@ module mojo_top (
     case(state.q){
       state.A:
         row[0] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[0];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.A2;
+        }
+      state.A2:
+        row[0] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[0];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.A3;
+        }
+      state.A3:
+        row[0] = 1;
+        red = ~game.wall[0];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.B;
         }
+        
       state.B:
         row[1] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[1];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.B2;
+        }
+      state.B2:
+        row[1] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[1];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.B3;
+        }
+      state.B3:
+        row[1] = 1;
+        red = ~game.wall[1];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.C;
         }
       state.C:
         row[2] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[2];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.C2;
+        }
+      state.C2:
+        row[2] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[2];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.C3;
+        }
+      state.C3:
+        row[2] = 1;
+        red = ~game.wall[2];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.D;
         }
+       
       state.D:
         row[3] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[3];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.D2;
+        }
+      state.D2:
+        row[3] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[3];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.D3;
+        }
+      state.D3:
+        row[3] = 1;
+        red = ~game.wall[3];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.E;
         }
       state.E:
         row[4] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[4];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.E2;
+        }
+      state.E2:
+        row[4] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[4];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.E3;
+        }
+      state.E3:
+        row[4] = 1;
+        red = ~game.wall[4];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.F;
         }
       state.F:
         row[5] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[5];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.F2;
+        }
+      state.F2:
+        row[5] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[5];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.F3;
+        }
+      state.F3:
+        row[5] = 1;
+        red = ~game.wall[5];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.G;
         }
+        
       state.G:
         row[6] = 1;
+        red = 8x{1};
+        blue = 8x{1};
         green = ~game.player_position_out[6];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.G2;
+        }
+      state.G2:
+        row[6] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[6];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.G3;
+        }
+      state.G3:
+        row[6] = 1;
+        red = ~game.wall[6];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.H;
         }
+        
       state.H:
         row[7] = 1;
-        green = ~game.player_position_out[7];
+        red = 8x{1};
+        blue = 8x{1};
+        green[6:0] = ~game.player_position_out[7][6:0];
+        green[7] = 0;
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.H2;
+        }
+      state.H2:
+        row[7] = 1;
+        red = 8x{1};
+        green = 8x{1};
+        blue = ~game.tokens[7];
+        if(counter.q[3] == 1){
+          counter.d = 0;
+          state.d = state.H3;
+        }
+      state.H3:
+        row[7] = 1;
+        red = ~game.wall[7];
+        green = 8x{1};
+        blue = 8x{1};
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.A;
         }
-       
     }
   }
 }
