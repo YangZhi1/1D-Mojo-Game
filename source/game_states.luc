@@ -10,9 +10,9 @@ module game_states (
     input button_left,
     input button_right
   ) {
-  dff delay_movement[32](.clk(clk), .rst(rst));
+  dff delay_movement[26](.clk(clk), .rst(rst));
   
-  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1, INTER2, LEVEL2, INTER3, LEVEL3, INTER4, LEVEL4, END};
+  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1, INTER2, LEVEL2, INTER3, LEVEL3, INTER4, LEVEL4};
   .clk(clk){
     .rst(rst){
       dff token_map [8][8](#INIT(8b00000010));
@@ -22,12 +22,10 @@ module game_states (
       dff level_score [4](#INIT(4b0000));              // Level score will not exceed 10
       dff end_position [8](#INIT(8b00000001));
       dff current_stage[3](#INIT(3b000));
-      dff walls [8][8](#INIT(8b00000000));
+      dff walls [8][8](#INIT(8b00000001));
+      
       dff number_times_moved[3](#INIT(3b000));
       
-      dff rngesus [2];                                 // Use pn_gen from mojo component to generate random number to choose map
-      
-      pn_gen random_number;
     }
   }
   
@@ -38,12 +36,14 @@ module game_states (
   level_two_rom inter_two;
   level_three_rom inter_three;
   level_four_rom inter_four;
+  
   move_player move_player;
   move_player_down move_down;
   move_player_left move_left;
   move_player_right move_right;
   tutorial_rom tutorial;
-  
+    
+
   always {
     player_position_out = player_position.q;
     tokens = token_map.q;
@@ -73,13 +73,11 @@ module game_states (
     move_right.walls = 8x{{8hxx}};
     move_right.token_map = 8x{{8hxx}};
 
-    random_number.seed = delay_movement.q;
-    random_number.next = 0;   
+    inter_one.rngeezus = delay_movement.q[1:0];
+    inter_two.rngeezus = delay_movement.q[1:0];
+    inter_three.rngeezus = delay_movement.q[1:0];
+    inter_four.rngeezus = delay_movement.q[1:0];
     
-    inter_one.rngeezus = 2b00;
-    inter_two.rngeezus = 2b00;
-    inter_three.rngeezus = 2b00;
-    inter_four.rngeezus = 2b00;
     /*
     MAKE dff RETAIN PREVIOUS VALUES
     */
@@ -93,15 +91,14 @@ module game_states (
     level_score.d = level_score.q;
     number_times_moved.d = number_times_moved.q;
     delay_movement.d = delay_movement.q + 1;
-    rngesus.d = rngesus.q;
 
     case(state.q){
       state.START:
         // TODO: CHANGE THIS CODE TO START STATE 
         // ON START BUTTON: GO TO LEVEL 1, RESET PREVIOUS PLAYER SCORE TO 0
         // DISPLAY HIGH SCORE, DISPLAY PREVIOUS SCORE OF THE PREVIOUS PLAYER
-        player_position.d = inter_one.player_initial_position;
-        player_reg_selector.d = inter_one.player_reg_selector;
+        player_position.d = tutorial.player_initial_position;
+        player_reg_selector.d = tutorial.player_reg_selector;
         player_position_out = player_position.q;
         score.d = 7b0000000;
         state.d = state.TUTORIALROM;
@@ -112,7 +109,6 @@ module game_states (
         player_position_out = player_position.q;
         intermediate_tokens = tutorial.tokens;
         token_map.d = intermediate_tokens;
-       // token_map.d = tutorial.tokens;
         walls.d = tutorial.walls;
         state.d = state.TUTORIAL;
         
@@ -305,10 +301,7 @@ module game_states (
         player_position.d = inter_one.player_initial_position;
         player_reg_selector.d = inter_one.player_reg_selector;
         player_position_out = player_position.q;
-        random_number.next = 1;
-        rngesus.d = random_number.num[1:0];
-        inter_one.rngeezus = rngesus.q;
-        
+        inter_one.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_one.tokens;
         token_map.d = intermediate_tokens;
         walls.d = inter_one.walls;
@@ -332,15 +325,12 @@ module game_states (
         if(player_position.q[7] == 8b00000001){
           state.d = state.INTER2;
         }
-        
       state.INTER2:
         player_position.d = inter_two.player_initial_position;
         player_reg_selector.d = inter_two.player_reg_selector;
         player_position_out = player_position.q;
-        random_number.next = 1;
-        rngesus.d = random_number.num[1:0];
-        inter_two.rngeezus = rngesus.q;
         
+        inter_two.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_two.tokens;
         token_map.d = intermediate_tokens;
         walls.d = inter_two.walls;
@@ -364,14 +354,11 @@ module game_states (
         if(player_position.q[7] == 8b00000001){
           state.d = state.INTER3;
         }
-        
       state.INTER3:
         player_position.d = inter_three.player_initial_position;
         player_reg_selector.d = inter_three.player_reg_selector;
         player_position_out = player_position.q;
-        random_number.next = 1;
-        rngesus.d = random_number.num[1:0];
-        inter_three.rngeezus = rngesus.q;
+        inter_three.rngeezus = delay_movement.q[1:0];
         
         intermediate_tokens = inter_three.tokens;
         token_map.d = intermediate_tokens;
@@ -396,19 +383,16 @@ module game_states (
         if(player_position.q[7] == 8b00000001){
           state.d = state.INTER4;
         }
-        
       state.INTER4:
         player_position.d = inter_four.player_initial_position;
         player_reg_selector.d = inter_four.player_reg_selector;
         player_position_out = player_position.q;
-        random_number.next = 1;
-        rngesus.d = random_number.num[1:0];
-        inter_four.rngeezus = rngesus.q;
         
+        inter_four.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_four.tokens;
         token_map.d = intermediate_tokens;
         walls.d = inter_four.walls;
-        state.d = state.LEVEL2;
+        state.d = state.LEVEL4;
         
       state.LEVEL4:
         walls.d = inter_four.walls;
@@ -426,12 +410,8 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         if(player_position.q[7] == 8b00000001){
-          state.d = state.END;
+          state.d = state.START;
         }
-        
-      state.END:
-        // ADD CODE TO D SOME FLASHY STUFF ON LED MATRIX TO SHOW ITS THE END, EITHER THAT OR JUST DISPLAY E N D 
-        state.d = state.START;
     }
   }
 }

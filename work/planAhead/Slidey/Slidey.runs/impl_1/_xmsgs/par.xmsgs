@@ -5,21 +5,6 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_button(0)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_button(1)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_button(2)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_button(3)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_button(4)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">cclk_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
@@ -27,6 +12,18 @@
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(1)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(2)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(3)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(4)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(5)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(6)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
@@ -42,6 +39,12 @@
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">spi_sck_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">resetbtn(0)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">resetbtn(1)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">avr_rx_busy_IBUF</arg> has no load.  PAR will not attempt to route this signal.
@@ -65,6 +68,12 @@
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(15)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(16)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(17)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">avr_tx_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
@@ -74,11 +83,11 @@
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">spi_mosi_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
-<msg type="warning" file="ParHelpers" num="361" delta="new" >There are <arg fmt="%d" index="1">23</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+<msg type="warning" file="ParHelpers" num="361" delta="new" >There are <arg fmt="%d" index="1">26</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 </msg>
 
-<msg type="warning" file="Par" num="283" delta="new" >There are <arg fmt="%d" index="1">23</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+<msg type="warning" file="Par" num="283" delta="new" >There are <arg fmt="%d" index="1">26</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 </msg>
 

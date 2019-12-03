@@ -16,10 +16,11 @@ module level_four_rom (
     player_initial_position[0] = 8b10000000;
     player_initial_position[7:1] = 7x{{8b0}};
     player_reg_selector = 3b000;
+    end_position[6:0] = 7x{{8b0}};
     end_position[7] = 8b00000001;
     
-    walls = 8x{{8hxx}};
-    tokens = 8x{{8hxx}};
+    walls = 8x{{8h00}};
+    tokens = 8x{{8h00}};
     
     case(rngeezus){
       b00:

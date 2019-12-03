@@ -22,6 +22,7 @@ module mojo_top_0 (
     output reg [7:0] blue,
     output reg [7:0] row,
     input [3:0] buttons,
+    input [1:0] resetbtn,
     input [23:0] io_dip,
     input [4:0] io_button,
     output reg [23:0] io_led
@@ -117,9 +118,25 @@ module mojo_top_0 (
     .out(M_right_out)
   );
   
+  wire [1-1:0] M_resetleft_out;
+  reg [1-1:0] M_resetleft_in;
+  edge_detector_3 resetleft (
+    .clk(clk),
+    .in(M_resetleft_in),
+    .out(M_resetleft_out)
+  );
+  
+  wire [1-1:0] M_resetright_out;
+  reg [1-1:0] M_resetright_in;
+  edge_detector_3 resetright (
+    .clk(clk),
+    .in(M_resetright_in),
+    .out(M_resetright_out)
+  );
+  
   wire [1-1:0] M_upb_out;
   reg [1-1:0] M_upb_in;
-  button_conditioner_7 upb (
+  button_conditioner_9 upb (
     .clk(clk),
     .in(M_upb_in),
     .out(M_upb_out)
@@ -127,7 +144,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_downb_out;
   reg [1-1:0] M_downb_in;
-  button_conditioner_7 downb (
+  button_conditioner_9 downb (
     .clk(clk),
     .in(M_downb_in),
     .out(M_downb_out)
@@ -135,7 +152,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_leftb_out;
   reg [1-1:0] M_leftb_in;
-  button_conditioner_7 leftb (
+  button_conditioner_9 leftb (
     .clk(clk),
     .in(M_leftb_in),
     .out(M_leftb_out)
@@ -143,10 +160,26 @@ module mojo_top_0 (
   
   wire [1-1:0] M_rightb_out;
   reg [1-1:0] M_rightb_in;
-  button_conditioner_7 rightb (
+  button_conditioner_9 rightb (
     .clk(clk),
     .in(M_rightb_in),
     .out(M_rightb_out)
+  );
+  
+  wire [1-1:0] M_resetleftb_out;
+  reg [1-1:0] M_resetleftb_in;
+  button_conditioner_9 resetleftb (
+    .clk(clk),
+    .in(M_resetleftb_in),
+    .out(M_resetleftb_out)
+  );
+  
+  wire [1-1:0] M_resetrightb_out;
+  reg [1-1:0] M_resetrightb_in;
+  button_conditioner_9 resetrightb (
+    .clk(clk),
+    .in(M_resetrightb_in),
+    .out(M_resetrightb_out)
   );
   
   reg [19:0] M_counter_d, M_counter_q = 1'h0;
@@ -169,10 +202,14 @@ module mojo_top_0 (
     M_downb_in = buttons[1+0-:1];
     M_leftb_in = buttons[2+0-:1];
     M_rightb_in = buttons[3+0-:1];
+    M_resetleftb_in = resetbtn[0+0-:1];
+    M_resetrightb_in = resetbtn[1+0-:1];
     M_up_in = ~M_upb_out;
     M_down_in = ~M_downb_out;
     M_left_in = ~M_leftb_out;
     M_right_in = ~M_rightb_out;
+    M_resetleft_in = ~M_resetleftb_out;
+    M_resetright_in = ~M_resetrightb_out;
     M_game_button_up = M_up_out;
     M_game_button_down = M_down_out;
     M_game_button_left = M_left_out;

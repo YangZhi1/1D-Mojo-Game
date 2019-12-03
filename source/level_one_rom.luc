@@ -2,7 +2,7 @@ module level_one_rom (
     input rngeezus [2],
     output player_initial_position [8][8],
     output player_reg_selector[3],
-    output end_position [8][8],
+    output end_position[8][8],
     output walls[8][8],
     output tokens[8][8]
   ) {
@@ -16,8 +16,8 @@ module level_one_rom (
     player_initial_position[0] = 8b10000000;
     player_initial_position[7:1] = 7x{{8b0}};
     player_reg_selector = 3b000;
+    end_position[6:0] = 7x{{8b0}};
     end_position[7] = 8b00000001;
-    
     
     walls[0] = 8b01000000;
     walls[1] = 8b01000000;

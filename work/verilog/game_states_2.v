@@ -22,22 +22,27 @@ module game_states_2 (
   reg [25:0] M_delay_movement_d, M_delay_movement_q = 1'h0;
   
   
-  localparam START_state = 4'd0;
-  localparam WAITLEFT_state = 4'd1;
-  localparam WAITDOWN_state = 4'd2;
-  localparam WAITUP_state = 4'd3;
-  localparam WAITRIGHT_state = 4'd4;
-  localparam MOVE8TIMESLEFT_state = 4'd5;
-  localparam MOVE8TIMESRIGHT_state = 4'd6;
-  localparam MOVE8TIMESUP_state = 4'd7;
-  localparam MOVE8TIMESDOWN_state = 4'd8;
-  localparam TUTORIALROM_state = 4'd9;
-  localparam TUTORIAL_state = 4'd10;
-  localparam TUTORIALWAIT_state = 4'd11;
-  localparam INTER1_state = 4'd12;
-  localparam LEVEL1_state = 4'd13;
+  localparam START_state = 5'd0;
+  localparam WAITLEFT_state = 5'd1;
+  localparam WAITDOWN_state = 5'd2;
+  localparam WAITUP_state = 5'd3;
+  localparam WAITRIGHT_state = 5'd4;
+  localparam MOVE8TIMESLEFT_state = 5'd5;
+  localparam MOVE8TIMESRIGHT_state = 5'd6;
+  localparam MOVE8TIMESUP_state = 5'd7;
+  localparam MOVE8TIMESDOWN_state = 5'd8;
+  localparam TUTORIALROM_state = 5'd9;
+  localparam TUTORIAL_state = 5'd10;
+  localparam INTER1_state = 5'd11;
+  localparam LEVEL1_state = 5'd12;
+  localparam INTER2_state = 5'd13;
+  localparam LEVEL2_state = 5'd14;
+  localparam INTER3_state = 5'd15;
+  localparam LEVEL3_state = 5'd16;
+  localparam INTER4_state = 5'd17;
+  localparam LEVEL4_state = 5'd18;
   
-  reg [3:0] M_state_d, M_state_q = START_state;
+  reg [4:0] M_state_d, M_state_q = START_state;
   
   reg [63:0] M_token_map_d, M_token_map_q = 8'h02;
   reg [63:0] M_player_position_d, M_player_position_q = 8'h80;
@@ -46,7 +51,7 @@ module game_states_2 (
   reg [3:0] M_level_score_d, M_level_score_q = 4'h0;
   reg [7:0] M_end_position_d, M_end_position_q = 8'h01;
   reg [2:0] M_current_stage_d, M_current_stage_q = 3'h0;
-  reg [63:0] M_walls_d, M_walls_q = 8'h00;
+  reg [63:0] M_walls_d, M_walls_q = 8'h01;
   reg [2:0] M_number_times_moved_d, M_number_times_moved_q = 3'h0;
   
   reg [63:0] intermediate_tokens;
@@ -56,12 +61,59 @@ module game_states_2 (
   wire [64-1:0] M_inter_one_end_position;
   wire [64-1:0] M_inter_one_walls;
   wire [64-1:0] M_inter_one_tokens;
-  level_one_rom_11 inter_one (
+  reg [2-1:0] M_inter_one_rngeezus;
+  level_one_rom_15 inter_one (
+    .rngeezus(M_inter_one_rngeezus),
     .player_initial_position(M_inter_one_player_initial_position),
     .player_reg_selector(M_inter_one_player_reg_selector),
     .end_position(M_inter_one_end_position),
     .walls(M_inter_one_walls),
     .tokens(M_inter_one_tokens)
+  );
+  
+  wire [64-1:0] M_inter_two_player_initial_position;
+  wire [3-1:0] M_inter_two_player_reg_selector;
+  wire [64-1:0] M_inter_two_end_position;
+  wire [64-1:0] M_inter_two_walls;
+  wire [64-1:0] M_inter_two_tokens;
+  reg [2-1:0] M_inter_two_rngeezus;
+  level_two_rom_16 inter_two (
+    .rngeezus(M_inter_two_rngeezus),
+    .player_initial_position(M_inter_two_player_initial_position),
+    .player_reg_selector(M_inter_two_player_reg_selector),
+    .end_position(M_inter_two_end_position),
+    .walls(M_inter_two_walls),
+    .tokens(M_inter_two_tokens)
+  );
+  
+  wire [64-1:0] M_inter_three_player_initial_position;
+  wire [3-1:0] M_inter_three_player_reg_selector;
+  wire [64-1:0] M_inter_three_end_position;
+  wire [64-1:0] M_inter_three_walls;
+  wire [64-1:0] M_inter_three_tokens;
+  reg [2-1:0] M_inter_three_rngeezus;
+  level_three_rom_17 inter_three (
+    .rngeezus(M_inter_three_rngeezus),
+    .player_initial_position(M_inter_three_player_initial_position),
+    .player_reg_selector(M_inter_three_player_reg_selector),
+    .end_position(M_inter_three_end_position),
+    .walls(M_inter_three_walls),
+    .tokens(M_inter_three_tokens)
+  );
+  
+  wire [64-1:0] M_inter_four_player_initial_position;
+  wire [3-1:0] M_inter_four_player_reg_selector;
+  wire [64-1:0] M_inter_four_end_position;
+  wire [64-1:0] M_inter_four_walls;
+  wire [64-1:0] M_inter_four_tokens;
+  reg [2-1:0] M_inter_four_rngeezus;
+  level_four_rom_18 inter_four (
+    .rngeezus(M_inter_four_rngeezus),
+    .player_initial_position(M_inter_four_player_initial_position),
+    .player_reg_selector(M_inter_four_player_reg_selector),
+    .end_position(M_inter_four_end_position),
+    .walls(M_inter_four_walls),
+    .tokens(M_inter_four_tokens)
   );
   
   wire [64-1:0] M_move_player_player_location_out;
@@ -72,7 +124,7 @@ module game_states_2 (
   reg [64-1:0] M_move_player_player_current_position;
   reg [64-1:0] M_move_player_walls;
   reg [64-1:0] M_move_player_token_map;
-  move_player_12 move_player (
+  move_player_19 move_player (
     .player_reg_selector(M_move_player_player_reg_selector),
     .player_current_position(M_move_player_player_current_position),
     .walls(M_move_player_walls),
@@ -91,7 +143,7 @@ module game_states_2 (
   reg [64-1:0] M_move_down_player_current_position;
   reg [64-1:0] M_move_down_walls;
   reg [64-1:0] M_move_down_token_map;
-  move_player_down_13 move_down (
+  move_player_down_20 move_down (
     .player_reg_selector(M_move_down_player_reg_selector),
     .player_current_position(M_move_down_player_current_position),
     .walls(M_move_down_walls),
@@ -110,7 +162,7 @@ module game_states_2 (
   reg [64-1:0] M_move_left_player_current_position;
   reg [64-1:0] M_move_left_walls;
   reg [64-1:0] M_move_left_token_map;
-  move_player_left_14 move_left (
+  move_player_left_21 move_left (
     .player_reg_selector(M_move_left_player_reg_selector),
     .player_current_position(M_move_left_player_current_position),
     .walls(M_move_left_walls),
@@ -129,7 +181,7 @@ module game_states_2 (
   reg [64-1:0] M_move_right_player_current_position;
   reg [64-1:0] M_move_right_walls;
   reg [64-1:0] M_move_right_token_map;
-  move_player_right_15 move_right (
+  move_player_right_22 move_right (
     .player_reg_selector(M_move_right_player_reg_selector),
     .player_current_position(M_move_right_player_current_position),
     .walls(M_move_right_walls),
@@ -145,7 +197,7 @@ module game_states_2 (
   wire [64-1:0] M_tutorial_end_position;
   wire [64-1:0] M_tutorial_walls;
   wire [64-1:0] M_tutorial_tokens;
-  tutorial_rom_16 tutorial (
+  tutorial_rom_23 tutorial (
     .player_initial_position(M_tutorial_player_initial_position),
     .player_reg_selector(M_tutorial_player_reg_selector),
     .end_position(M_tutorial_end_position),
@@ -186,6 +238,10 @@ module game_states_2 (
     M_move_right_player_current_position = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_right_walls = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
     M_move_right_token_map = 64'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    M_inter_one_rngeezus = M_delay_movement_q[0+1-:2];
+    M_inter_two_rngeezus = M_delay_movement_q[0+1-:2];
+    M_inter_three_rngeezus = M_delay_movement_q[0+1-:2];
+    M_inter_four_rngeezus = M_delay_movement_q[0+1-:2];
     M_player_position_d = M_player_position_q;
     M_player_reg_selector_d = M_player_reg_selector_q;
     M_token_map_d = M_token_map_q;
@@ -199,8 +255,8 @@ module game_states_2 (
     
     case (M_state_q)
       START_state: begin
-        M_player_position_d = M_inter_one_player_initial_position;
-        M_player_reg_selector_d = M_inter_one_player_reg_selector;
+        M_player_position_d = M_tutorial_player_initial_position;
+        M_player_reg_selector_d = M_tutorial_player_reg_selector;
         player_position_out = M_player_position_q;
         M_score_d = 7'h00;
         M_state_d = TUTORIALROM_state;
@@ -259,6 +315,15 @@ module game_states_2 (
               3'h1: begin
                 M_state_d = LEVEL1_state;
               end
+              3'h2: begin
+                M_state_d = LEVEL2_state;
+              end
+              3'h3: begin
+                M_state_d = LEVEL3_state;
+              end
+              3'h4: begin
+                M_state_d = LEVEL4_state;
+              end
             endcase
           end else begin
             M_number_times_moved_d = M_number_times_moved_q + 1'h1;
@@ -291,6 +356,15 @@ module game_states_2 (
               end
               3'h1: begin
                 M_state_d = LEVEL1_state;
+              end
+              3'h2: begin
+                M_state_d = LEVEL2_state;
+              end
+              3'h3: begin
+                M_state_d = LEVEL3_state;
+              end
+              3'h4: begin
+                M_state_d = LEVEL4_state;
               end
             endcase
           end else begin
@@ -325,6 +399,15 @@ module game_states_2 (
               3'h1: begin
                 M_state_d = LEVEL1_state;
               end
+              3'h2: begin
+                M_state_d = LEVEL2_state;
+              end
+              3'h3: begin
+                M_state_d = LEVEL3_state;
+              end
+              3'h4: begin
+                M_state_d = LEVEL4_state;
+              end
             endcase
           end else begin
             M_number_times_moved_d = M_number_times_moved_q + 1'h1;
@@ -358,6 +441,15 @@ module game_states_2 (
               3'h1: begin
                 M_state_d = LEVEL1_state;
               end
+              3'h2: begin
+                M_state_d = LEVEL2_state;
+              end
+              3'h3: begin
+                M_state_d = LEVEL3_state;
+              end
+              3'h4: begin
+                M_state_d = LEVEL4_state;
+              end
             endcase
           end else begin
             M_number_times_moved_d = M_number_times_moved_q + 1'h1;
@@ -369,6 +461,7 @@ module game_states_2 (
         M_player_position_d = M_inter_one_player_initial_position;
         M_player_reg_selector_d = M_inter_one_player_reg_selector;
         player_position_out = M_player_position_q;
+        M_inter_one_rngeezus = M_delay_movement_q[0+1-:2];
         intermediate_tokens = M_inter_one_tokens;
         M_token_map_d = intermediate_tokens;
         M_walls_d = M_inter_one_walls;
@@ -390,16 +483,98 @@ module game_states_2 (
           M_state_d = WAITRIGHT_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
+          M_state_d = INTER2_state;
+        end
+      end
+      INTER2_state: begin
+        M_player_position_d = M_inter_two_player_initial_position;
+        M_player_reg_selector_d = M_inter_two_player_reg_selector;
+        player_position_out = M_player_position_q;
+        M_inter_two_rngeezus = M_delay_movement_q[0+1-:2];
+        intermediate_tokens = M_inter_two_tokens;
+        M_token_map_d = intermediate_tokens;
+        M_walls_d = M_inter_two_walls;
+        M_state_d = LEVEL2_state;
+      end
+      LEVEL2_state: begin
+        M_walls_d = M_inter_two_walls;
+        M_current_stage_d = 3'h2;
+        if (button_up) begin
+          M_state_d = WAITUP_state;
+        end
+        if (button_down) begin
+          M_state_d = WAITDOWN_state;
+        end
+        if (button_left) begin
+          M_state_d = WAITLEFT_state;
+        end
+        if (button_right) begin
+          M_state_d = WAITRIGHT_state;
+        end
+        if (M_player_position_q[56+7-:8] == 8'h01) begin
+          M_state_d = INTER3_state;
+        end
+      end
+      INTER3_state: begin
+        M_player_position_d = M_inter_three_player_initial_position;
+        M_player_reg_selector_d = M_inter_three_player_reg_selector;
+        player_position_out = M_player_position_q;
+        M_inter_three_rngeezus = M_delay_movement_q[0+1-:2];
+        intermediate_tokens = M_inter_three_tokens;
+        M_token_map_d = intermediate_tokens;
+        M_walls_d = M_inter_three_walls;
+        M_state_d = LEVEL3_state;
+      end
+      LEVEL3_state: begin
+        M_walls_d = M_inter_three_walls;
+        M_current_stage_d = 3'h3;
+        if (button_up) begin
+          M_state_d = WAITUP_state;
+        end
+        if (button_down) begin
+          M_state_d = WAITDOWN_state;
+        end
+        if (button_left) begin
+          M_state_d = WAITLEFT_state;
+        end
+        if (button_right) begin
+          M_state_d = WAITRIGHT_state;
+        end
+        if (M_player_position_q[56+7-:8] == 8'h01) begin
+          M_state_d = INTER4_state;
+        end
+      end
+      INTER4_state: begin
+        M_player_position_d = M_inter_four_player_initial_position;
+        M_player_reg_selector_d = M_inter_four_player_reg_selector;
+        player_position_out = M_player_position_q;
+        M_inter_four_rngeezus = M_delay_movement_q[0+1-:2];
+        intermediate_tokens = M_inter_four_tokens;
+        M_token_map_d = intermediate_tokens;
+        M_walls_d = M_inter_four_walls;
+        M_state_d = LEVEL4_state;
+      end
+      LEVEL4_state: begin
+        M_walls_d = M_inter_four_walls;
+        M_current_stage_d = 3'h4;
+        if (button_up) begin
+          M_state_d = WAITUP_state;
+        end
+        if (button_down) begin
+          M_state_d = WAITDOWN_state;
+        end
+        if (button_left) begin
+          M_state_d = WAITLEFT_state;
+        end
+        if (button_right) begin
+          M_state_d = WAITRIGHT_state;
+        end
+        if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_state_d = START_state;
         end
       end
     endcase
   end
-  
-  always @(posedge clk) begin
-    M_state_q <= M_state_d;
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -410,7 +585,7 @@ module game_states_2 (
       M_level_score_q <= 4'h0;
       M_end_position_q <= 8'h01;
       M_current_stage_q <= 3'h0;
-      M_walls_q <= 8'h00;
+      M_walls_q <= 8'h01;
       M_number_times_moved_q <= 3'h0;
     end else begin
       M_token_map_q <= M_token_map_d;
@@ -432,6 +607,11 @@ module game_states_2 (
     end else begin
       M_delay_movement_q <= M_delay_movement_d;
     end
+  end
+  
+  
+  always @(posedge clk) begin
+    M_state_q <= M_state_d;
   end
   
 endmodule
