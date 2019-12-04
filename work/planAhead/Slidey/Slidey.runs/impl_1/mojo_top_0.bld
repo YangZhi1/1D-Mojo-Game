@@ -16,61 +16,6 @@ Done.
 Annotating constraints to design from ucf file "mojo_top_0.ucf" ...
 Resolving constraint associations...
 Checking Constraint Associations...
-WARNING:ConstraintSystem:119 - Constraint <NET "io_button[0]" IOSTANDARD =
-   LVTTL;> [mojo_top_0.ucf(152)]: This constraint cannot be distributed from the
-   design objects matching 'NET "io_button[0]"' because those design objects do
-   not contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_button[1]" IOSTANDARD =
-   LVTTL;> [mojo_top_0.ucf(154)]: This constraint cannot be distributed from the
-   design objects matching 'NET "io_button[1]"' because those design objects do
-   not contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_button[2]" IOSTANDARD =
-   LVTTL;> [mojo_top_0.ucf(156)]: This constraint cannot be distributed from the
-   design objects matching 'NET "io_button[2]"' because those design objects do
-   not contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_button[3]" IOSTANDARD =
-   LVTTL;> [mojo_top_0.ucf(158)]: This constraint cannot be distributed from the
-   design objects matching 'NET "io_button[3]"' because those design objects do
-   not contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_button[4]" IOSTANDARD =
-   LVTTL;> [mojo_top_0.ucf(160)]: This constraint cannot be distributed from the
-   design objects matching 'NET "io_button[4]"' because those design objects do
-   not contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[23]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(163)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[23]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[22]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(165)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[22]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[21]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(167)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[21]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[20]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(169)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[20]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[19]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(171)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[19]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
-WARNING:ConstraintSystem:119 - Constraint <NET "io_dip[18]" IOSTANDARD = LVTTL;>
-   [mojo_top_0.ucf(173)]: This constraint cannot be distributed from the design
-   objects matching 'NET "io_dip[18]"' because those design objects do not
-   contain or drive any instances of the correct type.
-
 Done...
 
 Checking expanded design ...
@@ -84,12 +29,12 @@ Partition Implementation Status
 
 NGDBUILD Design Results Summary:
   Number of errors:     0
-  Number of warnings:  11
+  Number of warnings:   0
 
-Total memory usage is 4407604 kilobytes
+Total memory usage is 4407476 kilobytes
 
 Writing NGD file "mojo_top_0.ngd" ...
-Total REAL time to NGDBUILD completion:  17 sec
-Total CPU time to NGDBUILD completion:   7 sec
+Total REAL time to NGDBUILD completion:  9 sec
+Total CPU time to NGDBUILD completion:   4 sec
 
 Writing NGDBUILD log file "mojo_top_0.bld"...

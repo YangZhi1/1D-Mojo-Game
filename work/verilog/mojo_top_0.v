@@ -23,41 +23,59 @@ module mojo_top_0 (
     output reg [7:0] row,
     input [3:0] buttons,
     input [1:0] resetbtn,
-    input [23:0] io_dip,
-    input [4:0] io_button,
-    output reg [23:0] io_led
+    output reg [7:0] playerones,
+    output reg [7:0] playertens,
+    output reg [7:0] highones,
+    output reg [7:0] hightens
   );
   
   
   
   reg rst;
   
+  wire [8-1:0] M_display_seven_seg_to_seven_seg;
+  reg [4-1:0] M_display_seven_seg_to_display;
+  display_seven_seg_1 display_seven_seg (
+    .to_display(M_display_seven_seg_to_display),
+    .to_seven_seg(M_display_seven_seg_to_seven_seg)
+  );
+  
   wire [1-1:0] M_reset_cond_out;
   reg [1-1:0] M_reset_cond_in;
-  reset_conditioner_1 reset_cond (
+  reset_conditioner_2 reset_cond (
     .clk(clk),
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
   wire [64-1:0] M_game_player_position_out;
   wire [64-1:0] M_game_tokens;
-  wire [7-1:0] M_game_current_score;
   wire [64-1:0] M_game_wall;
+  wire [4-1:0] M_game_player_ones;
+  wire [4-1:0] M_game_player_tens;
+  wire [4-1:0] M_game_hi_score_ones;
+  wire [4-1:0] M_game_hi_score_tens;
   reg [1-1:0] M_game_button_up;
   reg [1-1:0] M_game_button_down;
   reg [1-1:0] M_game_button_left;
   reg [1-1:0] M_game_button_right;
-  game_states_2 game (
+  reg [1-1:0] M_game_soft_reset;
+  reg [1-1:0] M_game_hard_reset;
+  game_states_3 game (
     .clk(clk),
     .rst(rst),
     .button_up(M_game_button_up),
     .button_down(M_game_button_down),
     .button_left(M_game_button_left),
     .button_right(M_game_button_right),
+    .soft_reset(M_game_soft_reset),
+    .hard_reset(M_game_hard_reset),
     .player_position_out(M_game_player_position_out),
     .tokens(M_game_tokens),
-    .current_score(M_game_current_score),
-    .wall(M_game_wall)
+    .wall(M_game_wall),
+    .player_ones(M_game_player_ones),
+    .player_tens(M_game_player_tens),
+    .hi_score_ones(M_game_hi_score_ones),
+    .hi_score_tens(M_game_hi_score_tens)
   );
   localparam A_state = 5'd0;
   localparam A2_state = 5'd1;
@@ -88,7 +106,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_up_out;
   reg [1-1:0] M_up_in;
-  edge_detector_3 up (
+  edge_detector_4 up (
     .clk(clk),
     .in(M_up_in),
     .out(M_up_out)
@@ -96,7 +114,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_down_out;
   reg [1-1:0] M_down_in;
-  edge_detector_3 down (
+  edge_detector_4 down (
     .clk(clk),
     .in(M_down_in),
     .out(M_down_out)
@@ -104,7 +122,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_left_out;
   reg [1-1:0] M_left_in;
-  edge_detector_3 left (
+  edge_detector_4 left (
     .clk(clk),
     .in(M_left_in),
     .out(M_left_out)
@@ -112,7 +130,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_right_out;
   reg [1-1:0] M_right_in;
-  edge_detector_3 right (
+  edge_detector_4 right (
     .clk(clk),
     .in(M_right_in),
     .out(M_right_out)
@@ -120,7 +138,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_resetleft_out;
   reg [1-1:0] M_resetleft_in;
-  edge_detector_3 resetleft (
+  edge_detector_4 resetleft (
     .clk(clk),
     .in(M_resetleft_in),
     .out(M_resetleft_out)
@@ -128,7 +146,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_resetright_out;
   reg [1-1:0] M_resetright_in;
-  edge_detector_3 resetright (
+  edge_detector_4 resetright (
     .clk(clk),
     .in(M_resetright_in),
     .out(M_resetright_out)
@@ -136,7 +154,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_upb_out;
   reg [1-1:0] M_upb_in;
-  button_conditioner_9 upb (
+  button_conditioner_10 upb (
     .clk(clk),
     .in(M_upb_in),
     .out(M_upb_out)
@@ -144,7 +162,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_downb_out;
   reg [1-1:0] M_downb_in;
-  button_conditioner_9 downb (
+  button_conditioner_10 downb (
     .clk(clk),
     .in(M_downb_in),
     .out(M_downb_out)
@@ -152,7 +170,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_leftb_out;
   reg [1-1:0] M_leftb_in;
-  button_conditioner_9 leftb (
+  button_conditioner_10 leftb (
     .clk(clk),
     .in(M_leftb_in),
     .out(M_leftb_out)
@@ -160,7 +178,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_rightb_out;
   reg [1-1:0] M_rightb_in;
-  button_conditioner_9 rightb (
+  button_conditioner_10 rightb (
     .clk(clk),
     .in(M_rightb_in),
     .out(M_rightb_out)
@@ -168,7 +186,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_resetleftb_out;
   reg [1-1:0] M_resetleftb_in;
-  button_conditioner_9 resetleftb (
+  button_conditioner_10 resetleftb (
     .clk(clk),
     .in(M_resetleftb_in),
     .out(M_resetleftb_out)
@@ -176,7 +194,7 @@ module mojo_top_0 (
   
   wire [1-1:0] M_resetrightb_out;
   reg [1-1:0] M_resetrightb_in;
-  button_conditioner_9 resetrightb (
+  button_conditioner_10 resetrightb (
     .clk(clk),
     .in(M_resetrightb_in),
     .out(M_resetrightb_out)
@@ -198,6 +216,8 @@ module mojo_top_0 (
     M_game_button_down = 1'h0;
     M_game_button_left = 1'h0;
     M_game_button_right = 1'h0;
+    M_game_soft_reset = 1'h0;
+    M_game_hard_reset = 1'h0;
     M_upb_in = buttons[0+0-:1];
     M_downb_in = buttons[1+0-:1];
     M_leftb_in = buttons[2+0-:1];
@@ -214,15 +234,21 @@ module mojo_top_0 (
     M_game_button_down = M_down_out;
     M_game_button_left = M_left_out;
     M_game_button_right = M_right_out;
-    io_led = 24'h000000;
+    M_game_soft_reset = M_resetleft_out;
+    M_game_hard_reset = M_resetright_out;
     row = 8'h00;
     green = 8'hff;
     blue = 8'hff;
     red = 8'hff;
+    M_display_seven_seg_to_display = M_game_player_ones;
+    playerones = M_display_seven_seg_to_seven_seg;
+    M_display_seven_seg_to_display = M_game_player_tens;
+    playertens = M_display_seven_seg_to_seven_seg;
+    M_display_seven_seg_to_display = M_game_hi_score_ones;
+    highones = M_display_seven_seg_to_seven_seg;
+    M_display_seven_seg_to_display = M_game_hi_score_tens;
+    hightens = M_display_seven_seg_to_seven_seg;
     M_counter_d = M_counter_q + 1'h1;
-    io_led[0+7-:8] = M_game_player_position_out[0+7-:8];
-    io_led[8+7-:8] = M_game_player_position_out[8+7-:8];
-    io_led[16+7-:8] = M_game_player_position_out[16+7-:8];
     
     case (M_state_q)
       A_state: begin
@@ -471,18 +497,18 @@ module mojo_top_0 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_counter_q <= 1'h0;
+      M_state_q <= 1'h0;
     end else begin
-      M_counter_q <= M_counter_d;
+      M_state_q <= M_state_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
+      M_counter_q <= 1'h0;
     end else begin
-      M_state_q <= M_state_d;
+      M_counter_q <= M_counter_d;
     end
   end
   

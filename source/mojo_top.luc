@@ -17,12 +17,14 @@ module mojo_top (
     output row[8],
     input buttons[4],
     input resetbtn[2],
-    input io_dip [3][8],    // remove once done!
-    input io_button [5],
-    output io_led [3][8]
+    output playerones[8],
+    output playertens[8],
+    output highones[8],
+    output hightens[8]
   ) {
   
   sig rst;                  // reset signal
+  display_seven_seg display_seven_seg;
   
   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
@@ -62,8 +64,8 @@ module mojo_top (
     game.button_down = 0;
     game.button_left = 0;
     game.button_right = 0;
-//    game.soft_reset = 0;
-//    game.hard_reset = 0;
+    game.soft_reset = 0;
+    game.hard_reset = 0;
     
     /*
     BUTTON CONDITIONER INPUTS
@@ -95,30 +97,27 @@ module mojo_top (
     game.button_down = down.out;
     game.button_left = left.out;
     game.button_right = right.out;
- //   game.soft_reset = resetleft.out;
- //   game.hard_reset = resetright.out;
-    
-    // REMOVE THESE ONCE YOU'RE DONE!
-    io_led = 3x{{8b00}};
-    // REMOVE THIS
+    game.soft_reset = resetleft.out;
+    game.hard_reset = resetright.out;
     
     row = 8x{0};
     green = 8x{1};
     blue = 8x{1};
     red = 8x{1};
     
+    display_seven_seg.to_display = game.player_ones;
+    playerones = display_seven_seg.to_seven_seg;
+    
+    display_seven_seg.to_display = game.player_tens;
+    playertens = display_seven_seg.to_seven_seg;
+    
+    display_seven_seg.to_display = game.hi_score_ones;
+    highones = display_seven_seg.to_seven_seg;
+    
+    display_seven_seg.to_display = game.hi_score_tens;
+    hightens = display_seven_seg.to_seven_seg;
+    
     counter.d = counter.q + 1;
-    
-    // REMOVE THESE ALSO
-    io_led[0] = game.player_position_out[0];
-    io_led[1] = game.player_position_out[1];
-    io_led[2] = game.player_position_out[2];  
-    // REMOVE THIS PART
-    
-//    game.button_up = buttons[0];
-//    game.button_down = buttons[1];
-//    game.button_left = buttons[2];
-//    game.button_right = buttons[3];
     
     case(state.q){
       state.A:

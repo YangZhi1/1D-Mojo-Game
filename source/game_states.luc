@@ -3,29 +3,40 @@ module game_states (
     input rst,  // reset
     output player_position_out [8][8],
     output tokens [8][8],
-    output current_score [7],
     output wall [8][8],
+    output player_ones [4],
+    output player_tens [4],
+    output hi_score_ones [4],
+    output hi_score_tens [4],
     input button_up,
     input button_down,
     input button_left,
-    input button_right
+    input button_right,
+    input soft_reset,
+    input hard_reset
   ) {
   dff delay_movement[26](.clk(clk), .rst(rst));
   
-  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1, INTER2, LEVEL2, INTER3, LEVEL3, INTER4, LEVEL4};
+  fsm state(.clk(clk), #INIT(START)) = {START, WAITLEFT, WAITDOWN, WAITUP, WAITRIGHT, MOVE8TIMESLEFT, MOVE8TIMESRIGHT, MOVE8TIMESUP, MOVE8TIMESDOWN, TUTORIALROM, TUTORIAL, INTER1, LEVEL1, INTER2, LEVEL2, INTER3, LEVEL3, INTER4, LEVEL4, INTER5, LEVEL5, INTER6, LEVEL6, INTER7, LEVEL7, INTER8, LEVEL8, END};
   .clk(clk){
     .rst(rst){
       dff token_map [8][8](#INIT(8b00000010));
       dff player_position [8][8](#INIT(8b10000000));   // Initialize player position to start at top left corner
       dff player_reg_selector [3];
-      dff score [7](#INIT(7b0000000));                 // Since 99 (max we can display) requires 7 bits to encode
-      dff level_score [4](#INIT(4b0000));              // Level score will not exceed 10
+      
       dff end_position [8](#INIT(8b00000001));
       dff current_stage[3](#INIT(3b000));
       dff walls [8][8](#INIT(8b00000001));
       
       dff number_times_moved[3](#INIT(3b000));
       
+      dff current_running_score [7](#INIT(7b0000000));   // Since 99 (max we can display) requires 7 bits to encode
+      dff hi_score [7](#INIT(7b0000000));                // All time high score
+      dff level_score [4](#INIT(4b0000));                // Level score will not exceed 10
+      dff current_ones [4](#INIT(4b0000));               // Ones decimal for the currnet running score 
+      dff current_tenths [4](#INIT(4b0000));             // Tenths decimal for the current running score 
+      dff hi_ones [4](#INIT(4b0000));                    // Ones decimal for high score 
+      dff hi_tenths [4](#INIT(4b0000));                  // Tenths decimal for high score
     }
   }
   
@@ -36,19 +47,30 @@ module game_states (
   level_two_rom inter_two;
   level_three_rom inter_three;
   level_four_rom inter_four;
+  level_five_rom inter_five;
+  level_six_rom inter_six;
+  level_seven_rom inter_seven;
+  level_eight_rom inter_eight;
   
   move_player move_player;
   move_player_down move_down;
   move_player_left move_left;
   move_player_right move_right;
   tutorial_rom tutorial;
+  
+  compare_high_score compare_high_score;
     
 
   always {
     player_position_out = player_position.q;
     tokens = token_map.q;
-    current_score = score.q; 
     wall = walls.q;
+    
+    player_ones = current_ones.q;
+    player_tens = current_tenths.q;
+    hi_score_ones = hi_ones.q;
+    hi_score_tens = hi_tenths.q;
+    
     
     /*
     INSTANTIATE VARIABLES FOR OTHER FILES
@@ -77,20 +99,45 @@ module game_states (
     inter_two.rngeezus = delay_movement.q[1:0];
     inter_three.rngeezus = delay_movement.q[1:0];
     inter_four.rngeezus = delay_movement.q[1:0];
+    inter_five.rngeezus = delay_movement.q[1:0];
+    inter_six.rngeezus = delay_movement.q[1:0];
+    inter_seven.rngeezus = delay_movement.q[1:0];
+    inter_eight.rngeezus = delay_movement.q[1:0];
     
+    compare_high_score.high_score = hi_score.q;
+    compare_high_score.player_current_score = current_running_score.q;
+    current_ones.d = current_ones.q;
+    current_tenths.d = current_tenths.q;
+    hi_ones.d = hi_ones.q;
+    hi_tenths.d = hi_tenths.q;
+
     /*
     MAKE dff RETAIN PREVIOUS VALUES
     */
     player_position.d = player_position.q;
     player_reg_selector.d = player_reg_selector.q;
     token_map.d = token_map.q;
-    score.d = score.q;
+    
     end_position.d = end_position.q;
     current_stage.d = current_stage.q;
     walls.d = walls.q;
-    level_score.d = level_score.q;
+    
     number_times_moved.d = number_times_moved.q;
     delay_movement.d = delay_movement.q + 1;
+    
+    current_running_score.d = current_running_score.q;
+    level_score.d = level_score.q;
+    hi_score.d = hi_score.q;
+    
+    
+    /*
+    Scoring incrementation 1 decimal by 1 decimal
+    If the ones place has reached 10, we will reset ones to 0 and increment tenths by 1
+    */
+    if(current_ones.q == 4b1010){
+      current_ones.d = 0;
+      current_tenths.d = current_tenths.q + 1;
+    }
 
     case(state.q){
       state.START:
@@ -100,7 +147,7 @@ module game_states (
         player_position.d = tutorial.player_initial_position;
         player_reg_selector.d = tutorial.player_reg_selector;
         player_position_out = player_position.q;
-        score.d = 7b0000000;
+        current_running_score.d = 7b0000000;
         state.d = state.TUTORIALROM;
       
       state.TUTORIALROM:
@@ -110,6 +157,7 @@ module game_states (
         intermediate_tokens = tutorial.tokens;
         token_map.d = intermediate_tokens;
         walls.d = tutorial.walls;
+        level_score.d = 0;
         state.d = state.TUTORIAL;
         
       state.TUTORIAL:
@@ -146,6 +194,7 @@ module game_states (
         token_map.d = move_player.new_token_map;                          // retrieves new token map, in case there was a collision with a token
         if(move_player.score_token){                                      // if there was a collision with token, score+1
           level_score.d = level_score.q + 1;
+          current_ones.d = current_ones.q + 1;
         }
         player_reg_selector.d = move_player.new_player_reg_selector;       // retrieve new register selector from move_player file
         player_position.d = move_player.player_location_out;               // retrieve new player position from move_player file
@@ -190,6 +239,7 @@ module game_states (
         token_map.d = move_down.new_token_map;
         if(move_down.score_token){
           level_score.d = level_score.q + 1;
+          current_ones.d = current_ones.q + 1;
         }
         player_reg_selector.d = move_down.new_player_reg_selector;
         player_position.d = move_down.player_location_out;
@@ -229,6 +279,7 @@ module game_states (
         token_map.d = move_left.new_token_map;
         if(move_left.score_token){
           level_score.d = level_score.q + 1;
+          current_ones.d = current_ones.q + 1;
         }
         player_reg_selector.d = move_left.new_player_reg_selector;
         player_position.d = move_left.player_location_out;
@@ -267,6 +318,7 @@ module game_states (
         token_map.d = move_right.new_token_map;
         if(move_right.score_token){
           level_score.d = level_score.q + 1;
+          current_ones.d = current_ones.q + 1;
         }
         player_reg_selector.d = move_right.new_player_reg_selector;   
         player_position.d = move_right.player_location_out;
@@ -301,10 +353,12 @@ module game_states (
         player_position.d = inter_one.player_initial_position;
         player_reg_selector.d = inter_one.player_reg_selector;
         player_position_out = player_position.q;
+        
         inter_one.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_one.tokens;
         token_map.d = intermediate_tokens;
         walls.d = inter_one.walls;
+        level_score.d = 0;
         state.d = state.LEVEL1;
         
       state.LEVEL1:
@@ -323,6 +377,7 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER2;
         }
       state.INTER2:
@@ -332,6 +387,7 @@ module game_states (
         
         inter_two.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_two.tokens;
+        level_score.d = 0;
         token_map.d = intermediate_tokens;
         walls.d = inter_two.walls;
         state.d = state.LEVEL2;
@@ -352,6 +408,7 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER3;
         }
       state.INTER3:
@@ -362,6 +419,7 @@ module game_states (
         
         intermediate_tokens = inter_three.tokens;
         token_map.d = intermediate_tokens;
+        level_score.d = 0;
         walls.d = inter_three.walls;
         state.d = state.LEVEL3;
         
@@ -381,6 +439,7 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER4;
         }
       state.INTER4:
@@ -390,6 +449,7 @@ module game_states (
         
         inter_four.rngeezus = delay_movement.q[1:0];
         intermediate_tokens = inter_four.tokens;
+        level_score.d = 0;
         token_map.d = intermediate_tokens;
         walls.d = inter_four.walls;
         state.d = state.LEVEL4;
@@ -410,8 +470,151 @@ module game_states (
           state.d = state.WAITRIGHT;
         }
         if(player_position.q[7] == 8b00000001){
-          state.d = state.START;
+          current_running_score.d = current_running_score.q + level_score.q;
+          state.d = state.INTER5;
         }
+        
+      state.INTER5:
+        player_position.d = inter_five.player_initial_position;
+        player_reg_selector.d = inter_five.player_reg_selector;
+        player_position_out = player_position.q;
+        
+        inter_five.rngeezus = delay_movement.q[1:0];
+        intermediate_tokens = inter_five.tokens;
+        level_score.d = 0;
+        token_map.d = intermediate_tokens;
+        walls.d = inter_five.walls;
+        state.d = state.LEVEL5;
+        
+      state.LEVEL5:
+        walls.d = inter_five.walls;
+        current_stage.d = 3b100;
+        if(button_up){
+          state.d = state.WAITUP;
+        }
+        if(button_down){
+          state.d = state.WAITDOWN;
+        }
+        if(button_left){
+          state.d = state.WAITLEFT;
+        }
+        if(button_right){
+          state.d = state.WAITRIGHT;
+        }
+        if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
+          state.d = state.INTER6;
+        }
+        
+      state.INTER6:
+        player_position.d = inter_six.player_initial_position;
+        player_reg_selector.d = inter_six.player_reg_selector;
+        player_position_out = player_position.q;
+        
+        inter_six.rngeezus = delay_movement.q[1:0];
+        intermediate_tokens = inter_six.tokens;
+        level_score.d = 0;
+        token_map.d = intermediate_tokens;
+        walls.d = inter_six.walls;
+        state.d = state.LEVEL6;
+        
+      state.LEVEL6:
+        walls.d = inter_six.walls;
+        current_stage.d = 3b100;
+        if(button_up){
+          state.d = state.WAITUP;
+        }
+        if(button_down){
+          state.d = state.WAITDOWN;
+        }
+        if(button_left){
+          state.d = state.WAITLEFT;
+        }
+        if(button_right){
+          state.d = state.WAITRIGHT;
+        }
+        if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
+          state.d = state.INTER7;
+        }
+        
+      state.INTER7:
+        player_position.d = inter_seven.player_initial_position;
+        player_reg_selector.d = inter_seven.player_reg_selector;
+        player_position_out = player_position.q;
+        
+        inter_seven.rngeezus = delay_movement.q[1:0];
+        intermediate_tokens = inter_seven.tokens;
+        level_score.d = 0;
+        token_map.d = intermediate_tokens;
+        walls.d = inter_seven.walls;
+        state.d = state.LEVEL7;
+        
+      state.LEVEL7:
+        walls.d = inter_seven.walls;
+        current_stage.d = 3b100;
+        if(button_up){
+          state.d = state.WAITUP;
+        }
+        if(button_down){
+          state.d = state.WAITDOWN;
+        }
+        if(button_left){
+          state.d = state.WAITLEFT;
+        }
+        if(button_right){
+          state.d = state.WAITRIGHT;
+        }
+        if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
+          state.d = state.INTER8;
+        }
+        
+      state.INTER8:
+        player_position.d = inter_eight.player_initial_position;
+        player_reg_selector.d = inter_eight.player_reg_selector;
+        player_position_out = player_position.q;
+        
+        inter_eight.rngeezus = delay_movement.q[1:0];
+        intermediate_tokens = inter_eight.tokens;
+        level_score.d = 0;
+        token_map.d = intermediate_tokens;
+        walls.d = inter_eight.walls;
+        state.d = state.LEVEL8;
+        
+      state.LEVEL8:
+        walls.d = inter_eight.walls;
+        current_stage.d = 3b100;
+        if(button_up){
+          state.d = state.WAITUP;
+        }
+        if(button_down){
+          state.d = state.WAITDOWN;
+        }
+        if(button_left){
+          state.d = state.WAITLEFT;
+        }
+        if(button_right){
+          state.d = state.WAITRIGHT;
+        }
+        if(player_position.q[7] == 8b00000001){
+          current_running_score.d = current_running_score.q + level_score.q;
+          state.d = state.END;
+        }
+        
+      /*
+      CHECKS WHETHER NEW PLAYER HAS HIT A HIGH SCORE 
+      IF PLAYER HAS THEN THEIR SCORE WILL REPLACE THE CURRENT HIGH SCORE  
+      */  
+      state.END:
+        compare_high_score.high_score = hi_score.q;
+        compare_high_score.player_current_score = current_running_score.q;
+        if(compare_high_score.high_score_lower){
+          hi_score.d = current_running_score.q;
+          hi_ones.d = current_ones.q;
+          hi_tenths.d = current_tenths.q;
+        }
+        state.d = state.START;
     }
   }
 }

@@ -34,10 +34,46 @@ NET "blue<5>" LOC = P131 | IOSTANDARD = LVTTL;
 NET "blue<6>" LOC = P134 | IOSTANDARD = LVTTL;
 NET "blue<7>" LOC = P133 | IOSTANDARD = LVTTL;
 
-NET "buttons<0>" LOC = P66 | IOSTANDARD = LVTTL | PULLUP;
-NET "buttons<1>" LOC = P58 | IOSTANDARD = LVTTL | PULLUP;
-NET "buttons<2>" LOC = P67 | IOSTANDARD = LVTTL | PULLUP;
-NET "buttons<3>" LOC = P57 | IOSTANDARD = LVTTL | PULLUP;
+NET "playerones<0>" LOC = P85 | IOSTANDARD = LVTTL;
+NET "playerones<1>" LOC = P84 | IOSTANDARD = LVTTL;
+NET "playerones<2>" LOC = P83 | IOSTANDARD = LVTTL;
+NET "playerones<3>" LOC = P82 | IOSTANDARD = LVTTL;
+NET "playerones<4>" LOC = P81 | IOSTANDARD = LVTTL;
+NET "playerones<5>" LOC = P80 | IOSTANDARD = LVTTL;
+NET "playerones<6>" LOC = P79 | IOSTANDARD = LVTTL;
+NET "playerones<7>" LOC = P78 | IOSTANDARD = LVTTL;
+
+NET "playertens<0>" LOC = P98 | IOSTANDARD = LVTTL;
+NET "playertens<1>" LOC = P97 | IOSTANDARD = LVTTL;
+NET "playertens<2>" LOC = P95 | IOSTANDARD = LVTTL;
+NET "playertens<3>" LOC = P94 | IOSTANDARD = LVTTL;
+NET "playertens<4>" LOC = P93 | IOSTANDARD = LVTTL;
+NET "playertens<5>" LOC = P92 | IOSTANDARD = LVTTL;
+NET "playertens<6>" LOC = P88 | IOSTANDARD = LVTTL;
+NET "playertens<7>" LOC = P87 | IOSTANDARD = LVTTL;
+
+NET "highones<0>" LOC = P112 | IOSTANDARD = LVTTL;
+NET "highones<1>" LOC = P111 | IOSTANDARD = LVTTL;
+NET "highones<2>" LOC = P105 | IOSTANDARD = LVTTL;
+NET "highones<3>" LOC = P104 | IOSTANDARD = LVTTL;
+NET "highones<4>" LOC = P102 | IOSTANDARD = LVTTL;
+NET "highones<5>" LOC = P101 | IOSTANDARD = LVTTL;
+NET "highones<6>" LOC = P100 | IOSTANDARD = LVTTL;
+NET "highones<7>" LOC = P99 | IOSTANDARD = LVTTL;
+
+NET "hightens<0>" LOC = P121 | IOSTANDARD = LVTTL;
+NET "hightens<1>" LOC = P120 | IOSTANDARD = LVTTL;
+NET "hightens<2>" LOC = P119 | IOSTANDARD = LVTTL;
+NET "hightens<3>" LOC = P118 | IOSTANDARD = LVTTL;
+NET "hightens<4>" LOC = P117 | IOSTANDARD = LVTTL;
+NET "hightens<5>" LOC = P116 | IOSTANDARD = LVTTL;
+NET "hightens<6>" LOC = P115 | IOSTANDARD = LVTTL;
+NET "hightens<7>" LOC = P114 | IOSTANDARD = LVTTL;
+
+NET "buttons<0>" LOC = P58 | IOSTANDARD = LVTTL | PULLUP;
+NET "buttons<1>" LOC = P66 | IOSTANDARD = LVTTL | PULLUP;
+NET "buttons<2>" LOC = P57 | IOSTANDARD = LVTTL | PULLUP;
+NET "buttons<3>" LOC = P67 | IOSTANDARD = LVTTL | PULLUP;
 
 NET "resetbtn<0>" LOC = P74 | IOSTANDARD = LVTTL | PULLUP;
 NET "resetbtn<1>" LOC = P75 | IOSTANDARD = LVTTL | PULLUP;

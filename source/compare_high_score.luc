@@ -1,0 +1,20 @@
+module compare_high_score (
+    input player_current_score [7],
+    input high_score [7],
+    output high_score_lower
+  ) {
+  alu alu;
+  
+  /*
+  File used to compare the current player's score against high high_score
+  A boolean value will be returned, true (1) --> player score is higher, player score will replace high score
+  */
+  always {
+    high_score_lower = 0;
+    alu.a = high_score;
+    alu.b = player_current_score;
+    alu.alufn = 6b110101;
+    
+    high_score_lower = alu.aluOut[0];
+  }
+}

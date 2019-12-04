@@ -19,9 +19,25 @@ module level_four_rom (
     end_position[6:0] = 7x{{8b0}};
     end_position[7] = 8b00000001;
     
-    walls = 8x{{8h00}};
-    tokens = 8x{{8h00}};
+    tokens[0] = 8b00100010;
+    tokens[1] = 8b00000000;
+    tokens[2] = 8b10000000;
+    tokens[3] = 8b00000000;
+    tokens[4] = 8b01000000;
+    tokens[5] = 8b00000000;
+    tokens[6] = 8b00000000;
+    tokens[7] = 8b00000010;
     
+    walls[0] = 8b01001100;
+    walls[1] = 8b01100110;
+    walls[2] = 8b00000000;
+    walls[3] = 8b10000000;
+    walls[4] = 8b10100000;
+    walls[5] = 8b00000001;
+    walls[6] = 8b00000001;
+    walls[7] = 8b10000000;
+    
+    /*
     case(rngeezus){
       b00:
         tokens[0] = 8b00100010;
@@ -118,5 +134,6 @@ module level_four_rom (
         walls[6] = 8b00000001;
         walls[7] = 8b10000000;
     }
+    */
   }
 }

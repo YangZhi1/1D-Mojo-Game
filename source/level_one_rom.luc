@@ -36,6 +36,7 @@ module level_one_rom (
     tokens[5] = 8b10000010;
     tokens[6] = 8b00100001;
     tokens[7] = 8b10000000;
+    /*
     
     case(rngeezus){
       b00:
@@ -114,6 +115,7 @@ module level_one_rom (
         tokens[6] = 8b00100001;
         tokens[7] = 8b10000000;
     }
+    */
     
   }
 }

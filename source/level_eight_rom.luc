@@ -1,0 +1,41 @@
+module level_eight_rom (
+    input rngeezus [2],
+    output player_initial_position [8][8],
+    output player_reg_selector[3],
+    output end_position [8][8],
+    output walls[8][8],
+    output tokens[8][8]
+  ) {
+
+  /*
+  ROM file that stores map values --> Position of tokens and walls
+  Each time player enters a new level we will pick a stage at random
+  from these values
+  */
+  always {
+    player_initial_position[0] = 8b10000000;
+    player_initial_position[7:1] = 7x{{8b0}};
+    player_reg_selector = 3b000;
+    end_position[6:0] = 7x{{8b0}};
+    end_position[7] = 8b00000001;
+    
+    tokens[0] = 8b00000000;
+    tokens[1] = 8b00000010;
+    tokens[2] = 8b00000000;
+    tokens[3] = 8b00000000;
+    tokens[4] = 8b00001000;
+    tokens[5] = 8b00100100;
+    tokens[6] = 8b10000000;
+    tokens[7] = 8b00000000;
+    
+    walls[0] = 8b00000100;
+    walls[1] = 8b01000000;
+    walls[2] = 8b01000010;
+    walls[3] = 8b00000000;
+    walls[4] = 8b00000010;
+    walls[5] = 8b10000010;
+    walls[6] = 8b00101000;
+    walls[7] = 8b00000000;
+    
+  }
+}
