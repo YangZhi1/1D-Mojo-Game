@@ -26,6 +26,10 @@ module game_states_3 (
   
   reg [25:0] M_delay_movement_d, M_delay_movement_q = 1'h0;
   
+  reg [29:0] M_delay_stage_d, M_delay_stage_q = 1'h0;
+  
+  reg cmphi_score;
+  
   
   localparam START_state = 5'd0;
   localparam WAITLEFT_state = 5'd1;
@@ -197,6 +201,13 @@ module game_states_3 (
     .tokens(M_inter_eight_tokens)
   );
   
+  wire [64-1:0] M_end_smiley;
+  wire [64-1:0] M_end_ready;
+  end_24 L_end (
+    .smiley(M_end_smiley),
+    .ready(M_end_ready)
+  );
+  
   wire [64-1:0] M_move_player_player_location_out;
   wire [3-1:0] M_move_player_new_player_reg_selector;
   wire [64-1:0] M_move_player_new_token_map;
@@ -205,7 +216,7 @@ module game_states_3 (
   reg [64-1:0] M_move_player_player_current_position;
   reg [64-1:0] M_move_player_walls;
   reg [64-1:0] M_move_player_token_map;
-  move_player_24 move_player (
+  move_player_25 move_player (
     .player_reg_selector(M_move_player_player_reg_selector),
     .player_current_position(M_move_player_player_current_position),
     .walls(M_move_player_walls),
@@ -224,7 +235,7 @@ module game_states_3 (
   reg [64-1:0] M_move_down_player_current_position;
   reg [64-1:0] M_move_down_walls;
   reg [64-1:0] M_move_down_token_map;
-  move_player_down_25 move_down (
+  move_player_down_26 move_down (
     .player_reg_selector(M_move_down_player_reg_selector),
     .player_current_position(M_move_down_player_current_position),
     .walls(M_move_down_walls),
@@ -243,7 +254,7 @@ module game_states_3 (
   reg [64-1:0] M_move_left_player_current_position;
   reg [64-1:0] M_move_left_walls;
   reg [64-1:0] M_move_left_token_map;
-  move_player_left_26 move_left (
+  move_player_left_27 move_left (
     .player_reg_selector(M_move_left_player_reg_selector),
     .player_current_position(M_move_left_player_current_position),
     .walls(M_move_left_walls),
@@ -262,7 +273,7 @@ module game_states_3 (
   reg [64-1:0] M_move_right_player_current_position;
   reg [64-1:0] M_move_right_walls;
   reg [64-1:0] M_move_right_token_map;
-  move_player_right_27 move_right (
+  move_player_right_28 move_right (
     .player_reg_selector(M_move_right_player_reg_selector),
     .player_current_position(M_move_right_player_current_position),
     .walls(M_move_right_walls),
@@ -278,7 +289,7 @@ module game_states_3 (
   wire [64-1:0] M_tutorial_end_position;
   wire [64-1:0] M_tutorial_walls;
   wire [64-1:0] M_tutorial_tokens;
-  tutorial_rom_28 tutorial (
+  tutorial_rom_29 tutorial (
     .player_initial_position(M_tutorial_player_initial_position),
     .player_reg_selector(M_tutorial_player_reg_selector),
     .end_position(M_tutorial_end_position),
@@ -289,7 +300,7 @@ module game_states_3 (
   wire [1-1:0] M_compare_high_score_high_score_lower;
   reg [7-1:0] M_compare_high_score_player_current_score;
   reg [7-1:0] M_compare_high_score_high_score;
-  compare_high_score_29 compare_high_score (
+  compare_high_score_30 compare_high_score (
     .player_current_score(M_compare_high_score_player_current_score),
     .high_score(M_compare_high_score_high_score),
     .high_score_lower(M_compare_high_score_high_score_lower)
@@ -306,6 +317,7 @@ module game_states_3 (
     M_hi_ones_d = M_hi_ones_q;
     M_walls_d = M_walls_q;
     M_current_ones_d = M_current_ones_q;
+    M_delay_stage_d = M_delay_stage_q;
     M_delay_movement_d = M_delay_movement_q;
     M_hi_score_d = M_hi_score_q;
     M_end_position_d = M_end_position_q;
@@ -361,6 +373,7 @@ module game_states_3 (
     M_current_running_score_d = M_current_running_score_q;
     M_level_score_d = M_level_score_q;
     M_hi_score_d = M_hi_score_q;
+    M_delay_stage_d = M_delay_stage_q + 1'h1;
     if (M_current_ones_q == 4'ha) begin
       M_current_ones_d = 1'h0;
       M_current_tenths_d = M_current_tenths_q + 1'h1;
@@ -368,11 +381,16 @@ module game_states_3 (
     
     case (M_state_q)
       START_state: begin
-        M_player_position_d = M_tutorial_player_initial_position;
-        M_player_reg_selector_d = M_tutorial_player_reg_selector;
+        M_player_position_d = M_end_ready;
         player_position_out = M_player_position_q;
+        M_current_ones_d = 4'h0;
+        M_current_tenths_d = 4'h0;
+        M_walls_d = 64'h0000000000000000;
+        M_token_map_d = 64'h0000000000000000;
         M_current_running_score_d = 7'h00;
-        M_state_d = TUTORIALROM_state;
+        if (button_up | button_down | button_left | button_right) begin
+          M_state_d = TUTORIALROM_state;
+        end
       end
       TUTORIALROM_state: begin
         M_player_position_d = M_tutorial_player_initial_position;
@@ -419,6 +437,7 @@ module game_states_3 (
         if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
+          M_current_running_score_d = M_current_running_score_q + 1'h1;
         end
         M_player_reg_selector_d = M_move_player_new_player_reg_selector;
         M_player_position_d = M_move_player_player_location_out;
@@ -472,6 +491,7 @@ module game_states_3 (
         if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
+          M_current_running_score_d = M_current_running_score_q + 1'h1;
         end
         M_player_reg_selector_d = M_move_down_new_player_reg_selector;
         M_player_position_d = M_move_down_player_location_out;
@@ -525,6 +545,7 @@ module game_states_3 (
         if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
+          M_current_running_score_d = M_current_running_score_q + 1'h1;
         end
         M_player_reg_selector_d = M_move_left_new_player_reg_selector;
         M_player_position_d = M_move_left_player_location_out;
@@ -578,6 +599,7 @@ module game_states_3 (
         if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
+          M_current_running_score_d = M_current_running_score_q + 1'h1;
         end
         M_player_reg_selector_d = M_move_right_new_player_reg_selector;
         M_player_position_d = M_move_right_player_location_out;
@@ -653,10 +675,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER2_state;
         end
       end
@@ -692,10 +715,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER3_state;
         end
       end
@@ -731,10 +755,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER4_state;
         end
       end
@@ -770,10 +795,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER5_state;
         end
       end
@@ -809,10 +835,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER6_state;
         end
       end
@@ -848,10 +875,11 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER7_state;
         end
       end
@@ -887,10 +915,12 @@ module game_states_3 (
         end
         if (hard_reset) begin
           M_current_running_score_d = 7'h00;
+          M_current_ones_d = 4'h0;
+          M_current_tenths_d = 4'h0;
           M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
+          M_delay_stage_d = 1'h0;
           M_state_d = END_state;
         end
       end
@@ -921,24 +951,44 @@ module game_states_3 (
           M_state_d = WAITRIGHT_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
-          M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = END_state;
         end
       end
       END_state: begin
+        M_walls_d = 64'h0000000000000000;
+        M_token_map_d = 64'h0000000000000000;
+        M_player_position_d = M_end_smiley;
+        player_position_out = M_player_position_q;
         M_compare_high_score_high_score = M_hi_score_q;
         M_compare_high_score_player_current_score = M_current_running_score_q;
-        if (M_compare_high_score_high_score_lower != 1'h1) begin
+        cmphi_score = M_compare_high_score_high_score_lower;
+        if (cmphi_score != 1'h1) begin
           M_hi_score_d = M_current_running_score_q;
           M_hi_ones_d = M_current_ones_q;
           M_hi_tenths_d = M_current_tenths_q;
         end
-        M_current_ones_d = 4'h0;
-        M_current_tenths_d = 4'h0;
-        M_state_d = START_state;
+        M_hi_ones_d = M_current_ones_q;
+        M_hi_tenths_d = M_current_tenths_q;
+        if (M_delay_stage_q[27+0-:1] == 1'h1) begin
+          M_state_d = START_state;
+        end
       end
     endcase
   end
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_delay_stage_q <= 1'h0;
+    end else begin
+      M_delay_stage_q <= M_delay_stage_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    M_state_q <= M_state_d;
+  end
+  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -981,11 +1031,6 @@ module game_states_3 (
     end else begin
       M_delay_movement_q <= M_delay_movement_d;
     end
-  end
-  
-  
-  always @(posedge clk) begin
-    M_state_q <= M_state_d;
   end
   
 endmodule

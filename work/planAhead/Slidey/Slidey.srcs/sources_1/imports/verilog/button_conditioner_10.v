@@ -23,7 +23,7 @@ module button_conditioner_10 (
   
   wire [1-1:0] M_sync_out;
   reg [1-1:0] M_sync_in;
-  pipeline_30 sync (
+  pipeline_31 sync (
     .clk(clk),
     .in(M_sync_in),
     .out(M_sync_out)
