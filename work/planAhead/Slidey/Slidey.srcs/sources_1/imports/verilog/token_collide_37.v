@@ -45,9 +45,9 @@ module token_collide_37 (
       new_token_map = token_map;
       score_token = 1'h0;
     end else begin
+      score_token = 1'h1;
       new_map = check_overlap ^ token_map;
       new_token_map = new_map;
-      score_token = 1'h1;
     end
   end
 endmodule

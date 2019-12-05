@@ -19,31 +19,31 @@ module display_seven_seg_1 (
         to_seven_seg = 8'h7e;
       end
       4'h1: begin
-        to_seven_seg = 8'h06;
+        to_seven_seg = 8'h60;
       end
       4'h2: begin
-        to_seven_seg = 8'hbc;
+        to_seven_seg = 8'h3d;
       end
       4'h3: begin
-        to_seven_seg = 8'h9e;
+        to_seven_seg = 8'h79;
       end
       4'h4: begin
-        to_seven_seg = 8'hc6;
+        to_seven_seg = 8'h63;
       end
       4'h5: begin
-        to_seven_seg = 8'hda;
+        to_seven_seg = 8'h5b;
       end
       4'h6: begin
-        to_seven_seg = 8'hfa;
+        to_seven_seg = 8'h5f;
       end
       4'h7: begin
-        to_seven_seg = 8'h0e;
+        to_seven_seg = 8'h70;
       end
       4'h8: begin
-        to_seven_seg = 8'hfe;
+        to_seven_seg = 8'h7f;
       end
       4'h9: begin
-        to_seven_seg = 8'hce;
+        to_seven_seg = 8'h73;
       end
       default: begin
         to_seven_seg = 8'h7e;

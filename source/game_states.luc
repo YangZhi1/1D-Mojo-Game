@@ -41,6 +41,7 @@ module game_states (
   }
   
   sig intermediate_tokens [8][8];
+  sig points;
   
   // MODULES
   level_one_rom inter_one;
@@ -175,6 +176,12 @@ module game_states (
         if(button_right){
           state.d = state.WAITRIGHT;
         }
+        if(soft_reset){
+          state.d = state.TUTORIALROM;
+        }
+        if(hard_reset){
+          state.d = state.START;
+        }
         if(player_position.q[7] == 8b00000001){
           state.d = state.INTER1;
         }
@@ -192,7 +199,8 @@ module game_states (
         move_player.token_map = token_map.q;                              // outputs token map to move_player file
         
         token_map.d = move_player.new_token_map;                          // retrieves new token map, in case there was a collision with a token
-        if(move_player.score_token){                                      // if there was a collision with token, score+1
+        points = move_player.score_token;
+        if(points == 1){                                                  // if there was a collision with token, score+1
           level_score.d = level_score.q + 1;
           current_ones.d = current_ones.q + 1;
         }
@@ -206,7 +214,7 @@ module game_states (
       ALMOST IDENTICAL TO OTHER WAIT__ STATES, BUT NEEDED DUE TO DIFFERENCE IN DIRECTIONS AND FUNCTIONS USED
       */ 
       state.WAITUP:
-        if(delay_movement.q[22] == 1){                 // Gives it around 0.085 seconds delay, which will not exceed 0.8 seconds
+        if(delay_movement.q[21] == 1){                 // Gives it around 0.085 seconds delay, which will not exceed 0.8 seconds
           delay_movement.d = 0;
           if(number_times_moved.q == 3b111){           // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
             number_times_moved.d = 0;                  // Use a register to store the number of times moved                                  
@@ -221,6 +229,12 @@ module game_states (
                 state.d = state.LEVEL3;
               3b100:
                 state.d = state.LEVEL4;
+              3b101:
+                state.d = state.LEVEL5;
+              3b110:
+                state.d = state.LEVEL6;
+              3b111:
+                state.d = state.LEVEL7;
             }
           }
           else{
@@ -237,7 +251,8 @@ module game_states (
         move_down.token_map = token_map.q;
         
         token_map.d = move_down.new_token_map;
-        if(move_down.score_token){
+        points = move_down.score_token;
+        if(points == 1){
           level_score.d = level_score.q + 1;
           current_ones.d = current_ones.q + 1;
         }
@@ -246,7 +261,7 @@ module game_states (
         state.d = state.WAITDOWN;
         
       state.WAITDOWN:
-        if(delay_movement.q[22] == 1){
+        if(delay_movement.q[21] == 1){
           delay_movement.d = 0;
           if(number_times_moved.q == 3b111){
             // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
@@ -262,6 +277,12 @@ module game_states (
                 state.d = state.LEVEL3;
               3b100:
                 state.d = state.LEVEL4;
+              3b101:
+                state.d = state.LEVEL5;
+              3b110:
+                state.d = state.LEVEL6;
+              3b111:
+                state.d = state.LEVEL7;
             }
           }
           else{
@@ -277,7 +298,8 @@ module game_states (
         move_left.token_map = token_map.q;
         
         token_map.d = move_left.new_token_map;
-        if(move_left.score_token){
+        points = move_left.score_token;
+        if(points == 1){
           level_score.d = level_score.q + 1;
           current_ones.d = current_ones.q + 1;
         }
@@ -286,7 +308,7 @@ module game_states (
         state.d = state.WAITLEFT;
           
       state.WAITLEFT:
-        if(delay_movement.q[22] == 1){
+        if(delay_movement.q[21] == 1){
           delay_movement.d = 0;
           if(number_times_moved.q == 3b111){
             // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
@@ -302,6 +324,12 @@ module game_states (
                 state.d = state.LEVEL3;
               3b100:
                 state.d = state.LEVEL4;
+              3b101:
+                state.d = state.LEVEL5;
+              3b110:
+                state.d = state.LEVEL6;
+              3b111:
+                state.d = state.LEVEL7;
             }
           }
           else{
@@ -316,7 +344,8 @@ module game_states (
         move_right.token_map = token_map.q;
         
         token_map.d = move_right.new_token_map;
-        if(move_right.score_token){
+        points = move_right.score_token;
+        if(points == 1){
           level_score.d = level_score.q + 1;
           current_ones.d = current_ones.q + 1;
         }
@@ -325,7 +354,7 @@ module game_states (
         state.d = state.WAITRIGHT;
         
       state.WAITRIGHT:
-        if(delay_movement.q[22] == 1){
+        if(delay_movement.q[21] == 1){
           delay_movement.d = 0;
           if(number_times_moved.q == 3b111){
             // IF WE HAVE MOVED 8 TIMES, WE RESET BACK TO THE STAGE WE CAME FROM
@@ -341,6 +370,12 @@ module game_states (
                 state.d = state.LEVEL3;
               3b100:
                 state.d = state.LEVEL4;
+              3b101:
+                state.d = state.LEVEL5;
+              3b110:
+                state.d = state.LEVEL6;
+              3b111:
+                state.d = state.LEVEL7;
             }
           }
           else{
@@ -376,6 +411,14 @@ module game_states (
         if(button_right){
           state.d = state.WAITRIGHT;
         }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER1;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
+        }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER2;
@@ -406,6 +449,14 @@ module game_states (
         }
         if(button_right){
           state.d = state.WAITRIGHT;
+        }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER2;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
         }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
@@ -438,6 +489,14 @@ module game_states (
         if(button_right){
           state.d = state.WAITRIGHT;
         }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER3;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
+        }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER4;
@@ -469,6 +528,14 @@ module game_states (
         if(button_right){
           state.d = state.WAITRIGHT;
         }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER4;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
+        }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
           state.d = state.INTER5;
@@ -488,7 +555,7 @@ module game_states (
         
       state.LEVEL5:
         walls.d = inter_five.walls;
-        current_stage.d = 3b100;
+        current_stage.d = 3b101;
         if(button_up){
           state.d = state.WAITUP;
         }
@@ -500,6 +567,14 @@ module game_states (
         }
         if(button_right){
           state.d = state.WAITRIGHT;
+        }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER5;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
         }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
@@ -520,7 +595,7 @@ module game_states (
         
       state.LEVEL6:
         walls.d = inter_six.walls;
-        current_stage.d = 3b100;
+        current_stage.d = 3b110;
         if(button_up){
           state.d = state.WAITUP;
         }
@@ -532,6 +607,14 @@ module game_states (
         }
         if(button_right){
           state.d = state.WAITRIGHT;
+        }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER6;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
         }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
@@ -552,7 +635,7 @@ module game_states (
         
       state.LEVEL7:
         walls.d = inter_seven.walls;
-        current_stage.d = 3b100;
+        current_stage.d = 3b111;
         if(button_up){
           state.d = state.WAITUP;
         }
@@ -565,9 +648,17 @@ module game_states (
         if(button_right){
           state.d = state.WAITRIGHT;
         }
+        if(soft_reset){
+          level_score.d = 0;
+          state.d = state.INTER7;
+        }
+        if(hard_reset){
+          current_running_score.d = 7b0000000;
+          state.d = state.START;
+        }
         if(player_position.q[7] == 8b00000001){
           current_running_score.d = current_running_score.q + level_score.q;
-          state.d = state.INTER8;
+          state.d = state.END;
         }
         
       state.INTER8:
@@ -609,11 +700,13 @@ module game_states (
       state.END:
         compare_high_score.high_score = hi_score.q;
         compare_high_score.player_current_score = current_running_score.q;
-        if(compare_high_score.high_score_lower){
+        if(compare_high_score.high_score_lower != 1){
           hi_score.d = current_running_score.q;
           hi_ones.d = current_ones.q;
           hi_tenths.d = current_tenths.q;
         }
+        current_ones.d = 4b0000;
+        current_tenths.d = 4b0000;
         state.d = state.START;
     }
   }

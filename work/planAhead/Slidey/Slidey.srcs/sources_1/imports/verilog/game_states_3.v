@@ -75,6 +75,8 @@ module game_states_3 (
   
   reg [63:0] intermediate_tokens;
   
+  reg points;
+  
   wire [64-1:0] M_inter_one_player_initial_position;
   wire [3-1:0] M_inter_one_player_reg_selector;
   wire [64-1:0] M_inter_one_end_position;
@@ -397,6 +399,12 @@ module game_states_3 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (soft_reset) begin
+          M_state_d = TUTORIALROM_state;
+        end
+        if (hard_reset) begin
+          M_state_d = START_state;
+        end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_state_d = INTER1_state;
         end
@@ -407,7 +415,8 @@ module game_states_3 (
         M_move_player_walls = M_walls_q;
         M_move_player_token_map = M_token_map_q;
         M_token_map_d = M_move_player_new_token_map;
-        if (M_move_player_score_token) begin
+        points = M_move_player_score_token;
+        if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
         end
@@ -416,7 +425,7 @@ module game_states_3 (
         M_state_d = WAITUP_state;
       end
       WAITUP_state: begin
-        if (M_delay_movement_q[22+0-:1] == 1'h1) begin
+        if (M_delay_movement_q[21+0-:1] == 1'h1) begin
           M_delay_movement_d = 1'h0;
           if (M_number_times_moved_q == 3'h7) begin
             M_number_times_moved_d = 1'h0;
@@ -436,6 +445,15 @@ module game_states_3 (
               end
               3'h4: begin
                 M_state_d = LEVEL4_state;
+              end
+              3'h5: begin
+                M_state_d = LEVEL5_state;
+              end
+              3'h6: begin
+                M_state_d = LEVEL6_state;
+              end
+              3'h7: begin
+                M_state_d = LEVEL7_state;
               end
             endcase
           end else begin
@@ -450,7 +468,8 @@ module game_states_3 (
         M_move_down_walls = M_walls_q;
         M_move_down_token_map = M_token_map_q;
         M_token_map_d = M_move_down_new_token_map;
-        if (M_move_down_score_token) begin
+        points = M_move_down_score_token;
+        if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
         end
@@ -459,7 +478,7 @@ module game_states_3 (
         M_state_d = WAITDOWN_state;
       end
       WAITDOWN_state: begin
-        if (M_delay_movement_q[22+0-:1] == 1'h1) begin
+        if (M_delay_movement_q[21+0-:1] == 1'h1) begin
           M_delay_movement_d = 1'h0;
           if (M_number_times_moved_q == 3'h7) begin
             M_number_times_moved_d = 1'h0;
@@ -479,6 +498,15 @@ module game_states_3 (
               end
               3'h4: begin
                 M_state_d = LEVEL4_state;
+              end
+              3'h5: begin
+                M_state_d = LEVEL5_state;
+              end
+              3'h6: begin
+                M_state_d = LEVEL6_state;
+              end
+              3'h7: begin
+                M_state_d = LEVEL7_state;
               end
             endcase
           end else begin
@@ -493,7 +521,8 @@ module game_states_3 (
         M_move_left_walls = M_walls_q;
         M_move_left_token_map = M_token_map_q;
         M_token_map_d = M_move_left_new_token_map;
-        if (M_move_left_score_token) begin
+        points = M_move_left_score_token;
+        if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
         end
@@ -502,7 +531,7 @@ module game_states_3 (
         M_state_d = WAITLEFT_state;
       end
       WAITLEFT_state: begin
-        if (M_delay_movement_q[22+0-:1] == 1'h1) begin
+        if (M_delay_movement_q[21+0-:1] == 1'h1) begin
           M_delay_movement_d = 1'h0;
           if (M_number_times_moved_q == 3'h7) begin
             M_number_times_moved_d = 1'h0;
@@ -522,6 +551,15 @@ module game_states_3 (
               end
               3'h4: begin
                 M_state_d = LEVEL4_state;
+              end
+              3'h5: begin
+                M_state_d = LEVEL5_state;
+              end
+              3'h6: begin
+                M_state_d = LEVEL6_state;
+              end
+              3'h7: begin
+                M_state_d = LEVEL7_state;
               end
             endcase
           end else begin
@@ -536,7 +574,8 @@ module game_states_3 (
         M_move_right_walls = M_walls_q;
         M_move_right_token_map = M_token_map_q;
         M_token_map_d = M_move_right_new_token_map;
-        if (M_move_right_score_token) begin
+        points = M_move_right_score_token;
+        if (points == 1'h1) begin
           M_level_score_d = M_level_score_q + 1'h1;
           M_current_ones_d = M_current_ones_q + 1'h1;
         end
@@ -545,7 +584,7 @@ module game_states_3 (
         M_state_d = WAITRIGHT_state;
       end
       WAITRIGHT_state: begin
-        if (M_delay_movement_q[22+0-:1] == 1'h1) begin
+        if (M_delay_movement_q[21+0-:1] == 1'h1) begin
           M_delay_movement_d = 1'h0;
           if (M_number_times_moved_q == 3'h7) begin
             M_number_times_moved_d = 1'h0;
@@ -565,6 +604,15 @@ module game_states_3 (
               end
               3'h4: begin
                 M_state_d = LEVEL4_state;
+              end
+              3'h5: begin
+                M_state_d = LEVEL5_state;
+              end
+              3'h6: begin
+                M_state_d = LEVEL6_state;
+              end
+              3'h7: begin
+                M_state_d = LEVEL7_state;
               end
             endcase
           end else begin
@@ -599,6 +647,14 @@ module game_states_3 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER1_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
+        end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER2_state;
@@ -629,6 +685,14 @@ module game_states_3 (
         end
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
+        end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER2_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
@@ -661,6 +725,14 @@ module game_states_3 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER3_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
+        end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER4_state;
@@ -692,6 +764,14 @@ module game_states_3 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER4_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
+        end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
           M_state_d = INTER5_state;
@@ -710,7 +790,7 @@ module game_states_3 (
       end
       LEVEL5_state: begin
         M_walls_d = M_inter_five_walls;
-        M_current_stage_d = 3'h4;
+        M_current_stage_d = 3'h5;
         if (button_up) begin
           M_state_d = WAITUP_state;
         end
@@ -722,6 +802,14 @@ module game_states_3 (
         end
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
+        end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER5_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
@@ -741,7 +829,7 @@ module game_states_3 (
       end
       LEVEL6_state: begin
         M_walls_d = M_inter_six_walls;
-        M_current_stage_d = 3'h4;
+        M_current_stage_d = 3'h6;
         if (button_up) begin
           M_state_d = WAITUP_state;
         end
@@ -753,6 +841,14 @@ module game_states_3 (
         end
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
+        end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER6_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
         end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
@@ -772,7 +868,7 @@ module game_states_3 (
       end
       LEVEL7_state: begin
         M_walls_d = M_inter_seven_walls;
-        M_current_stage_d = 3'h4;
+        M_current_stage_d = 3'h7;
         if (button_up) begin
           M_state_d = WAITUP_state;
         end
@@ -785,9 +881,17 @@ module game_states_3 (
         if (button_right) begin
           M_state_d = WAITRIGHT_state;
         end
+        if (soft_reset) begin
+          M_level_score_d = 1'h0;
+          M_state_d = INTER7_state;
+        end
+        if (hard_reset) begin
+          M_current_running_score_d = 7'h00;
+          M_state_d = START_state;
+        end
         if (M_player_position_q[56+7-:8] == 8'h01) begin
           M_current_running_score_d = M_current_running_score_q + M_level_score_q;
-          M_state_d = INTER8_state;
+          M_state_d = END_state;
         end
       end
       INTER8_state: begin
@@ -824,29 +928,17 @@ module game_states_3 (
       END_state: begin
         M_compare_high_score_high_score = M_hi_score_q;
         M_compare_high_score_player_current_score = M_current_running_score_q;
-        if (M_compare_high_score_high_score_lower) begin
+        if (M_compare_high_score_high_score_lower != 1'h1) begin
           M_hi_score_d = M_current_running_score_q;
           M_hi_ones_d = M_current_ones_q;
           M_hi_tenths_d = M_current_tenths_q;
         end
+        M_current_ones_d = 4'h0;
+        M_current_tenths_d = 4'h0;
         M_state_d = START_state;
       end
     endcase
   end
-  
-  always @(posedge clk) begin
-    M_state_q <= M_state_d;
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_delay_movement_q <= 1'h0;
-    end else begin
-      M_delay_movement_q <= M_delay_movement_d;
-    end
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -880,6 +972,20 @@ module game_states_3 (
       M_hi_ones_q <= M_hi_ones_d;
       M_hi_tenths_q <= M_hi_tenths_d;
     end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_delay_movement_q <= 1'h0;
+    end else begin
+      M_delay_movement_q <= M_delay_movement_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    M_state_q <= M_state_d;
   end
   
 endmodule

@@ -29,9 +29,9 @@ module token_collide (
       score_token = 0;
     }
     else{
+      score_token = 1;
       new_map = check_overlap ^ token_map;
       new_token_map = new_map;
-      score_token = 1;
     }
     
   }

@@ -240,14 +240,11 @@ module mojo_top_0 (
     green = 8'hff;
     blue = 8'hff;
     red = 8'hff;
-    M_display_seven_seg_to_display = M_game_player_ones;
-    playerones = M_display_seven_seg_to_seven_seg;
-    M_display_seven_seg_to_display = M_game_player_tens;
-    playertens = M_display_seven_seg_to_seven_seg;
-    M_display_seven_seg_to_display = M_game_hi_score_ones;
-    highones = M_display_seven_seg_to_seven_seg;
-    M_display_seven_seg_to_display = M_game_hi_score_tens;
-    hightens = M_display_seven_seg_to_seven_seg;
+    playerones = 8'h00;
+    playertens = 8'h00;
+    highones = 8'h00;
+    hightens = 8'h00;
+    M_display_seven_seg_to_display = 4'h0;
     M_counter_d = M_counter_q + 1'h1;
     
     case (M_state_q)
@@ -256,6 +253,8 @@ module mojo_top_0 (
         red = 8'hff;
         blue = 8'hff;
         green = ~M_game_player_position_out[0+7-:8];
+        M_display_seven_seg_to_display = M_game_player_ones;
+        playerones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = A2_state;
@@ -266,6 +265,8 @@ module mojo_top_0 (
         red = 8'hff;
         green = 8'hff;
         blue = ~M_game_tokens[0+7-:8];
+        M_display_seven_seg_to_display = M_game_player_tens;
+        playertens = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = A3_state;
@@ -276,6 +277,8 @@ module mojo_top_0 (
         red = ~M_game_wall[0+7-:8];
         green = 8'hff;
         blue = 8'hff;
+        M_display_seven_seg_to_display = M_game_hi_score_ones;
+        highones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = B_state;
@@ -286,6 +289,8 @@ module mojo_top_0 (
         red = 8'hff;
         blue = 8'hff;
         green = ~M_game_player_position_out[8+7-:8];
+        M_display_seven_seg_to_display = M_game_hi_score_tens;
+        hightens = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = B2_state;
@@ -296,6 +301,8 @@ module mojo_top_0 (
         red = 8'hff;
         green = 8'hff;
         blue = ~M_game_tokens[8+7-:8];
+        M_display_seven_seg_to_display = M_game_player_ones;
+        playerones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = B3_state;
@@ -306,6 +313,8 @@ module mojo_top_0 (
         red = ~M_game_wall[8+7-:8];
         green = 8'hff;
         blue = 8'hff;
+        M_display_seven_seg_to_display = M_game_hi_score_tens;
+        hightens = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = C_state;
@@ -316,6 +325,8 @@ module mojo_top_0 (
         red = 8'hff;
         blue = 8'hff;
         green = ~M_game_player_position_out[16+7-:8];
+        M_display_seven_seg_to_display = M_game_hi_score_ones;
+        highones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = C2_state;
@@ -326,6 +337,8 @@ module mojo_top_0 (
         red = 8'hff;
         green = 8'hff;
         blue = ~M_game_tokens[16+7-:8];
+        M_display_seven_seg_to_display = M_game_player_tens;
+        playertens = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = C3_state;
@@ -336,6 +349,8 @@ module mojo_top_0 (
         red = ~M_game_wall[16+7-:8];
         green = 8'hff;
         blue = 8'hff;
+        M_display_seven_seg_to_display = M_game_player_ones;
+        playerones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = D_state;
@@ -346,6 +361,8 @@ module mojo_top_0 (
         red = 8'hff;
         blue = 8'hff;
         green = ~M_game_player_position_out[24+7-:8];
+        M_display_seven_seg_to_display = M_game_hi_score_tens;
+        hightens = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = D2_state;
@@ -356,6 +373,8 @@ module mojo_top_0 (
         red = 8'hff;
         green = 8'hff;
         blue = ~M_game_tokens[24+7-:8];
+        M_display_seven_seg_to_display = M_game_hi_score_ones;
+        highones = M_display_seven_seg_to_seven_seg;
         if (M_counter_q[3+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_state_d = D3_state;
@@ -497,18 +516,18 @@ module mojo_top_0 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
+      M_counter_q <= 1'h0;
     end else begin
-      M_state_q <= M_state_d;
+      M_counter_q <= M_counter_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_counter_q <= 1'h0;
+      M_state_q <= 1'h0;
     end else begin
-      M_counter_q <= M_counter_d;
+      M_state_q <= M_state_d;
     end
   end
   

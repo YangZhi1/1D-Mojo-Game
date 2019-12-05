@@ -6,30 +6,55 @@ module display_seven_seg (
   always {
     to_seven_seg = 8b0;
     
-    // A B C DP G F E D
-    // Flip around, so ours is G F E D A B C DP
-    // https://www.rs-online.com/designspark/7-segment-display-a-brief-introduction
+    // pin 1 (top left pin)  - middle
+    // pin 2 (2nd left pin)  - top left 
+    // pin 3                 - bottom left
+    // pin 4                 - bottom 
+    // pin 5                 - top 
+    // pin 6                 - top right
+    // pin 7                 - bottom right
+    // pin 8                 - dot
+    
+    // flipped first 4 with last 4
+    // top - 8b00000001; 
+    // top right - 8b00000010;
+    // bottom right - 8b00000100;
+    // dot - 8b00001000;
+    // middle - 8b00010000;
+    // top left - 8b00100000;
+    // bottom left - 8b01000000;
+    // bottom - 8b10000000;
+    // left side and right sides are inverted
+    
+    // 2 - 8b00111101
+    // 3 - 8b01111001;
+    // 4 - 8b01100011;
+    // 5 - 8b11011011;
+    // 6 - 8b01011111
+    // 7 - 8b01110000
+    // 8 - 8b01111111;
+    // 9 - 8b11110011;
     case(to_display){
-      4b0000:
+      4b0000:                        // 0 is correct
         to_seven_seg = 8b01111110;
-      4b0001:
-        to_seven_seg = 8b00000110;
+      4b0001:                        // 1 is correct
+        to_seven_seg = 8b01100000;
       4b0010:
-        to_seven_seg = 8b10111100;
+        to_seven_seg = 8b00111101;
       4b0011:
-        to_seven_seg = 8b10011110;
-      4b0100:
-        to_seven_seg = 8b11000110;
-      4b0101:
-        to_seven_seg = 8b11011010;
+        to_seven_seg = 8b01111001;
+      4b0100:                        // 4 is correct
+        to_seven_seg = 8b01100011;
+      4b0101:                        // 5 is correct
+        to_seven_seg = 8b01011011;
       4b0110:
-        to_seven_seg = 8b11111010;
-      4b0111:
-        to_seven_seg = 8b00001110;
-      4b1000:
-        to_seven_seg = 8b11111110;
-      4b1001:
-        to_seven_seg = 8b11001110;
+        to_seven_seg = 8b01011111;
+      4b0111:                        // 7 is correct
+        to_seven_seg = 8b01110000;
+      4b1000:                        // 8 is correct
+        to_seven_seg = 8b01111111;
+      4b1001:                        // 9 is correct
+        to_seven_seg = 8b01110011;
       default:
         to_seven_seg = 8b01111110; 
     }

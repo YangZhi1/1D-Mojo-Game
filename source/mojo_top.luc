@@ -51,6 +51,8 @@ module mojo_top (
   button_conditioner resetrightb(.clk(clk));
   
   dff counter[20](.clk(clk), .rst(rst));
+  
+  
   always {  
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
@@ -105,17 +107,12 @@ module mojo_top (
     blue = 8x{1};
     red = 8x{1};
     
-    display_seven_seg.to_display = game.player_ones;
-    playerones = display_seven_seg.to_seven_seg;
+    playerones = 8x{0};
+    playertens = 8x{0};
+    highones = 8x{0};
+    hightens = 8x{0};
     
-    display_seven_seg.to_display = game.player_tens;
-    playertens = display_seven_seg.to_seven_seg;
-    
-    display_seven_seg.to_display = game.hi_score_ones;
-    highones = display_seven_seg.to_seven_seg;
-    
-    display_seven_seg.to_display = game.hi_score_tens;
-    hightens = display_seven_seg.to_seven_seg;
+    display_seven_seg.to_display = 4b0;
     
     counter.d = counter.q + 1;
     
@@ -125,6 +122,10 @@ module mojo_top (
         red = 8x{1};
         blue = 8x{1};
         green = ~game.player_position_out[0];
+        
+        display_seven_seg.to_display = game.player_ones;
+        playerones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.A2;
@@ -134,6 +135,10 @@ module mojo_top (
         red = 8x{1};
         green = 8x{1};
         blue = ~game.tokens[0];
+        
+        display_seven_seg.to_display = game.player_tens;
+        playertens = display_seven_seg.to_seven_seg;
+
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.A3;
@@ -143,6 +148,10 @@ module mojo_top (
         red = ~game.wall[0];
         green = 8x{1};
         blue = 8x{1};
+
+        display_seven_seg.to_display = game.hi_score_ones;
+        highones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.B;
@@ -153,6 +162,10 @@ module mojo_top (
         red = 8x{1};
         blue = 8x{1};
         green = ~game.player_position_out[1];
+        
+        display_seven_seg.to_display = game.hi_score_tens;
+        hightens = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.B2;
@@ -162,6 +175,10 @@ module mojo_top (
         red = 8x{1};
         green = 8x{1};
         blue = ~game.tokens[1];
+        
+        display_seven_seg.to_display = game.player_ones;
+        playerones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.B3;
@@ -171,6 +188,10 @@ module mojo_top (
         red = ~game.wall[1];
         green = 8x{1};
         blue = 8x{1};
+        
+        display_seven_seg.to_display = game.hi_score_tens;
+        hightens = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.C;
@@ -180,6 +201,10 @@ module mojo_top (
         red = 8x{1};
         blue = 8x{1};
         green = ~game.player_position_out[2];
+        
+        display_seven_seg.to_display = game.hi_score_ones;
+        highones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.C2;
@@ -189,6 +214,10 @@ module mojo_top (
         red = 8x{1};
         green = 8x{1};
         blue = ~game.tokens[2];
+       
+        display_seven_seg.to_display = game.player_tens;
+        playertens = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.C3;
@@ -198,6 +227,10 @@ module mojo_top (
         red = ~game.wall[2];
         green = 8x{1};
         blue = 8x{1};
+        
+        display_seven_seg.to_display = game.player_ones;
+        playerones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.D;
@@ -208,6 +241,10 @@ module mojo_top (
         red = 8x{1};
         blue = 8x{1};
         green = ~game.player_position_out[3];
+        
+        display_seven_seg.to_display = game.hi_score_tens;
+        hightens = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.D2;
@@ -217,6 +254,10 @@ module mojo_top (
         red = 8x{1};
         green = 8x{1};
         blue = ~game.tokens[3];
+        
+        display_seven_seg.to_display = game.hi_score_ones;
+        highones = display_seven_seg.to_seven_seg;
+        
         if(counter.q[3] == 1){
           counter.d = 0;
           state.d = state.D3;
